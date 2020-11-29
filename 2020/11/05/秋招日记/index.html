@@ -1,376 +1,264 @@
-<?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>十大经典排序算法</title>
-    <url>/2020/11/23/%E5%8D%81%E5%A4%A7%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<div style = "padding-left:100px; padding-right:100px">排序算法是算法学习中比较经典的内容，面试也会经常考到，学习十大经典排序算法的目的在于理解并掌握其中运用的算法思想，还有装逼(不是</div><br>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<a id="more"></a>
+<link rel="stylesheet" href="/css/main.css">
 
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yorug.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":240,"width":250,"display":"post","padding":55,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-<blockquote>
-<p>本片文章参考了博客<a href="https://www.cnblogs.com/onepixel/articles/7674659.html">十大经典排序算法(动图演示)</a>，该博客上还有排序的相关图解和JS代码实现，非常清晰</p>
-</blockquote>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
-<li><strong>稳定</strong>：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。</li>
-<li><strong>不稳定</strong>：如果a原本在b的前面，而a=b，排序之后 a 可能会出现在 b 的后面。</li>
-<li><strong>时间复杂度</strong>：对排序数据的总的操作次数。反映当n变化时，操作次数呈现什么规律。</li>
-<li><strong>空间复杂度：</strong>是指算法在计算机内执行时所需存储空间的度量，它也是数据规模n的函数。</li>
-</ul>
-<p>下面代码通用的排序工具类，用于提供打印数组的方法和测试数据，并且下面排序算法都是按从小到大排序(从大到小反推即可)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SortUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span>[] array)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i:array)</span><br><span class="line">            System.out.print(<span class="string">&quot; &quot;</span>+i+<span class="string">&quot; &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] array1=&#123;<span class="number">100</span>,<span class="number">889</span>,<span class="number">4678</span>,<span class="number">1354</span>,<span class="number">20</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">225</span>,<span class="number">502</span>,<span class="number">765</span>,<span class="number">12</span>,<span class="number">10058</span>,<span class="number">52</span>&#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] array2=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">77</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">80</span>,<span class="number">464</span>,<span class="number">124</span>&#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] array3=&#123;<span class="number">3</span>,<span class="number">5</span>,<span class="number">38</span>,<span class="number">156</span>,<span class="number">1</span>,<span class="number">564</span>,<span class="number">8</span>,<span class="number">4</span>,<span class="number">65</span>,<span class="number">51</span>,<span class="number">321</span>,<span class="number">3</span>,<span class="number">54</span>,<span class="number">31</span>,<span class="number">23</span>,<span class="number">150</span>&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <meta name="description" content="记录大四秋招期间自己的一段心路历程，在一场场笔试、面试中积累经验，从很菜的菜鸡变成一般的菜鸡，自己的心态也在不断发生变化......">
+<meta property="og:type" content="article">
+<meta property="og:title" content="秋招日记">
+<meta property="og:url" content="https://yorug.github.io/2020/11/05/%E7%A7%8B%E6%8B%9B%E6%97%A5%E8%AE%B0/index.html">
+<meta property="og:site_name" content="YoruG&#39;s Blog">
+<meta property="og:description" content="记录大四秋招期间自己的一段心路历程，在一场场笔试、面试中积累经验，从很菜的菜鸡变成一般的菜鸡，自己的心态也在不断发生变化......">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-11-29T09:49:10.318Z">
+<meta property="article:author" content="YoruG">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
 
-
-
-
-
-<h2 id="1-冒泡排序"><a href="#1-冒泡排序" class="headerlink" title="1.冒泡排序"></a>1.冒泡排序</h2><p>冒泡排序的特点就是在交换相邻数组元素时，元素会一步一步地向末尾端移动，像冒泡一样</p>
-<ul>
-<li>时间复杂度(平均)：O(n^2)</li>
-<li>时间复杂度(最好)：O(n)</li>
-<li>时间复杂度(最差)：O(n^2)</li>
-<li>空间复杂度：O(1)</li>
-<li>稳定性：稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BubbleSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array=SortUtil.array1;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;array.length-<span class="number">1</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//这里设置j的上限为array.length-1可以减少无效循环语句的执行</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;array.length-<span class="number">1</span>-i;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(array[j]&gt;array[j+<span class="number">1</span>])</span><br><span class="line">                &#123;</span><br><span class="line">                	<span class="comment">//冒泡的核心部分在于相邻元素的交换</span></span><br><span class="line">                    <span class="keyword">int</span> temp=array[j];</span><br><span class="line">                    array[j]=array[j+<span class="number">1</span>];</span><br><span class="line">                    array[j+<span class="number">1</span>]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<link rel="canonical" href="https://yorug.github.io/2020/11/05/%E7%A7%8B%E6%8B%9B%E6%97%A5%E8%AE%B0/">
 
 
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>秋招日记 | YoruG's Blog</title>
+  
 
 
-
-<h2 id="2-选择排序"><a href="#2-选择排序" class="headerlink" title="2.选择排序"></a>2.选择排序</h2><p>选择排序的特点在于把数组分为有序和无序的，初始数组全为无序部分，然后从中选择最小(大)值放到有序部分(有序部分从数组的0下标开始)，依次执行直到无序部分遍历结束</p>
-<ul>
-<li>时间复杂度(平均)：O(n^2)</li>
-<li>时间复杂度(最好)：O(n^2)</li>
-<li>时间复杂度(最差)：O(n^2)</li>
-<li>空间复杂度：O(1)</li>
-<li>稳定性：不稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = SortUtil.array1;</span><br><span class="line">        <span class="comment">//用minIndex作为最小部分的下标</span></span><br><span class="line">        <span class="keyword">int</span> minIndex=<span class="number">0</span>;</span><br><span class="line">        <span class="comment">//这里上限为array.length-1是为了防止j越界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;array.length-<span class="number">1</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//这一步很关键，每次在无序部分进行新一轮循环时都要重新初始化最小下标</span></span><br><span class="line">            <span class="comment">//因为不知道哪个是最小值则用第一个下标做minIndex</span></span><br><span class="line">            minIndex=i;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;array.length;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//每当遇到比最小下标元素更小的元素时就更新最小下标</span></span><br><span class="line">                <span class="keyword">if</span>(array[j]&lt;array[minIndex])</span><br><span class="line">                    minIndex=j;</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="keyword">int</span> temp=array[i];</span><br><span class="line">            array[i]=array[minIndex];</span><br><span class="line">            array[minIndex]=temp; </span><br><span class="line">        &#125;</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-<h2 id="3-插入排序"><a href="#3-插入排序" class="headerlink" title="3.插入排序"></a>3.插入排序</h2><p>插入排序的特点是也像选择排序那样分成有序和无序部分，不过它的第二轮循环没有遍历无序部分，而是遍历有序部分与无序部分的第一个元素进行比较，如果满足条件则将这当前元素插入到有序部分中，这里的插入是从后往前插</p>
-<ul>
-<li>时间复杂度(平均)：O(n^2)</li>
-<li>时间复杂度(最好)：O(n)</li>
-<li>时间复杂度(最差)：O(n^2)</li>
-<li>空间复杂度：O(1)</li>
-<li>稳定性：稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InsertSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = SortUtil.array1;</span><br><span class="line">        <span class="comment">//设置前面有序序列的替换下标、当前值</span></span><br><span class="line">        <span class="keyword">int</span> preIndex,current;</span><br><span class="line">        <span class="comment">//循环要从1开始，因为要预留下标0给preIndex</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;array.length;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            preIndex=i-<span class="number">1</span>;</span><br><span class="line">            <span class="comment">//这里要用current记录下标i的值，而不能直接记录下标i，因为后面下标i的元素会被替换掉</span></span><br><span class="line">            current=array[i];</span><br><span class="line">            <span class="comment">//这里判断前面的下标是否大于当前值且在数组元素内，如果大于就让前面元素向后移位空出一格以备当前元素插入</span></span><br><span class="line">            <span class="keyword">while</span>(preIndex&gt;=<span class="number">0</span> &amp;&amp; array[preIndex]&gt;current)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//前面下标后移一格，下标同时向前移动</span></span><br><span class="line">                array[preIndex+<span class="number">1</span>]=array[preIndex];</span><br><span class="line">                preIndex--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//循环结束则说明当前元素大于前面元素，此时插入空格位(看起来是空格为但实际上是前面的后移元素)</span></span><br><span class="line">            <span class="comment">//并且这里的preIndex+1是因为在前面循环后preIndex会比空格位对应的下标还要小1，因此要+1得到空格位</span></span><br><span class="line">            array[preIndex+<span class="number">1</span>]=current;</span><br><span class="line">        &#125;</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ccc02f093bf72cadaa2d65eb22e16e07";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YoruG's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
 
 
 
 
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
 
-<h2 id="4-希尔排序"><a href="#4-希尔排序" class="headerlink" title="4.希尔排序"></a>4.希尔排序</h2><p>希尔排序是第一个突破O(n^2)复杂度的排序算法。它是插入排序的优化版本，又叫缩小增量排序，插入排序每次比较的间隔都是1，而希尔排序的比较间隔是从大到小，如果后面的元素满足条件则也会从后往前插入</p>
-<ul>
-<li>时间复杂度(平均)：O(n^1.3)</li>
-<li>时间复杂度(最好)：O(n)</li>
-<li>时间复杂度(最差)：O(n^2)</li>
-<li>空间复杂度：O(1)</li>
-<li>稳定性：不稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShellSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = SortUtil.array1;</span><br><span class="line">        <span class="comment">//preIndex作为前面元素下标、gap作为比较间隔、current作为当前元素</span></span><br><span class="line">        <span class="keyword">int</span> preIndex,gap,current; </span><br><span class="line">        <span class="comment">//首先外部有个大循环是用gap作条件，不断缩小比较的间隔，如12-&gt;6-&gt;3-&gt;1</span></span><br><span class="line">        <span class="keyword">for</span>(gap=array.length/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap=gap/<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//这里的核心部分和插入排序非常相似</span></span><br><span class="line">            <span class="comment">//初始条件i=gap和插入排序的i=1类似</span></span><br><span class="line">            <span class="comment">//初始化preIndex=i-gap和插入排序的i=i-1类似</span></span><br><span class="line">            <span class="comment">//到后面的while循环条件和插入排序直接一致，可以说当gap缩小到1时这段代码就等同于插入排序了</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=gap;i&lt;array.length;i++)</span><br><span class="line">            &#123;</span><br><span class="line">                preIndex=i-gap;</span><br><span class="line">                current=array[i];</span><br><span class="line">                <span class="keyword">while</span>(preIndex&gt;=<span class="number">0</span> &amp;&amp; array[preIndex]&gt;current)</span><br><span class="line">                &#123;</span><br><span class="line">                    array[preIndex+gap]=array[preIndex];</span><br><span class="line">                    preIndex-=gap;</span><br><span class="line">                &#125;</span><br><span class="line">                array[preIndex+gap]=current;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
+  </li>
+        <li class="menu-item menu-item-tags">
 
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
+  </li>
+        <li class="menu-item menu-item-categories">
 
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
+  </li>
+        <li class="menu-item menu-item-archives">
 
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-
-
-<h2 id="5-归并排序"><a href="#5-归并排序" class="headerlink" title="5.归并排序"></a>5.归并排序</h2><p>归并排序的特点是通过分治法，先把无序队列分成子序列，分成子序列的关键在于变换首尾下标，起初是子序列是整个数组的长度然后慢慢递减到只有1个长度，然后使子序列有序，然后再把有序子序列合并起来，最终得到一个完整的有序序列</p>
-<ul>
-<li>时间复杂度(平均)：O(nlogn)</li>
-<li>时间复杂度(最好)：O(nlogn)</li>
-<li>时间复杂度(最差)：O(nlogn)</li>
-<li>空间复杂度：O(n)</li>
-<li>稳定性：稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MergeSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = SortUtil.array1;</span><br><span class="line">        <span class="comment">//用一个辅助数组来帮助实现归并</span></span><br><span class="line">        <span class="keyword">int</span>[] result=<span class="keyword">new</span> <span class="keyword">int</span>[array.length];</span><br><span class="line">        <span class="comment">//初始前后下标设置为数组首尾下标</span></span><br><span class="line">        merge(array,result,<span class="number">0</span>,array.length-<span class="number">1</span>);</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//递归方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] array,<span class="keyword">int</span>[] result,<span class="keyword">int</span> start,<span class="keyword">int</span> end)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//当只有子序列只有一个元素时结束递归，子序列长度由start和end决定</span></span><br><span class="line">        <span class="keyword">if</span>(start&gt;=end)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">//首先取一半作为子序列</span></span><br><span class="line">        <span class="keyword">int</span> mid=start+(end-start)/<span class="number">2</span>;</span><br><span class="line">        <span class="comment">//前半段子序列下标为start1~end1，后半段下标为start2~end2</span></span><br><span class="line">        <span class="keyword">int</span> start1=start,end1=mid;</span><br><span class="line">        <span class="keyword">int</span> start2=mid+<span class="number">1</span>,end2=end;</span><br><span class="line">        <span class="comment">//然后一直递归直到只有1个元素才会继续后面的代码</span></span><br><span class="line">        merge(array,result,start1,end1);</span><br><span class="line">        merge(array,result,start2,end2);</span><br><span class="line">        <span class="comment">//下面是归并部分，用把两个有序队列合并成一个有序队列来看就很容易理解</span></span><br><span class="line">        <span class="keyword">int</span> k=start;</span><br><span class="line">        <span class="comment">//首先两个有序队列都未遍历完，因此比较后小的插入result数组，同时变换下标</span></span><br><span class="line">        <span class="keyword">while</span>(start1&lt;=end1 &amp;&amp; start2&lt;=end2)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(array[start1]&lt;array[start2])</span><br><span class="line">                result[k++]=array[start1++];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                result[k++]=array[start2++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//当一个队列遍历完后另一个队列就可以直接遍历剩余部分插入到result数组中</span></span><br><span class="line">        <span class="keyword">while</span>(start1&lt;=end1)</span><br><span class="line">            result[k++]=array[start1++];</span><br><span class="line">        <span class="keyword">while</span>(start2&lt;=end2)</span><br><span class="line">            result[k++]=array[start2++];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//最后要修改原数组array，因为result只是一个辅助数组</span></span><br><span class="line">        <span class="keyword">for</span> (k=start;k&lt;=end;k++)</span><br><span class="line">            array[k]=result[k];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
-<h2 id="6-快速排序"><a href="#6-快速排序" class="headerlink" title="6.快速排序"></a>6.快速排序</h2><p>快速排序的特点在于选择一个队列左侧的一个值作为基准值，然后通过比较基准值把比基准值小(大)的元素移动到队列前端(队列前端的数都比基准值小，后方都比基准值大)，最后再把基准值移动到前端尾部进行下一轮递归。</p>
-<ul>
-<li>时间复杂度(平均)：O(nlogn)</li>
-<li>时间复杂度(最好)：O(nlogn)</li>
-<li>时间复杂度(最差)：O(n^2)</li>
-<li>空间复杂度：O(nlogn)</li>
-<li>稳定性：不稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = SortUtil.array1;</span><br><span class="line">        quickSort(array,<span class="number">0</span>,array.length-<span class="number">1</span>);</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//通过递归实现快速排序</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] array,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="comment">//当队列只有一个元素时结束递归</span></span><br><span class="line">        <span class="keyword">if</span>(left&lt;right)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> partition=getPartition(array,left,right);</span><br><span class="line">            <span class="comment">//左边都小于基准值，右边都大于基准值</span></span><br><span class="line">            quickSort(array,left,partition-<span class="number">1</span>);</span><br><span class="line">            quickSort(array,partition+<span class="number">1</span>,right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//分区操作，获得最后</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getPartition</span><span class="params">(<span class="keyword">int</span>[] array,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pivot=left;</span><br><span class="line">        <span class="keyword">int</span> index=pivot+<span class="number">1</span>;</span><br><span class="line">        <span class="comment">//从基准值后一位开始遍历到右边</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=index;i&lt;=right;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//如果当前元素比基准值小，就与初始遍历位交换，然后下标向后移动一位</span></span><br><span class="line">            <span class="keyword">if</span>(array[i]&lt;array[pivot])</span><br><span class="line">            &#123;</span><br><span class="line">                swap(array,i,index);</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//这里index-1是因为前最后一次循环后index还会后移一位到比基准值大的地方</span></span><br><span class="line">        <span class="comment">//而基准值最后要交换的应当是比其小的最大数，因此需要index-1</span></span><br><span class="line">        swap(array,pivot,index-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> index-<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//交换两个下标的数组元素</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] array,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp=array[i];</span><br><span class="line">        array[i]=array[j];</span><br><span class="line">        array[j]=temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
 
+          <div class="content post posts-expand">
+            
 
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yorug.github.io/2020/11/05/%E7%A7%8B%E6%8B%9B%E6%97%A5%E8%AE%B0/">
 
-<p>以后再写，困了…</p>
-]]></content>
-      <categories>
-        <category>学习总结</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>补招日记</title>
-    <url>/2020/11/21/%E8%A1%A5%E6%8B%9B%E6%97%A5%E8%AE%B0/</url>
-    <content><![CDATA[<div style = "padding-left:100px; padding-right:100px">秋招结束了，我青结~~本来这篇应该是《日常实习日记》的，但投了二十来家公司都没人回我，反倒是补招上岸，就变成《补招日记》了</div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="YoruG">
+      <meta itemprop="description" content="记录一些自己的东西">
+    </span>
 
-<a id="more"></a>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YoruG's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          秋招日记
+        </h1>
 
-<h4 id="2020-10-27"><a href="#2020-10-27" class="headerlink" title="2020.10.27"></a>2020.10.27</h4><p>&emsp;&emsp;投递公司：</p>
-<ul>
-<li><strong>字节跳动</strong></li>
-<li><strong>快手</strong></li>
-<li><strong>滴滴杭州</strong></li>
-<li><strong>斗鱼</strong></li>
-<li><strong>网易有道</strong></li>
-<li><strong>欢聚</strong></li>
-<li><strong>小米</strong></li>
-<li><strong>京东</strong></li>
-</ul>
-<p>&emsp;&emsp;投完才发现自己又忘记用内推了，害 </p>
-<p><br><br></p>
-<h4 id="2020-10-30"><a href="#2020-10-30" class="headerlink" title="2020.10.30"></a>2020.10.30</h4><p><strong>快手简历(淘汰)</strong></p>
-<p>&emsp;&emsp;哎，快手真的难，三投三挂，实习简历都过不去</p>
-<p><br><br></p>
-<h4 id="2020-11-1"><a href="#2020-11-1" class="headerlink" title="2020.11.1"></a>2020.11.1</h4><blockquote>
-<p>​        今天体测完略伤，一千米倒还好平时有练，但引体向上做完整个人都不好了，感觉全身都肌肉拉伤了，躺床上起身都难。以后还是要加强锻炼啊，尤其是现在还在学校这段日子</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-3"><a href="#2020-11-3" class="headerlink" title="2020.11.3"></a>2020.11.3</h4><p><strong>京东简历(淘汰)</strong></p>
-<p>&emsp;&emsp;又是一行“硕士优先”直接人就没了，但是我真的不觉得开发岗位硕士跟本科有啥区别啊，要是说校招因为没实习挂了我还能服气，为什么实习的技术岗也看学历啊，后来想想可能也有应届生找实习的Debuff加成在吧。<br></p>
-<blockquote>
-<p>&emsp;&emsp;感觉自己又开始眼高手低了，可是感觉要是去小厂打杂(虽然大厂也是打杂)在简历上没法添加优势。然而要去大厂，就得有学历、竞赛或者实习，可惜我全不能选手样样没有，之后试着投投好一点的小厂吧</p>
-</blockquote>
-<p><strong>网易简历(下架)</strong></p>
-<p>&emsp;&emsp;想找大厂实习是真的太难了，竞争的人太多，而且也不缺人</p>
-<p>&emsp;&emsp;投递公司：</p>
-<ul>
-<li><strong>百度</strong></li>
-<li><strong>汇量科技</strong></li>
-<li><strong>SHEIN</strong></li>
-<li><strong>盛趣游戏</strong></li>
-<li><strong>帆软</strong></li>
-<li><strong>元戎启行</strong></li>
-<li><strong>京东金融</strong></li>
-</ul>
-<p><strong>斗鱼、SHEIN、盛趣、京东金融、汇量简历(放置Play)</strong></p>
-<p>&emsp;&emsp;实习僧简历这个已查看状态太恶心啦，看了又不改状态，搞得我每天都要上去看一看，没过也改成不合适呗</p>
-<p><strong>元戎启行简历(秒挂)</strong></p>
-<p>&emsp;&emsp;到现在投了15个实习了，然而两天就已经挂四五个了。。。不想投了，心累了，要是没实习就专心一直学习准备到春招了</p>
-<blockquote>
-<p>&emsp;&emsp;不知道从什么时候开始，越是看面经越觉得自己不会的太多，无限の恶性循环</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-4"><a href="#2020-11-4" class="headerlink" title="2020.11.4"></a>2020.11.4</h4><p>&emsp;&emsp;秋招遗漏下来的面试，岗位还变成数据开发工程师了，我Kafka、spark、hadoop可是样样不会啊，估计也是KPI练手了，随意吧，一轮游预备</p>
-<ul>
-<li><p><strong>美团一面</strong></p>
-<ol>
-<li>topK</li>
-</ol>
-<p>&emsp;&emsp;上次字节也是TOPK算法测试用例没通过，这次还是没过，SQL也没写正确，我真踏马是个fw啊，这面试官还硬是问了一小时，真是辛苦他了。又一次让我知道自己和大厂的距离。不过秋招也总该结束了吧，那实习电话为啥还不来啊呜呜呜┭┮﹏┭┮</p>
-</li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-11-5"><a href="#2020-11-5" class="headerlink" title="2020.11.5"></a>2020.11.5</h4><blockquote>
-<p>&emsp;&emsp;今天还是没有实习电话的一天，有点想签了招银了，总感觉就是自讨苦吃，本来可以签了offer舒舒服服地躺几天，但是不懂为什么自己不想放弃，不是大佬心气还这么高，也有想过如果在一周期限内没找到实习就签了</p>
-<p>&emsp;&emsp;想了一晚上，犹豫就会败北，不管怎样都不签了，有这种想法感觉就容易让自己失去继续努力的动力，还是觉得不甘心啊，又投了几个部门直招的补招。</p>
-</blockquote>
-<ul>
-<li><strong>微众银行</strong></li>
-<li><strong>小米互二</strong></li>
-<li><strong>小米手机</strong></li>
-<li><strong>京东零售云</strong></li>
-</ul>
-<blockquote>
-<p>&emsp;&emsp;今天又是无所事事刷牛客的一天，哎，明天把之前记录的所有面经问题都看完把，然后开始看点技术书籍了</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-6"><a href="#2020-11-6" class="headerlink" title="2020.11.6"></a>2020.11.6</h4><p>&emsp;&emsp;投递公司：</p>
-<ul>
-<li><strong>滴滴北京</strong></li>
-<li><strong>东方财富</strong></li>
-<li><strong>顺丰</strong></li>
-<li><strong>小红书</strong></li>
-<li><strong>卡牛</strong></li>
-<li><strong>尚米网络</strong></li>
-<li><strong>广州卓动</strong></li>
-</ul>
-<blockquote>
-<p>&emsp;&emsp;今天面经还是没看完，又是沉迷刷牛客的一天，怀念国庆那段时间啊，纯粹地刷题练算法、看书，学习提升自己，现在感觉被各种东西困扰，不过说到底还是自己的专注力不够，是时候把番茄钟下回来了        </p>
-<p>&emsp;&emsp;<del>没有梦想，那和做咸鱼有什么区别</del>，罢了，不过是个打工人，谈什么梦想</p>
-<p>当下的最优解：</p>
-<ol>
-<li>补招上岸，去实习    </li>
-<li>找到实习，补招、春招上岸</li>
-<li>补招、实习无望，硬着头皮刚春招</li>
-<li><del>当条咸鱼，接了offer</del></li>
-</ol>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-7"><a href="#2020-11-7" class="headerlink" title="2020.11.7"></a>2020.11.7</h4><p><strong>货拉拉一面</strong></p>
-<ol>
-<li>动态代理的底层</li>
-<li>spring事务中用trycatch捕获异常是否还会回滚</li>
-</ol>
-<p>&emsp;&emsp;又是秋招遗留下来的。有几个问题不会，但是一结束就忘记啥问题了，太草了</p>
-<p><br><br></p>
-<h4 id="2020-11-8"><a href="#2020-11-8" class="headerlink" title="2020.11.8"></a>2020.11.8</h4><blockquote>
-<p>&emsp;&emsp;闲的发慌，面经不想看，题不想刷，看起了视频，追起了番，这季度的《黄金神威》和《咒术回战》很彳亍</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-9"><a href="#2020-11-9" class="headerlink" title="2020.11.9"></a>2020.11.9</h4><p><strong>东方财富测评</strong></p>
-<p>&emsp;&emsp;投的实习但是发了个校招的测评邮件，懵了</p>
-<blockquote>
-<p>&emsp;&emsp;想了想还是想补招上岸好啊，今天看了下知乎，今年的考研报名人数差不多得有420万，太离谱了，比去年直接就多了80w人，大学毕业生不过八百多万，考研报名的就占了一半，再加上保研名额，几乎就是全员读研了。到时候春招想必一定是人更多坑更少了，再加上一些大佬想春招再找毁约曲线救国，难以想象战况的惨烈了</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-10"><a href="#2020-11-10" class="headerlink" title="2020.11.10"></a>2020.11.10</h4><blockquote>
-<p>&emsp;&emsp;补招它终于lei了，最近一直没消息又怠惰了两天，现在终于机会来了，补招上岸冲踏马的，说实话我也不想春招啊，补招上岸，学习、休息半个月再去实习它不香吗</p>
-</blockquote>
-<p><strong>小米一面</strong></p>
-<ol>
-<li>电脑CPU占100%怎么解决(JVM调优)</li>
-<li>HashMap插入节点是在头结点还是尾结点</li>
-<li>翻转链表</li>
-</ol>
-<p>&emsp;&emsp;哎，继续投实习把，裂开来，有好几题没答出来，最后给了个像KPI一样的简单算法题，我看别人都是两道算法啊。。。感觉之前把太多希望都寄托于此了，现在失落感真的倍增。有这种补招上岸的想法是我不对，哎蒟蒻就不配上岸，投的实习到现在也不给个电话，实习机会再不来感觉连三个月的工期都保证不了了啊。。</p>
-<blockquote>
-<p>&emsp;&emsp;永远不要把鸡蛋放在一个篮子里            ——周迅</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-11"><a href="#2020-11-11" class="headerlink" title="2020.11.11"></a>2020.11.11</h4><blockquote>
-<p>&emsp;&emsp;难受的双十一，至今未接到实习电话(早上九点有个电话，不过睡晚了没接到，打回去也没人接了)，下午学习也学不下去，然后听了一下午的菅田将晖，歌是真好听啊，感觉很少有男歌手的声音这么舒服的</p>
-<p>&emsp;&emsp;晚上拒绝了招银的Offer，又一次回归0offer的情况了，彻底断了退路，孤注一掷了。现在真的需要好好静下心来学习了，一切从零开始，锻炼自己的心态</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-12"><a href="#2020-11-12" class="headerlink" title="2020.11.12"></a>2020.11.12</h4><p>&emsp;&emsp;机会又来了，开冲，不知道是互二的还是手机部的，但是接到电话真的很激动，感觉面试才是复习的驱动力啊！又想了想还是不要全把希望寄托在一处了，放宽心，心态保持好，从容应对吧</p>
-<p><strong>小米二面</strong></p>
-<p>&emsp;&emsp;问了大部分是项目，加一些基础，加一个快排</p>
-<blockquote>
-<p>&emsp;&emsp;面试结束了，发了测评邮件，当晚也做完了。剩下的就是等结果了，希望能就此结束秋招吧，然后放松几天，去实习，开始新的生活</p>
-</blockquote>
-<p><strong>小米测评</strong></p>
-<p>&emsp;&emsp;测评难得雅痞，之前也做过但不知道正确答案，就没怎么刷过这种测评，图形题和计算题看的好烦，不懂这有啥意义啊，难道只凭这种测评就能看出人是啥心理，啥智商了吗。要是是因为测评挂了，我直接原地裂开┭┮﹏┭┮</p>
-<p><br><br></p>
-<h4 id="2020-11-13"><a href="#2020-11-13" class="headerlink" title="2020.11.13"></a>2020.11.13</h4><blockquote>
-<p>&emsp;&emsp;最近刷题感觉陷入了一个怪圈，只有简单题才能做，一遇到中等题或者困难题就想着看题解，这种思维感觉不太好，下次遇到中难题至少要想10分钟不会再看了。</p>
-<p>&emsp;&emsp;下午被辅导员要求去参加了学校另一个校区的线下招聘，都是些不想去的，还硬是催了我二十分钟，想了想就去看看，毕竟也没有线下面试过，体验一波流程吧。</p>
-<p>&emsp;&emsp;整个过程太尴尬了，三个企业宣讲。就第一个国家电网的子子公司有点排面，公司的大佬还有福利讲了挺多，后面两个小公司一个讲着没底气了，一个干脆不讲了，然后一结束没人投简历全部排着队出去了。。。合着全都是来凑数的。而且每个公司面试都只有HR，一般不是要有技术面试官的吗。。还是说我参加的少了，没见识。可惜省份有点尴尬，学校好像还是全省最好几所了，要是在北上广可能还能去蹭蹭其他学校大公司的招聘会</p>
-</blockquote>
-<p>​        </p>
-<blockquote>
-<p>&emsp;&emsp;秉持着鸡蛋不能放一个篮子的原则，又冲了几家补招，突然就不想实习了，反正也不call我，那就补招上岸把。还有最近看到的实习岗位好多都是go语言，感觉go语言好像真的是趋势了，谷歌影响力还是大啊，像腾讯这种龙头都在往go转了</p>
-</blockquote>
-<p>&emsp;&emsp;投递公司：</p>
-<ul>
-<li><strong>快手</strong></li>
-<li><strong>达达</strong></li>
-<li><strong>顺丰</strong></li>
-</ul>
-<blockquote>
-<p>&emsp;&emsp;今天又是堕落的一天，现在明明都没有offer，就开始休闲娱乐了，看了B站上一整页的马保国，真的鬼畜新星。然后晚上又开始贤者模式一般地醒悟过来，还是要去学习啊，要能应对各种突然面试才行，只要没有签，就不要停下来啊~</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-16"><a href="#2020-11-16" class="headerlink" title="2020.11.16"></a>2020.11.16</h4><blockquote>
-<p>&emsp;&emsp;周末结束，又有很多新的补招信息，但是不知道为什么，看到了一些之前笔试面试失败的公司补招却不敢投，就有种底气不足的感觉，害怕又给虐一轮。转念一想，给虐那么多次了也不差这几次就狠下心投了</p>
-</blockquote>
-<ul>
-<li><strong>京东广告部</strong></li>
-<li><strong>美团到店</strong></li>
-<li><strong>跟谁学</strong></li>
-<li><strong>途虎养车</strong></li>
-<li><strong>京东国际</strong></li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-11-17"><a href="#2020-11-17" class="headerlink" title="2020.11.17"></a>2020.11.17</h4><blockquote>
-<p>&emsp;&emsp;好累啊，今天又刷了一天牛客，找补招信息，找来找去发现就那几家，太难了，但是补招这种情况感觉就真的很考验信息检索能力。之前投的其他补招都没有消息，搞得我现在又想去找实习了，没有竞争力真的太难了，然而现在实习到春节也不过三个月不到的时长，而且也没有啥好点的公司要，感觉只能去外包公司实习了，要是大三暑期实习感觉还能接受，可是现在已经大四了，接受不能啊。。。没顶住，投了个离学校比较近的实习</p>
-</blockquote>
-<ul>
-<li><p><strong>金山</strong></p>
-<br>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
+              <time title="创建时间：2020-11-05 00:00:00" itemprop="dateCreated datePublished" datetime="2020-11-05T00:00:00+08:00">2020-11-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-29 17:49:10" itemprop="dateModified" datetime="2020-11-29T17:49:10+08:00">2020-11-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">日常随笔</span></a>
+                </span>
+            </span>
 
-</li>
-</ul>
-<p><strong>货拉拉二面</strong></p>
-<p>&emsp;&emsp;这家的流程好慢啊，慢的我还以为之前一面已经挂了。</p>
-<p>&emsp;&emsp;因为没有特别想去，面试前毫无准备，甚至刷牛客，结果自然是面的不是很好，项目有些地方遗忘了，不过面试官的态度挺好的，但可能就是没有后面流程了吧。</p>
-<p><br><br></p>
-<h4 id="2020-11-18"><a href="#2020-11-18" class="headerlink" title="2020.11.18"></a>2020.11.18</h4><p><strong>金山简历(淘汰)</strong></p>
-<p>&emsp;&emsp;一早上起来就看到给挂了，感觉找个实习比校招还难，直接劝退。现在投实习可能真的晚了，还是专心复习准备<del>春招</del>补招吧</p>
-<p><strong>携程测评</strong></p>
-<p>&emsp;&emsp;本来以为又要做一小时，结果发现和上次做的一样，北森测评只要一直点跳过就行了，不知道能不能给面试机会啊，上海是几个一线城市里最想去的了</p>
-<p><br><br></p>
-<h4 id="2020-11-19"><a href="#2020-11-19" class="headerlink" title="2020.11.19"></a>2020.11.19</h4><p>&emsp;&emsp;莫名其妙地到了最后一面。。</p>
-<p><strong>货拉拉HR面</strong></p>
-<p>&emsp;&emsp;感觉货拉拉的面试官都挺好的，就是我自己太搞了。。问我公司0<del>5分评积分，我说3</del>4分，现在感觉至少应该说个4分，有点太不给面子了。还问了给了offer是否会来，我觉得当时要是坚定一点可能就很稳吧，不过还是太实诚了，说不一定去，然而手上只不过有个泡池子的。</p>
-<p>&emsp;&emsp;面试前在了解公司情况的时候，看到这家公司的老板以前打德州扑克打七年成了财富自由，惊了！！</p>
-<br>
+          
+            <span id="/2020/11/05/%E7%A7%8B%E6%8B%9B%E6%97%A5%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="秋招日记" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
 
-<p><strong>途虎养车笔试</strong></p>
-<ol>
-<li>两个有序数组，一个升序，一个降序，合并成升序数组</li>
-<li>求排列组合公式C(r,n)，n! / r! / (n - r)!</li>
-</ol>
-<p>&emsp;&emsp;好久没做笔试，笔试题果然还是这么恶心人啊，第一题常规的双指针做法结果55%，第二题用动态规划求出所有阶乘然后计算12%，两个都是O(N)的时间复杂度然后都不能过，难道非得打表O(1)吗</p>
-<blockquote>
-<p>&emsp;&emsp;突然发现自己好像局限于牛客上的公司了，其实别的网站上也有一些公司在补招但没有信息出来，于是在拉勾网上又投了几家</p>
-</blockquote>
-<ul>
-<li><strong>欢聚</strong></li>
-<li><strong>收钱吧</strong></li>
-<li><strong>BIGO</strong></li>
-<li><strong>Insta360</strong></li>
-<li><strong>字节教育</strong></li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-11-20"><a href="#2020-11-20" class="headerlink" title="2020.11.20"></a>2020.11.20</h4><p><strong>货拉拉OC</strong></p>
-<p>&emsp;&emsp;下午问了是否确定要offer，薪资比之前都要高，但还没想好要不要接受，给了三天时间考虑。不知道要不要放弃小米啊，但其实又不是特别想去北京，还是想留在南方。哎，人的欲望啊，无休无止，无穷无尽，感觉自己快要迷失了。</p>
-<p><strong>小米OC</strong></p>
-<p>&emsp;&emsp;终于，一周时间，周末的前一天OC了，可能也要正式宣布我的秋招之旅结束了吧。今后要是再想冲击更好的平台可能就要等社招了吧，谁又能想到在11月中旬我这样的菜鸡也能一天双oc呢，周末休息两天，等正式接到offer签约后，再回来写完最后一段把</p>
-<p><br><br></p>
-<h4 id="2020-11-21"><a href="#2020-11-21" class="headerlink" title="2020.11.21"></a>2020.11.21</h4><p><strong>小米offer</strong></p>
-<blockquote>
-<p>&emsp;&emsp;接到了offer邮件。整个补招20天结束。说实话补招在难度上可能是几种招聘最小的了，没有笔试，岗位急缺，争的人也不多，被捞起来就有很大机会上岸，所以真的觉得自己很幸运了。虽然朋友们说应该再试试更好的，其实我也想，但是之前几个大厂面试的溃败让我看清自己目前的水平了，还是要继续沉淀。有时候感觉自信真的源于实力，因为准备不够充分，所以在面试大厂时会紧张，我想如果实力足够了应当就会从容应对吧。</p>
-<p>&emsp;&emsp;这段校招之旅真的改变了我很多，从原本只想着考试考好就行，到之后开始会为未来考虑，有主动提升自己的意识，懂得去获取资源，会开始尝试新的学习方式。</p>
-<p>&emsp;&emsp;对未来的希望：不断提升自己的技术，多看些技术书籍还有大牛的博客，增强自己的知识广度和深度，还有要多开阔自己的视野，不要让自己局限于学生思维， 也不知道自己在35岁了还会不会仍在这个行业里，但不管未来怎么样也只能不断摸索着前进，要敢于走出自己的舒适圈，能适应学习不同的技术栈(有时候真的觉得自己过于局限于Java这块了)，还有之后要开始每天锻炼身体，再也不熬夜了，毕竟在这个动荡的2020年能好好活着就很不容易了~~</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>日常随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>秋招日记</title>
-    <url>/2020/11/05/%E7%A7%8B%E6%8B%9B%E6%97%A5%E8%AE%B0/</url>
-    <content><![CDATA[<div style = "padding-left:100px; padding-right:100px">记录大四秋招期间自己的一段心路历程，在一场场笔试、面试中积累经验，从很菜的菜鸡变成一般的菜鸡，自己的心态也在不断发生变化......</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div style = "padding-left:100px; padding-right:100px">记录大四秋招期间自己的一段心路历程，在一场场笔试、面试中积累经验，从很菜的菜鸡变成一般的菜鸡，自己的心态也在不断发生变化......</div>
 
 <a id="more"></a>
 
@@ -1235,12 +1123,216 @@
 <p>&emsp;&emsp;细数一下我现在有的优势：失败而坎坷的秋招笔面试经历、<del>不算很</del>拉胯的面试技巧、顶多能解决easy题的笔试能力、未来一定能<del>可能</del>找到的实习经历、寻找春招招聘信息的意识、<del>破罐破摔</del>良好的心态。</p>
 <p>&emsp;&emsp;之后要做的是实习总结收获，每天练习算法，看技术书籍，在春招前要看完书单的所有书，还有写博客，记录自己的想法。之后应该转战《日常实习笔记》，不会再动这篇记录了，希望来年春天拿到offer后我能满意地回来看这篇文章吧</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>日常随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-</search>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"><i class="fa fa-tag"></i> 随笔</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/21/%E8%A1%A5%E6%8B%9B%E6%97%A5%E8%AE%B0/" rel="next" title="补招日记">
+      补招日记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-8-6"><span class="nav-text">2020.8.6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-8-12"><span class="nav-text">2020.8.12</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-8-13"><span class="nav-text">2020.8.13</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-8-21"><span class="nav-text">2020.8.21</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-8-23"><span class="nav-text">2020.8.23</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-8-24"><span class="nav-text">2020.8.24</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-8-28"><span class="nav-text">2020.8.28</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-1"><span class="nav-text">2020.9.1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-4"><span class="nav-text">2020.9.4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-6"><span class="nav-text">2020.9.6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-7"><span class="nav-text">2020.9.7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-8"><span class="nav-text">2020.9.8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-9"><span class="nav-text">2020.9.9</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-10"><span class="nav-text">2020.9.10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-12"><span class="nav-text">2020.9.12</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-13"><span class="nav-text">2020.9.13</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-14"><span class="nav-text">2020.9.14</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-15"><span class="nav-text">2020.9.15</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-16"><span class="nav-text">2020.9.16</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-17"><span class="nav-text">2020.9.17</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-18"><span class="nav-text">2020.9.18</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-20"><span class="nav-text">2020.9.20</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-21"><span class="nav-text">2020.9.21</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-22"><span class="nav-text">2020.9.22</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-23"><span class="nav-text">2020.9.23</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-24"><span class="nav-text">2020.9.24</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-25"><span class="nav-text">2020.9.25</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-26"><span class="nav-text">2020.9.26</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-27"><span class="nav-text">2020.9.27</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-28"><span class="nav-text">2020.9.28</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-29"><span class="nav-text">2020.9.29</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-9-30"><span class="nav-text">2020.9.30</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-1"><span class="nav-text">2020.10.1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-4"><span class="nav-text">2020.10.4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-9"><span class="nav-text">2020.10.9</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-10"><span class="nav-text">2020.10.10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-11"><span class="nav-text">2020.10.11</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-12"><span class="nav-text">2020.10.12</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-13"><span class="nav-text">2020.10.13</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-14"><span class="nav-text">2020.10.14</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-15"><span class="nav-text">2020.10.15</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-16"><span class="nav-text">2020.10.16</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-17"><span class="nav-text">2020.10.17</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-18"><span class="nav-text">2020.10.18</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-20"><span class="nav-text">2020.10.20</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-21"><span class="nav-text">2020.10.21</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-22"><span class="nav-text">2020.10.22</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-24"><span class="nav-text">2020.10.24</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-25"><span class="nav-text">2020.10.25</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-26"><span class="nav-text">2020.10.26</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-27"><span class="nav-text">2020.10.27</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-28"><span class="nav-text">2020.10.28</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-29"><span class="nav-text">2020.10.29</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-10-30"><span class="nav-text">2020.10.30</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-11-2"><span class="nav-text">2020.11.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020-11-5"><span class="nav-text">2020.11.5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%8B%E6%8B%9B%E5%A4%8D%E7%9B%98"><span class="nav-text">秋招复盘</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YoruG"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">YoruG</p>
+  <div class="site-description" itemprop="description">记录一些自己的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YoruG" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YoruG" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/yorug" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;yorug" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-anchor"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YoruG</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
