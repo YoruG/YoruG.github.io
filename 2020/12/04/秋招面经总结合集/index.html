@@ -1,1244 +1,271 @@
-<?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>十大经典排序算法</title>
-    <url>/2020/11/23/%E5%8D%81%E5%A4%A7%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<div style = "padding-left:100px; padding-right:100px">排序算法是算法学习中比较经典的内容，面试也会经常考到，学习十大经典排序算法的目的在于理解并掌握其中运用的算法思想，还有装逼(不是</div><br>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Sans SC:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yorug.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":240,"width":250,"display":"post","padding":55,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="主要记录一些之前遇到过但不会的问题，部分比较基础的问题就没有收录进来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="秋招面经总结合集">
+<meta property="og:url" content="https://yorug.github.io/2020/12/04/%E7%A7%8B%E6%8B%9B%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93%E5%90%88%E9%9B%86/index.html">
+<meta property="og:site_name" content="YoruG&#39;s Blog">
+<meta property="og:description" content="主要记录一些之前遇到过但不会的问题，部分比较基础的问题就没有收录进来">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-07T05:08:03.546Z">
+<meta property="article:author" content="YoruG">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://yorug.github.io/2020/12/04/%E7%A7%8B%E6%8B%9B%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93%E5%90%88%E9%9B%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>秋招面经总结合集 | YoruG's Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ccc02f093bf72cadaa2d65eb22e16e07";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
 
-<a id="more"></a>
-
-
-
-<blockquote>
-<p>本片文章参考了博客<a href="https://www.cnblogs.com/onepixel/articles/7674659.html">十大经典排序算法(动图演示)</a>，该博客上还有排序的相关图解和JS代码实现，非常清晰</p>
-</blockquote>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
-<li><strong>稳定</strong>：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。</li>
-<li><strong>不稳定</strong>：如果a原本在b的前面，而a=b，排序之后 a 可能会出现在 b 的后面。</li>
-<li><strong>时间复杂度</strong>：对排序数据的总的操作次数。反映当n变化时，操作次数呈现什么规律。</li>
-<li><strong>空间复杂度：</strong>是指算法在计算机内执行时所需存储空间的度量，它也是数据规模n的函数。</li>
-</ul>
-<p>下面代码通用的排序工具类，用于提供打印数组的方法和测试数据，并且下面排序算法都是按从小到大排序(从大到小反推即可)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SortUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span>[] array)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i:array)</span><br><span class="line">            System.out.print(<span class="string">&quot; &quot;</span>+i+<span class="string">&quot; &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] array1=&#123;<span class="number">100</span>,<span class="number">889</span>,<span class="number">4678</span>,<span class="number">1354</span>,<span class="number">20</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">225</span>,<span class="number">502</span>,<span class="number">765</span>,<span class="number">12</span>,<span class="number">10058</span>,<span class="number">52</span>&#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] array2=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">77</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">80</span>,<span class="number">464</span>,<span class="number">124</span>&#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] array3=&#123;<span class="number">3</span>,<span class="number">5</span>,<span class="number">38</span>,<span class="number">156</span>,<span class="number">1</span>,<span class="number">564</span>,<span class="number">8</span>,<span class="number">4</span>,<span class="number">65</span>,<span class="number">51</span>,<span class="number">321</span>,<span class="number">3</span>,<span class="number">54</span>,<span class="number">31</span>,<span class="number">23</span>,<span class="number">150</span>&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="1-冒泡排序"><a href="#1-冒泡排序" class="headerlink" title="1.冒泡排序"></a>1.冒泡排序</h2><p>冒泡排序的特点就是在交换相邻数组元素时，元素会一步一步地向末尾端移动，像冒泡一样</p>
-<ul>
-<li>时间复杂度(平均)：O(n^2)</li>
-<li>时间复杂度(最好)：O(n)</li>
-<li>时间复杂度(最差)：O(n^2)</li>
-<li>空间复杂度：O(1)</li>
-<li>稳定性：稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BubbleSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array=SortUtil.array1;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;array.length-<span class="number">1</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//这里设置j的上限为array.length-1可以减少无效循环语句的执行</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;array.length-<span class="number">1</span>-i;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(array[j]&gt;array[j+<span class="number">1</span>])</span><br><span class="line">                &#123;</span><br><span class="line">                	<span class="comment">//冒泡的核心部分在于相邻元素的交换</span></span><br><span class="line">                    <span class="keyword">int</span> temp=array[j];</span><br><span class="line">                    array[j]=array[j+<span class="number">1</span>];</span><br><span class="line">                    array[j+<span class="number">1</span>]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h2 id="2-选择排序"><a href="#2-选择排序" class="headerlink" title="2.选择排序"></a>2.选择排序</h2><p>选择排序的特点在于把数组分为有序和无序的，初始数组全为无序部分，然后从中选择最小(大)值放到有序部分(有序部分从数组的0下标开始)，依次执行直到无序部分遍历结束</p>
-<ul>
-<li>时间复杂度(平均)：O(n^2)</li>
-<li>时间复杂度(最好)：O(n^2)</li>
-<li>时间复杂度(最差)：O(n^2)</li>
-<li>空间复杂度：O(1)</li>
-<li>稳定性：不稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = SortUtil.array1;</span><br><span class="line">        <span class="comment">//用minIndex作为最小部分的下标</span></span><br><span class="line">        <span class="keyword">int</span> minIndex=<span class="number">0</span>;</span><br><span class="line">        <span class="comment">//这里上限为array.length-1是为了防止j越界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;array.length-<span class="number">1</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//这一步很关键，每次在无序部分进行新一轮循环时都要重新初始化最小下标</span></span><br><span class="line">            <span class="comment">//因为不知道哪个是最小值则用第一个下标做minIndex</span></span><br><span class="line">            minIndex=i;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;array.length;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//每当遇到比最小下标元素更小的元素时就更新最小下标</span></span><br><span class="line">                <span class="keyword">if</span>(array[j]&lt;array[minIndex])</span><br><span class="line">                    minIndex=j;</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="keyword">int</span> temp=array[i];</span><br><span class="line">            array[i]=array[minIndex];</span><br><span class="line">            array[minIndex]=temp; </span><br><span class="line">        &#125;</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-<h2 id="3-插入排序"><a href="#3-插入排序" class="headerlink" title="3.插入排序"></a>3.插入排序</h2><p>插入排序的特点是也像选择排序那样分成有序和无序部分，不过它的第二轮循环没有遍历无序部分，而是遍历有序部分与无序部分的第一个元素进行比较，如果满足条件则将这当前元素插入到有序部分中，这里的插入是从后往前插</p>
-<ul>
-<li>时间复杂度(平均)：O(n^2)</li>
-<li>时间复杂度(最好)：O(n)</li>
-<li>时间复杂度(最差)：O(n^2)</li>
-<li>空间复杂度：O(1)</li>
-<li>稳定性：稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InsertSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = SortUtil.array1;</span><br><span class="line">        <span class="comment">//设置前面有序序列的替换下标、当前值</span></span><br><span class="line">        <span class="keyword">int</span> preIndex,current;</span><br><span class="line">        <span class="comment">//循环要从1开始，因为要预留下标0给preIndex</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;array.length;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            preIndex=i-<span class="number">1</span>;</span><br><span class="line">            <span class="comment">//这里要用current记录下标i的值，而不能直接记录下标i，因为后面下标i的元素会被替换掉</span></span><br><span class="line">            current=array[i];</span><br><span class="line">            <span class="comment">//这里判断前面的下标是否大于当前值且在数组元素内，如果大于就让前面元素向后移位空出一格以备当前元素插入</span></span><br><span class="line">            <span class="keyword">while</span>(preIndex&gt;=<span class="number">0</span> &amp;&amp; array[preIndex]&gt;current)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//前面下标后移一格，下标同时向前移动</span></span><br><span class="line">                array[preIndex+<span class="number">1</span>]=array[preIndex];</span><br><span class="line">                preIndex--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//循环结束则说明当前元素大于前面元素，此时插入空格位(看起来是空格为但实际上是前面的后移元素)</span></span><br><span class="line">            <span class="comment">//并且这里的preIndex+1是因为在前面循环后preIndex会比空格位对应的下标还要小1，因此要+1得到空格位</span></span><br><span class="line">            array[preIndex+<span class="number">1</span>]=current;</span><br><span class="line">        &#125;</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-<h2 id="4-希尔排序"><a href="#4-希尔排序" class="headerlink" title="4.希尔排序"></a>4.希尔排序</h2><p>希尔排序是第一个突破O(n^2)复杂度的排序算法。它是插入排序的优化版本，又叫缩小增量排序，插入排序每次比较的间隔都是1，而希尔排序的比较间隔是从大到小，如果后面的元素满足条件则也会从后往前插入</p>
-<ul>
-<li>时间复杂度(平均)：O(n^1.3)</li>
-<li>时间复杂度(最好)：O(n)</li>
-<li>时间复杂度(最差)：O(n^2)</li>
-<li>空间复杂度：O(1)</li>
-<li>稳定性：不稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShellSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = SortUtil.array1;</span><br><span class="line">        <span class="comment">//preIndex作为前面元素下标、gap作为比较间隔、current作为当前元素</span></span><br><span class="line">        <span class="keyword">int</span> preIndex,gap,current; </span><br><span class="line">        <span class="comment">//首先外部有个大循环是用gap作条件，不断缩小比较的间隔，如12-&gt;6-&gt;3-&gt;1</span></span><br><span class="line">        <span class="keyword">for</span>(gap=array.length/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap=gap/<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//这里的核心部分和插入排序非常相似</span></span><br><span class="line">            <span class="comment">//初始条件i=gap和插入排序的i=1类似</span></span><br><span class="line">            <span class="comment">//初始化preIndex=i-gap和插入排序的i=i-1类似</span></span><br><span class="line">            <span class="comment">//到后面的while循环条件和插入排序直接一致，可以说当gap缩小到1时这段代码就等同于插入排序了</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=gap;i&lt;array.length;i++)</span><br><span class="line">            &#123;</span><br><span class="line">                preIndex=i-gap;</span><br><span class="line">                current=array[i];</span><br><span class="line">                <span class="keyword">while</span>(preIndex&gt;=<span class="number">0</span> &amp;&amp; array[preIndex]&gt;current)</span><br><span class="line">                &#123;</span><br><span class="line">                    array[preIndex+gap]=array[preIndex];</span><br><span class="line">                    preIndex-=gap;</span><br><span class="line">                &#125;</span><br><span class="line">                array[preIndex+gap]=current;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-<h2 id="5-归并排序"><a href="#5-归并排序" class="headerlink" title="5.归并排序"></a>5.归并排序</h2><p>归并排序的特点是通过分治法，先把无序队列分成子序列，分成子序列的关键在于变换首尾下标，起初是子序列是整个数组的长度然后慢慢递减到只有1个长度，然后使子序列有序，然后再把有序子序列合并起来，最终得到一个完整的有序序列</p>
-<ul>
-<li>时间复杂度(平均)：O(nlogn)</li>
-<li>时间复杂度(最好)：O(nlogn)</li>
-<li>时间复杂度(最差)：O(nlogn)</li>
-<li>空间复杂度：O(n)</li>
-<li>稳定性：稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MergeSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = SortUtil.array1;</span><br><span class="line">        <span class="comment">//用一个辅助数组来帮助实现归并</span></span><br><span class="line">        <span class="keyword">int</span>[] result=<span class="keyword">new</span> <span class="keyword">int</span>[array.length];</span><br><span class="line">        <span class="comment">//初始前后下标设置为数组首尾下标</span></span><br><span class="line">        merge(array,result,<span class="number">0</span>,array.length-<span class="number">1</span>);</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//递归方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] array,<span class="keyword">int</span>[] result,<span class="keyword">int</span> start,<span class="keyword">int</span> end)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//当只有子序列只有一个元素时结束递归，子序列长度由start和end决定</span></span><br><span class="line">        <span class="keyword">if</span>(start&gt;=end)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">//首先取一半作为子序列</span></span><br><span class="line">        <span class="keyword">int</span> mid=start+(end-start)/<span class="number">2</span>;</span><br><span class="line">        <span class="comment">//前半段子序列下标为start1~end1，后半段下标为start2~end2</span></span><br><span class="line">        <span class="keyword">int</span> start1=start,end1=mid;</span><br><span class="line">        <span class="keyword">int</span> start2=mid+<span class="number">1</span>,end2=end;</span><br><span class="line">        <span class="comment">//然后一直递归直到只有1个元素才会继续后面的代码</span></span><br><span class="line">        merge(array,result,start1,end1);</span><br><span class="line">        merge(array,result,start2,end2);</span><br><span class="line">        <span class="comment">//下面是归并部分，用把两个有序队列合并成一个有序队列来看就很容易理解</span></span><br><span class="line">        <span class="keyword">int</span> k=start;</span><br><span class="line">        <span class="comment">//首先两个有序队列都未遍历完，因此比较后小的插入result数组，同时变换下标</span></span><br><span class="line">        <span class="keyword">while</span>(start1&lt;=end1 &amp;&amp; start2&lt;=end2)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(array[start1]&lt;array[start2])</span><br><span class="line">                result[k++]=array[start1++];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                result[k++]=array[start2++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//当一个队列遍历完后另一个队列就可以直接遍历剩余部分插入到result数组中</span></span><br><span class="line">        <span class="keyword">while</span>(start1&lt;=end1)</span><br><span class="line">            result[k++]=array[start1++];</span><br><span class="line">        <span class="keyword">while</span>(start2&lt;=end2)</span><br><span class="line">            result[k++]=array[start2++];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//最后要修改原数组array，因为result只是一个辅助数组</span></span><br><span class="line">        <span class="keyword">for</span> (k=start;k&lt;=end;k++)</span><br><span class="line">            array[k]=result[k];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="6-快速排序"><a href="#6-快速排序" class="headerlink" title="6.快速排序"></a>6.快速排序</h2><p>快速排序的特点在于选择一个队列左侧的一个值作为基准值，然后通过比较基准值把比基准值小(大)的元素移动到队列前端(队列前端的数都比基准值小，后方都比基准值大)，最后再把基准值移动到前端尾部进行下一轮递归。</p>
-<ul>
-<li>时间复杂度(平均)：O(nlogn)</li>
-<li>时间复杂度(最好)：O(nlogn)</li>
-<li>时间复杂度(最差)：O(n^2)</li>
-<li>空间复杂度：O(nlogn)</li>
-<li>稳定性：不稳定</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = SortUtil.array1;</span><br><span class="line">        quickSort(array,<span class="number">0</span>,array.length-<span class="number">1</span>);</span><br><span class="line">        SortUtil.printArray(array);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//通过递归实现快速排序</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] array,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="comment">//当队列只有一个元素时结束递归</span></span><br><span class="line">        <span class="keyword">if</span>(left&lt;right)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> partition=getPartition(array,left,right);</span><br><span class="line">            <span class="comment">//左边都小于基准值，右边都大于基准值</span></span><br><span class="line">            quickSort(array,left,partition-<span class="number">1</span>);</span><br><span class="line">            quickSort(array,partition+<span class="number">1</span>,right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//分区操作，获得最后</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getPartition</span><span class="params">(<span class="keyword">int</span>[] array,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pivot=left;</span><br><span class="line">        <span class="keyword">int</span> index=pivot+<span class="number">1</span>;</span><br><span class="line">        <span class="comment">//从基准值后一位开始遍历到右边</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=index;i&lt;=right;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//如果当前元素比基准值小，就与初始遍历位交换，然后下标向后移动一位</span></span><br><span class="line">            <span class="keyword">if</span>(array[i]&lt;array[pivot])</span><br><span class="line">            &#123;</span><br><span class="line">                swap(array,i,index);</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//这里index-1是因为前最后一次循环后index还会后移一位到比基准值大的地方</span></span><br><span class="line">        <span class="comment">//而基准值最后要交换的应当是比其小的最大数，因此需要index-1</span></span><br><span class="line">        swap(array,pivot,index-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> index-<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//交换两个下标的数组元素</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] array,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp=array[i];</span><br><span class="line">        array[i]=array[j];</span><br><span class="line">        array[j]=temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>以后再写，困了…</p>
-]]></content>
-      <categories>
-        <category>学习总结</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>补招日记</title>
-    <url>/2020/11/21/%E8%A1%A5%E6%8B%9B%E6%97%A5%E8%AE%B0/</url>
-    <content><![CDATA[<div style = "padding-left:100px; padding-right:100px">秋招结束了，我青结~~本来这篇应该是《日常实习日记》的，但投了二十来家公司都没人回我，反倒是补招上岸，就变成《补招日记》了</div>
-
-<a id="more"></a>
-
-<h4 id="2020-10-27"><a href="#2020-10-27" class="headerlink" title="2020.10.27"></a>2020.10.27</h4><p>&emsp;&emsp;投递公司：</p>
-<ul>
-<li><strong>字节跳动</strong></li>
-<li><strong>快手</strong></li>
-<li><strong>滴滴杭州</strong></li>
-<li><strong>斗鱼</strong></li>
-<li><strong>网易有道</strong></li>
-<li><strong>欢聚</strong></li>
-<li><strong>小米</strong></li>
-<li><strong>京东</strong></li>
-</ul>
-<p>&emsp;&emsp;投完才发现自己又忘记用内推了，害 </p>
-<p><br><br></p>
-<h4 id="2020-10-30"><a href="#2020-10-30" class="headerlink" title="2020.10.30"></a>2020.10.30</h4><p><strong>快手简历(淘汰)</strong></p>
-<p>&emsp;&emsp;哎，快手真的难，三投三挂，实习简历都过不去</p>
-<p><br><br></p>
-<h4 id="2020-11-1"><a href="#2020-11-1" class="headerlink" title="2020.11.1"></a>2020.11.1</h4><blockquote>
-<p>&emsp;&emsp;今天体测完略伤，一千米倒还好平时有练，但引体向上做完整个人都不好了，感觉全身都肌肉拉伤了，躺床上起身都难。以后还是要加强锻炼啊，尤其是现在还在学校这段日子</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-3"><a href="#2020-11-3" class="headerlink" title="2020.11.3"></a>2020.11.3</h4><p><strong>京东简历(淘汰)</strong></p>
-<p>&emsp;&emsp;又是一行“硕士优先”直接人就没了，但是我真不觉得普通开发岗硕士跟本科有啥区别，要说校招因为没实习挂了我也认了，为什么实习的技术岗也看学历啊。但想了想有硕士凭什么要用你个烂本科呢，再加上找实习的应届本来就是秋招的失败者，罢了，我的问题。<br></p>
-<blockquote>
-<p>&emsp;&emsp;感觉自己又开始眼高手低了，可是感觉要是去小厂打杂(虽然大厂也是打杂)在简历上没法添加优势。然而要去大厂，就得有学历、竞赛或者实习，可惜作为全不能选手样样不行，之后试着投投好一点的小厂吧</p>
-</blockquote>
-<p><strong>网易简历(下架)</strong></p>
-<p>&emsp;&emsp;想找大厂实习是真的太难了，竞争的人太多，而且也不缺人</p>
-<p>&emsp;&emsp;投递公司：</p>
-<ul>
-<li><strong>百度</strong></li>
-<li><strong>汇量科技</strong></li>
-<li><strong>SHEIN</strong></li>
-<li><strong>盛趣游戏</strong></li>
-<li><strong>帆软</strong></li>
-<li><strong>元戎启行</strong></li>
-<li><strong>京东金融</strong></li>
-</ul>
-<p><strong>斗鱼、SHEIN、盛趣、京东金融、汇量简历(放置Play)</strong></p>
-<p>&emsp;&emsp;实习僧简历这个已查看状态太恶心啦，看了又不改状态，每天还得上去看看，没过也改成不合适呗</p>
-<p><strong>元戎启行简历(秒挂)</strong></p>
-<p>&emsp;&emsp;到现在投了15个实习了，然而两天就已经挂四五个了。。。不想投了，心累了，要是没实习就专心一直学习准备到春招了。也不知道从什么时候开始，越是看面经越觉得自己不会的太多，无限の恶性循环</p>
-<p><br><br></p>
-<h4 id="2020-11-4"><a href="#2020-11-4" class="headerlink" title="2020.11.4"></a>2020.11.4</h4><p>&emsp;&emsp;秋招遗漏下来的面试，岗位还变成数据开发工程师了，我Kafka、spark、hadoop可是样样都不会啊，估计也是KPI练手了，随意吧，一轮游预备</p>
-<ul>
-<li><p><strong>美团一面</strong></p>
-<ol>
-<li>出现次数最多的前n个字符串</li>
-</ol>
-<p>&emsp;&emsp;心思完全没在面试上，面的很差。算法题跟上次字节一样代码写出来了测试用例没过，写一道SQL也没写正确，我可真踏马是个fw啊，这面试官还硬是问了一小时，真是难为他了。又一次让我知道自己和大厂的距离有多远。不过秋招也总该结束了吧，那实习电话为啥还不来啊呜呜呜┭┮﹏┭┮</p>
-</li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-11-5"><a href="#2020-11-5" class="headerlink" title="2020.11.5"></a>2020.11.5</h4><blockquote>
-<p>&emsp;&emsp;今天还是没有实习电话的一天，有点想签了招银了，总感觉就是自讨苦吃，本来可以签了offer舒舒服服地躺几天，但是不懂为什么自己不想放弃，不是大佬心气还这么高，也有想过如果在一周期限内没找到实习就签了</p>
-<p>&emsp;&emsp;想了一晚上，犹豫就会败北，不管怎样都不签了，有这种想法感觉就容易让自己失去继续努力的动力，还是觉得不甘心啊，又投了几个部门直招的补招。</p>
-</blockquote>
-<ul>
-<li><strong>微众银行</strong></li>
-<li><strong>小米互二</strong></li>
-<li><strong>小米手机</strong></li>
-<li><strong>京东零售云</strong></li>
-</ul>
-<blockquote>
-<p>&emsp;&emsp;今天又是无所事事刷牛客的一天，明天把之前记录的所有面经问题都看完，然后开始看点技术书籍了</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-6"><a href="#2020-11-6" class="headerlink" title="2020.11.6"></a>2020.11.6</h4><p>&emsp;&emsp;投递公司：</p>
-<ul>
-<li><strong>滴滴北京</strong></li>
-<li><strong>东方财富</strong></li>
-<li><strong>顺丰</strong></li>
-<li><strong>小红书</strong></li>
-<li><strong>卡牛</strong></li>
-<li><strong>尚米网络</strong></li>
-<li><strong>广州卓动</strong></li>
-</ul>
-<blockquote>
-<p>&emsp;&emsp;今天面经还是没看完，又是沉迷刷牛客的一天，怀念国庆那段时间啊，纯粹地刷题练算法、看书，学习提升自己，现在感觉被各种东西困扰，不过说到底还是自己的专注力不够，是时候把番茄钟下回来了        </p>
-<p>&emsp;&emsp;<del>没有梦想，那和做咸鱼有什么区别</del>，不过是个打工人，谈什么梦想</p>
-<p>当下的最优解：</p>
-<ol>
-<li>补招上岸，去实习    </li>
-<li>找到实习，补招、春招上岸</li>
-<li>补招、实习无望，硬着头皮刚春招</li>
-<li><del>当条咸鱼，接了offer</del></li>
-</ol>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-7"><a href="#2020-11-7" class="headerlink" title="2020.11.7"></a>2020.11.7</h4><p><strong>货拉拉一面</strong></p>
-<ol>
-<li>动态代理的底层</li>
-<li>spring事务中用trycatch捕获异常是否还会回滚</li>
-</ol>
-<p>&emsp;&emsp;又是秋招遗留下来的面试。有几个问题不会，但是一结束就忘记啥问题了</p>
-<p><br><br></p>
-<h4 id="2020-11-8"><a href="#2020-11-8" class="headerlink" title="2020.11.8"></a>2020.11.8</h4><blockquote>
-<p>&emsp;&emsp;闲的发慌，面经也不想看，题也不想刷，看起了视频，追起了番，这季度的《黄金神威》和《咒术回战》霸权预定</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-9"><a href="#2020-11-9" class="headerlink" title="2020.11.9"></a>2020.11.9</h4><p><strong>东方财富测评</strong></p>
-<p>&emsp;&emsp;投的实习但是发了个校招的测评邮件，懵了</p>
-<blockquote>
-<p>&emsp;&emsp;想了想还是想补招上岸好啊，今天看了下知乎，今年的考研报名人数差不多得有420万，太离谱了，比去年直接就多了80w人，大学毕业生不过八百多万，考研报名的就占了一半，再加上保研名额，怕不是全员读研。到时候春招想必是人更多坑更少了，再加上一些大佬想春招再找毁约曲线救国，不敢想象战况之惨烈</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-10"><a href="#2020-11-10" class="headerlink" title="2020.11.10"></a>2020.11.10</h4><blockquote>
-<p>&emsp;&emsp;补招它终于lei了，最近一直没消息又怠惰了两天，现在终于机会来了，补招上岸冲啊，说实话我也不想春招啊，补招上岸，学习、休息半个月再去实习多香啊</p>
-</blockquote>
-<p><strong>小米一面</strong></p>
-<ol>
-<li>电脑CPU占100%怎么解决(JVM调优)</li>
-<li>HashMap插入节点是在头结点还是尾结点</li>
-<li>翻转链表</li>
-</ol>
-<p>&emsp;&emsp;哎，继续投实习把，裂开来，有好几题没答出来，最后给了个像KPI一样的简单算法题，我看别人都是两道算法啊。。。感觉之前把太多希望都寄托于此了，现在失落感真的倍增。有这种补招上岸的想法是我不对，哎蒟蒻就不配上岸，投的实习到现在也不给个电话，实习机会再不来感觉连三个月的工期都保证不了了啊。。</p>
-<blockquote>
-<p>&emsp;&emsp;永远不要把鸡蛋放在一个篮子里            ——周迅</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-11"><a href="#2020-11-11" class="headerlink" title="2020.11.11"></a>2020.11.11</h4><blockquote>
-<p>&emsp;&emsp;难受的双十一，至今未接到实习电话(早上九点有个电话，不过睡晚了没接到，打回去也没人接了)，下午学习也学不下去，然后听了一下午的菅田将晖，歌是真好听啊，感觉很少有男歌手的声音这么舒服的</p>
-<p>&emsp;&emsp;晚上拒绝了招银的Offer，又一次回归0offer的情况了，彻底断了退路，孤注一掷了。现在真的需要好好静下心来学习了，一切从零开始，锻炼自己的心态</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-12"><a href="#2020-11-12" class="headerlink" title="2020.11.12"></a>2020.11.12</h4><p>&emsp;&emsp;机会又来了，开冲，不知道是互二的还是手机部的，但是接到电话真的很激动，果然面试才是复习的驱动力啊！又想了想还是不要全把希望寄托在一处了，放宽心，心态保持好，从容应对吧</p>
-<p><strong>小米二面</strong></p>
-<p>&emsp;&emsp;问了大部分是项目相关，加一些基础再加一个快排</p>
-<blockquote>
-<p>&emsp;&emsp;面试结束了，发了测评邮件，当晚也做完了。剩下的就是等结果了，希望能就此结束秋招吧，然后放松几天，去实习，开始新的生活</p>
-</blockquote>
-<p><strong>小米测评</strong></p>
-<p>&emsp;&emsp;测评难得雅痞，之前也做过但不知道正确答案，就没怎么刷过这种测评，图形题和计算题看的好烦，不懂这有啥意义啊，难道只凭这种测评就能看出人的性格和智商了吗。要是是因为测评挂了，我直接原地裂开┭┮﹏┭┮</p>
-<p><br><br></p>
-<h4 id="2020-11-13"><a href="#2020-11-13" class="headerlink" title="2020.11.13"></a>2020.11.13</h4><blockquote>
-<p>&emsp;&emsp;最近做题感觉陷入了一个怪圈，只有简单题才肯去动手做，一遇到中等题或者困难题就想着看题解，这种思维方式感觉不太好，下次遇到中难题至少要想10分钟起步，就是用暴力都要试着做出来。</p>
-<p>&emsp;&emsp;下午被辅导员要求去参加了学校另一个校区的线下招聘，都是些听都没听过的公司，还硬是催了我二十分钟。想了想就去看看，毕竟也没有线下面试过，体验一波流程吧。</p>
-<p>&emsp;&emsp;整个过程太尴尬了，三个企业宣讲。就第一个国家电网的子子公司有点排面，讲了挺久，后面两个小公司一个讲着没底气了，一个干脆不讲了，然后一结束没人投简历全部排着队出去了。。。合着全都是来凑数的。而且每个公司面试都只有HR，一般不是要有技术面试官的吗？还是说我参加的少了，没有见识。可惜来学校的也就只有这些公司了，学校好像还是省内比较好的了，要是在北上广没准还能去蹭蹭大公司的招聘会</p>
-</blockquote>
-<p>​        </p>
-<blockquote>
-<p>&emsp;&emsp;秉持着鸡蛋不能放一个篮子的原则，又冲了几家补招，投着投着就不想找日常实习了，反正投了也没反应，那就补招上岸吧。还有最近看到的岗位好多都是go语言，感觉go语言好像真的是趋势了，谷歌影响力还是大啊，像腾讯这种龙头都在往go转了</p>
-</blockquote>
-<p>&emsp;&emsp;投递公司：</p>
-<ul>
-<li><strong>快手</strong></li>
-<li><strong>达达</strong></li>
-<li><strong>顺丰</strong></li>
-</ul>
-<blockquote>
-<p>&emsp;&emsp;今天又是堕落的一天，现在明明都没有offer，就开始休闲娱乐了，看了B站上一整页的马保国，真的鬼畜新星。然后晚上又开始贤者模式一般地醒悟过来，还是要去学习啊，要能应对各种突然面试才行，只要没有签，就不要停下来啊~</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-16"><a href="#2020-11-16" class="headerlink" title="2020.11.16"></a>2020.11.16</h4><blockquote>
-<p>&emsp;&emsp;周末结束，又有很多新的补招信息，但是不知道为什么，看到了一些之前笔试面试失败的公司补招却不敢投，就有种底气不足的感觉，害怕又给虐一轮。转念一想，给虐那么多次了也不差这几次就狠下心投了</p>
-</blockquote>
-<ul>
-<li><strong>京东广告部</strong></li>
-<li><strong>美团到店</strong></li>
-<li><strong>跟谁学</strong></li>
-<li><strong>途虎养车</strong></li>
-<li><strong>京东国际</strong></li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-11-17"><a href="#2020-11-17" class="headerlink" title="2020.11.17"></a>2020.11.17</h4><blockquote>
-<p>&emsp;&emsp;好累啊，今天又刷了一天牛客，找补招信息，找来找去发现就那几家，太难了，但是补招这种情况感觉就真的很考验信息检索能力。之前投的其他补招都没有消息，搞得我现在又想去找实习了，没有竞争力真的太难了，然而现在实习到春节也不过三个月不到的时长，而且也没有啥好点的公司要，感觉只能去外包公司实习了，要是大三暑期实习感觉还能接受，可是现在已经大四了，我不能接受啊。。。没顶住，投了个比较近的实习</p>
-</blockquote>
-<ul>
-<li><p><strong>金山</strong></p>
-<br>
-
-</li>
-</ul>
-<p><strong>货拉拉二面</strong></p>
-<p>&emsp;&emsp;这家的流程好慢啊，慢的我还以为之前一面已经挂了。</p>
-<p>&emsp;&emsp;因为没有特别想去，面试前毫无准备，甚至刷牛客，结果自然是面的不是很好，项目有些地方遗忘了，不过面试官的态度挺好的，但可能就是没有后面流程了吧。</p>
-<p><br><br></p>
-<h4 id="2020-11-18"><a href="#2020-11-18" class="headerlink" title="2020.11.18"></a>2020.11.18</h4><p><strong>金山简历(淘汰)</strong></p>
-<p>&emsp;&emsp;一早上起来就看到给挂了，感觉找个实习比校招还难，直接劝退。现在投实习可能真的晚了，还是专心复习准备<del>春招</del>补招吧</p>
-<p><strong>携程测评</strong></p>
-<p>&emsp;&emsp;本来以为又要做一小时，结果发现和上次做的一样，北森测评只要一直点跳过就行了，不知道能不能给面试机会啊，上海是几个一线城市里最想去的了</p>
-<p><br><br></p>
-<h4 id="2020-11-19"><a href="#2020-11-19" class="headerlink" title="2020.11.19"></a>2020.11.19</h4><p>&emsp;&emsp;莫名其妙地到了最后一面。。</p>
-<p><strong>货拉拉HR面</strong></p>
-<p>&emsp;&emsp;感觉货拉拉的面试官都挺好的，就是我自己太搞了。。问我公司0-5分评几分，我说3分吧，现在感觉至少应该说个4分，有点太不给面子了。还问了给了offer是否会来，我觉得当时要是坚定一点可能就很稳吧，不过还是太实诚了，说自己不一定去，然而手上只不过有个泡池子的。</p>
-<p>&emsp;&emsp;还有面试前在了解公司情况的时候，看到这家公司的老板以前打德州扑克打七年成了财富自由，惊了！！</p>
-<br>
-
-<p><strong>途虎养车笔试</strong></p>
-<ol>
-<li>两个有序数组，一个升序，一个降序，合并成升序数组</li>
-<li>求排列组合公式C(r,n)，n! / r! / (n - r)!</li>
-</ol>
-<p>&emsp;&emsp;好久没做笔试，笔试题果然还是这么恶心人啊，第一题常规的双指针做法结果A了55%，第二题用动态规划求出所有阶乘然后计算A了12%，两个都是O(N)的时间复杂度然后都超时不能过，难道非得打表O(1)吗</p>
-<blockquote>
-<p>&emsp;&emsp;突然发现自己好像局限于牛客上的公司了，其实别的网站上也有一些公司在补招但没有信息出来，于是在拉勾网上又投了几家</p>
-</blockquote>
-<ul>
-<li><strong>欢聚</strong></li>
-<li><strong>收钱吧</strong></li>
-<li><strong>BIGO</strong></li>
-<li><strong>Insta360</strong></li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-11-20"><a href="#2020-11-20" class="headerlink" title="2020.11.20"></a>2020.11.20</h4><p><strong>货拉拉OC</strong></p>
-<p>&emsp;&emsp;下午问了是否确定要offer，薪资比之前都要高，但还没想好要不要接受，给了三天时间考虑。不知道要不要放弃小米啊，但其实又不是特别想去北京，还是想留在南方。哎，人的欲望啊，无休无止，无穷无尽，感觉自己快要迷失了。</p>
-<p><strong>小米OC</strong></p>
-<p>&emsp;&emsp;原本还是有点抗拒的，但在OC的时候就变成”还是接了吧，不想再焦虑下去了，赶紧上岸得了”的想法了。秋招之旅大概也就此结束了，今后要是再想冲击更好平台可能就要等社招了。其实也已经很满意了，毕竟谁又能想到在11月我这种菜鸡也能一天双oc呢，周末休息两天，等正式接到offer签约后，再回来写完最后一段</p>
-<p><br><br></p>
-<h4 id="2020-11-21"><a href="#2020-11-21" class="headerlink" title="2020.11.21"></a>2020.11.21</h4><p><strong>小米offer</strong></p>
-<blockquote>
-<p>&emsp;&emsp;正式接到了offer邮件。整个补招共20天结束。说实话补招在难度上可能是几种招聘最小的了，没有笔试，岗位急缺，争的人也不多，被捞起来就有很大机会上岸，所以真的觉得自己很幸运了。虽然朋友们说应该再尝试些更好的，其实我也想，但是之前几次大厂面试的溃败让我看清自己目前的水平了，还是要继续沉淀。有时候感觉自信真的源于实力，因为准备不够充分，所以在面试大厂时会有些紧张，我想如果实力足够的话应当就能从容应对吧。</p>
-<p>&emsp;&emsp;自己对未来的希望：要不断提升自己的技术，多看些书籍还有大牛的博客，增强自己的知识广度和深度，还有要多开阔自己的视野，不要让自己还局限于学生思维， 不要被各种那些互联网上的社交媒体迷失了自我，要坚持自己的想法，也不知道自己在35岁了还会不会仍在这个行业里，但不管未来怎么样也只能不断摸索着前进，要敢于走出自己的舒适圈，学会拥抱变化(虽然现在一提到这词就联想到裁员了。。但确实希望自己能够适应各种变化，应对不同的挑战)，在技术上希望自己能适应学习不同的技术栈(有时候真觉得自己被局限在Java这块了)，还有之后要多锻炼身体，再也不熬夜了，毕竟在这个动荡的2020年能好好活着就很不容易了~~</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>日常随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>秋招日记</title>
-    <url>/2020/11/05/%E7%A7%8B%E6%8B%9B%E6%97%A5%E8%AE%B0/</url>
-    <content><![CDATA[<div style = "padding-left:100px; padding-right:100px">记录大四秋招期间自己的一段心路历程，在一场场笔试、面试中积累经验，从无可救药的菜鸡变成普通一般选手，自己的心态也在不断发生变化......</div>
-
-<a id="more"></a>
-
-<h4 id="2020-8-6"><a href="#2020-8-6" class="headerlink" title="2020.8.6"></a>2020.8.6</h4><blockquote>
-<p> <del>噩</del>梦开始的地方？</p>
-</blockquote>
-<p><strong>简历投递第一波</strong></p>
-<p>&emsp;&emsp;第一波投递公司：</p>
-<ul>
-<li><strong>哔哩哔哩</strong>(视频，目前最想去的公司，叔叔让我用爱发电吧)</li>
-<li><strong>斗鱼</strong>、<strong>虎牙</strong>(直播，两家都是头牌，不过最近好像要合并了)</li>
-<li><strong>声网</strong>(音视频，主要语言用的好像都是C艹，投JAVA好像有点不匹配)</li>
-<li><strong>网易云</strong>(音乐，老网抑云用户了)</li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-8-12"><a href="#2020-8-12" class="headerlink" title="2020.8.12"></a>2020.8.12</h4><p> <strong>网易云简历(淘汰)</strong></p>
-<p>&emsp;&emsp;第一次挂简历，自己检查了一遍，发现是真菜，确实该被淘汰，要实习没实习、要前沿技术也不会，好的项目也没有，基础知识还掌握不牢固，是要好好反思了。</p>
-<p><br><br></p>
-<h4 id="2020-8-13"><a href="#2020-8-13" class="headerlink" title="2020.8.13"></a>2020.8.13</h4><p><strong>哔哩哔哩笔试</strong></p>
-<ol>
-<li>给四个数求24点</li>
-<li>忘记了..</li>
-<li>1000块分16、4、1….，求最多的硬币</li>
-</ol>
-<p>&emsp;&emsp;秋招的第一场笔试，选择题好多懵逼的。三道编程题就最后一题比较简单，用贪心法AC了，另外两题有一点思路但不会写，面向测试编程嗯凑了50%、60%，后面在牛客网上看到别人投票基本都是全过，差距好大啊哎</p>
-<p><br><br></p>
-<h4 id="2020-8-21"><a href="#2020-8-21" class="headerlink" title="2020.8.21"></a>2020.8.21</h4><p><strong>简历投递第二波</strong></p>
-<p>&emsp;&emsp;前面投的其他公司一直没消息，估计是沉了，沉淀了十来天学习了Spring Cloud系列，修改了下简历开始投第二波，第一版简历没注意到页面格式问题(一页多两行字，导致整体很难看)，所以把第二版简历的大小缩减成一页纸，第二波投递公司：</p>
-<ul>
-<li><strong>恒生电子</strong>(金融)</li>
-<li><strong>中金所技术</strong>(金融)</li>
-<li><strong>携程</strong>(旅游，携程投递简历后还要做测评，可能是性格测试什么的，题目太多看到后面直接就乱选了)</li>
-<li><strong>平安</strong>(金融)</li>
-<li><strong>快手</strong>(短视频，简历居然一点击就撤回不了，信息没填完一点击就交上去了啊)</li>
-<li><strong>小米</strong>(手机)</li>
-<li><strong>滴滴</strong>(出行)    </li>
-</ul>
-<p>&emsp;&emsp;投的时候还看了其他一些公司的开发岗还要求要会分布式存储技术像Hadoop之类的，投都没法投，开发之路道阻且长啊~~</p>
-<p><br><br></p>
-<h4 id="2020-8-23"><a href="#2020-8-23" class="headerlink" title="2020.8.23"></a>2020.8.23</h4><p><strong>简历投递第三波</strong></p>
-<p>&emsp;&emsp;前些天看完了JavaGuide面试宝典，这两天又复习了下，但还是没收到笔试或面试，快开学了越来越焦虑了，等不及又投了几家公司，第三波投递公司：</p>
-<ul>
-<li><strong>吉比特</strong>(游戏)</li>
-<li><strong>哈啰</strong>(出行)</li>
-<li><strong>欢聚</strong>(直播)</li>
-<li><strong>依图科技</strong>(人工智能)</li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-8-24"><a href="#2020-8-24" class="headerlink" title="2020.8.24"></a>2020.8.24</h4><p><strong>虎牙简历(淘汰)</strong></p>
-<blockquote>
-<p>&emsp;&emsp;凌晨的时候刷到突然弹出的消息，不过其实也不意外了，毕竟也半个月以上没有消息了，那时候甚至还在刷B站。不过看到了一个在谷歌工作的up主讲他自己的跨专业读研经历，在开始阶段每天要学习十几个小时。反而我作为科班有先天优势，却不努力还没韧性，在家准备的这段时间每天也都在玩，实属不该</p>
-</blockquote>
-<p><strong>吉比特简历(淘汰)</strong></p>
-<p>&emsp;&emsp;投递第二天就挂了，不过至少比一些公司吊着简历快一个月好多了</p>
-<p><br><br></p>
-<h4 id="2020-8-28"><a href="#2020-8-28" class="headerlink" title="2020.8.28"></a>2020.8.28</h4><p><strong>简历投递第四波</strong></p>
-<p>&emsp;&emsp;这段时间学习了企业上用的比较多的传统RPC框架Dubbo，再把之前简历中用SSM实现的单一应用项目改成了分布式项目，完成第三版简历后开始新一轮简历投递，然而还是没有笔试面试通知，第四波投递公司：</p>
-<ul>
-<li><strong>小红书(内推码)</strong>(电商)</li>
-<li><strong>有赞</strong>(电商)</li>
-<li><strong>广联达</strong>(建筑)</li>
-<li><strong>同花顺</strong>(证券)</li>
-<li><strong>微盟</strong>(企业服务)</li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-9-1"><a href="#2020-9-1" class="headerlink" title="2020.9.1"></a>2020.9.1</h4><p>&emsp;&emsp;挂了一大批简历，不过总比没有消息好。不过就这个简历挂率，后面的投递要试试内推了</p>
-<ul>
-<li><strong>快手简历(淘汰)</strong></li>
-<li><strong>依图科技简历(淘汰)</strong></li>
-<li><strong>声网简历(淘汰)</strong></li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-9-4"><a href="#2020-9-4" class="headerlink" title="2020.9.4"></a>2020.9.4</h4><p><strong>简历投递第五波</strong>        </p>
-<blockquote>
-<p>&emsp;&emsp;明天要开学了，这个暑假一次面试机会都没有，就做了几次测评和一次笔试，最近倒是接到几次笔试通知不过都是九月份的，看网上说好像是因为提前批神仙打架，比较差的简历筛都筛不过去，所以直接延续到秋招正式批了。还有就是每次假期在家的学习效率都很低下(真的是从初中寄宿起养成的毛病了)，沉迷娱乐，白天注意力涣散、夜里还熬夜修仙，真是怠惰啊 ┌(。Д。)┐</p>
-</blockquote>
-<p>&emsp;&emsp;今天试着用内推投了十几家公司，不知道内推的效果如何，第五波投递公司：</p>
-<ul>
-<li><strong>阅文集团</strong>(图书)</li>
-<li><strong>众安保险(内推)</strong>(保险)</li>
-<li><strong>京东(内推码)</strong>(电商)</li>
-<li><strong>BIGO</strong>(直播)</li>
-<li><strong>微众银行(内推码)</strong>(金融)</li>
-<li><strong>新浪(内推码)</strong>(社交)</li>
-<li><strong>帆软(内推码)</strong>(企业应用)</li>
-<li><strong>广州光锥元</strong>(视频图像)</li>
-<li><strong>达达集团</strong>(物流)</li>
-<li><strong>云从科技</strong>(人工智能)</li>
-<li><strong>奇安信(内推)</strong>(安全)</li>
-<li><strong>招银网络(内推)</strong>(金融)</li>
-<li><strong>58同城(内推码)</strong>(本地服务)</li>
-<li><strong>度小满</strong>(金融)</li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-9-6"><a href="#2020-9-6" class="headerlink" title="2020.9.6"></a>2020.9.6</h4><p><strong>微盟笔试</strong></p>
-<ol>
-<li>忘记了</li>
-<li>字符串翻转</li>
-<li>不用if、while语句求1…n</li>
-</ol>
-<p>&emsp;&emsp;第二次笔试，又拉垮了，虽然这种带选择问答的笔试编程题都不难，结果还是没成。三道编程题，两题20%，第3题力扣上的原题用布尔变量的特性实现不过输入进去只能AC20%，不知道哪里出问题了。第2题一开始看题目也以为是原题，直接蒙头写，后面发现题目看错了但没时间改了结果不能运行就提交了，不过因为刷了两天力扣还是有用的，一些题目做起来就有点思路了。</p>
-<blockquote>
-<p>总结一下失误，时间没有把控好，只剩四十分钟做编程，题目也没有仔细审题就楞头做。</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-9-7"><a href="#2020-9-7" class="headerlink" title="2020.9.7"></a>2020.9.7</h4><p><strong>帆软笔试</strong></p>
-<ol>
-<li>给几个链表进行合并(把相同key值的value值加起来)，按序排列</li>
-</ol>
-<p>&emsp;&emsp;题型为选择、多选、填空和编程题，选择题还好，填空题好像都是智力题，看到第一题还是高中的排列组合，直接人傻了，后面还有进制转换。编程题AC了50%，感觉没有用到什么算法，就是转换字符串，然后把键值对放到哈希表里，不过可能这就是只有50%的原因吧</p>
-<br>
-
-<p><strong>有赞简历(淘汰)</strong></p>
-<p><br><br></p>
-<h4 id="2020-9-8"><a href="#2020-9-8" class="headerlink" title="2020.9.8"></a>2020.9.8</h4><p><strong>SHEIN简历(淘汰)</strong></p>
-<p>&emsp;&emsp;话说投的太多简历了，我都不记得有投过这家就收到感谢信了</p>
-<br>
-
-<p><strong>携程笔试</strong></p>
-<ol>
-<li>替换语句中的敏感词(敏感词的排列组合也要替换)</li>
-<li>求工作流的所有情况，如给a bc d可以得到的工作流有a b d和a c d，有循环情况还要特别标出</li>
-<li>地图，小车找最短路径，有电量，充电次数，只能撞墙后改方向</li>
-</ol>
-<p>&emsp;&emsp;做的最烂的一次笔试了，一题没写出来，提前30分钟就不堪重负溜了，第一题应该是全排列的衍生题，我记得是用回溯法但是做的时候一直出现越界问题以为思路出了问题，后面跑步回来冷静地看了一下直接就发现循环的i++写成k++，本来可以做出来的题没做出来。看牛客上大部分都是AC1+2+的，感觉第一题就是送分题可是我不中用啊。第二题在Idea上连获取值都不知道怎么获取一直出现死循环停不下来(后面看官方提示也跟我写的一样，所以只是在Idea上会出现死循环而已，在Idea上想要退出循环一般需要条件判断)，这就是不做OJ题的下场吧，不过也没有思路就是了；第三题经典地图DFS，然而看到一堆条件多的连做的想法都木有了。</p>
-<blockquote>
-<p>&emsp;&emsp;携程基本上是凉凉了，但也让我意识到自己是什么水平了，准备重刷一遍剑指然后开始练专项了。今天携程笔试还和小米还撞上了，小米笔试顺延到15号，听说小米笔试第二题好像出的有问题，提交前20分钟才改，看来以后还不能提前交卷了</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-9-9"><a href="#2020-9-9" class="headerlink" title="2020.9.9"></a>2020.9.9</h4><p><strong>广州光锥元笔试</strong></p>
-<ol>
-<li>整数倒序</li>
-<li>判断完全二叉树</li>
-<li>给一个阈值，求一列灰度数值中在阈值内的连续最大长度</li>
-<li>挖多个挖宝地，挖宝时不能挖相邻的地点，求能挖出的宝物最大值</li>
-</ol>
-<p>&emsp;&emsp;目前来说题目做出来最多的一次笔试了，不过题目也很简单，第四题不确定对不对，不过这出题方式是手写代码，不测试也不知道正不正确…</p>
-<blockquote>
-<p>&emsp;&emsp;PS：现在回来看当初原来连打家劫舍都不知道=.=</p>
-</blockquote>
-<br>
-
-
-
-<p><strong>广联达笔试</strong></p>
-<ol>
-<li>农夫用多瓶药水浇草，每次只浇最矮草，草被浇后会提升固定高度，求最后最矮的草高度</li>
-<li>机器人跳舞，用多个动作，每个动作会耗电和提升魅力值，有电量上限，求最好的跳舞方案得到最多的魅力值</li>
-<li>序列会重复值，要让重复值合并使最终序列不存在重复值</li>
-</ol>
-<p>&emsp;&emsp;第一题只AC了55%，一些测试用例超时了算法不够优良，不过好久没过50%了，泪目~ 第二题AC了36%，这题类似背包问题，不过在力扣上还没刷过背包题，之前好像有场笔试也是这类问题，得赶紧恶补一波了。第三题没思路…牛客上2~3的好多，基本又凉凉了</p>
-<p><strong>简历投递第六波</strong>        </p>
-<p>&emsp;&emsp;今天最后投一波简历了，感觉每天就在找公司投递，学习时很容易分心，这次投完之后基本上就不投了，专心准备笔试面试了，第六波投递公司：</p>
-<ul>
-<li><strong>瑛太莱</strong>(电商)</li>
-<li><strong>一加(内推码)</strong>(手机)</li>
-<li><strong>青书</strong>(教育)</li>
-<li><strong>浩鲸云</strong>(企业服务)</li>
-<li><strong>途虎养车</strong>(汽车)</li>
-<li><strong>酷家乐</strong>(室内设计)</li>
-<li><strong>GrowingIO</strong>(数据分析)</li>
-<li><strong>字节跳动(内推码)</strong>(互联网综合)</li>
-<li><strong>爱奇艺(内推码)</strong>(视频)</li>
-<li><strong>猫眼娱乐</strong>(电影)</li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-9-10"><a href="#2020-9-10" class="headerlink" title="2020.9.10"></a>2020.9.10</h4><p><strong>顺网科技简历(淘汰)</strong></p>
-<p>&emsp;&emsp;这波光速淘汰属实惊了…刚投两个小时就收到感谢信了，HR效率有点东西，所以能内推就一定要内推，别对自己的垃圾简历盲目自信啊</p>
-<br>
-
-
-
-<p><strong>BIGO笔试</strong></p>
-<ol>
-<li>给最大磁盘、最大内存、用户访问量，给多个进程在满足磁盘内存情况下选择合适进程得到最大用户访问量，然后打印出磁盘和内存消耗</li>
-<li>对泛型进行快速排序(从大到小)</li>
-<li>对一个二维数组进行二、三、四镜像的翻转，得到翻转后的结果</li>
-</ol>
-<p>&emsp;&emsp;选择题有丶难，计组知识感觉有点多。编程题第一题又是背包问题(应该用动态规划解决)。佛了，本来昨天才栽坑还没来得及看今天又来了，而且编程还是手写没法测试，还不能像昨天那样用贪心法贪一点AC率。第二题考之前刚好看了快排，泛型处理只要让泛型继承Comparable接口就可以比较大小了。第三题就是翻转+翻转。要是看了第一题没准笔试就能过了~~</p>
-<p><br><br></p>
-<h4 id="2020-9-12"><a href="#2020-9-12" class="headerlink" title="2020.9.12"></a>2020.9.12</h4><p><strong>奇安信笔试</strong></p>
-<p>&emsp;&emsp;和小红书笔试完全冲突了，好像也是最后一次笔试，出师未捷身先死了，提前预约淘汰一手</p>
-<p><strong>奇安信笔试(未做淘汰)</strong><br></p>
-<p><strong>帆软笔试(淘汰)</strong><br><br></p>
-<p><strong>小红书笔试</strong></p>
-<ol>
-<li>求二叉树中最小自然数</li>
-<li>求二叉树最少子串数量，子串需要保证头尾字符相同</li>
-<li>给n个长方体，长方体有长、宽、高，上层的长方体要比下层的长宽大或者相等，每个长方体一个方向只能用一次，即可以用三次，获取让长方体堆积起来的最大高度</li>
-</ol>
-<p>&emsp;&emsp;第一题说是二叉树但跟树结构没关系，就是给个数组求最小自然数，第二题用的动态规划，dp数组的转换方程为上一元素的最小子串数加一或者为与当前元素重复下标的最小子串数，前两题AC了，第三题开始想用类实现比较接口让程序来排序，但是怎么都排不了实在是没思路</p>
-<br>
-
-<p><strong>青书笔试</strong></p>
-<p>&emsp;&emsp;给的是三天时间内自由支配，比较人性化</p>
-<ol>
-<li>求是否是丑数</li>
-<li>约瑟夫环，依次移除环中的数字求最后剩下的数字</li>
-<li>青蛙跳格子，跳跃步数从1开始依次递增，超过目的地会变成从负数开始算</li>
-<li>N进制字符串转M进制字符串</li>
-<li>给一个字符串，求从上到下从左到右的Z型排列后显示的字符串</li>
-<li>附加题：城市、机票，没来得及看</li>
-</ol>
-<p>&emsp;&emsp;笔试平台有点拉胯，不能看AC率可以理解防一手运气选手，编程题不能在本地IDE写也能接受，但是，自带的编辑器竟然没有提示！好在这几题都比较简单，原题有不少。第1题本来还以为是力扣原题求第n位丑数，结果发现只是验证丑数，第二题之前在力扣上想半天写了一大堆代码没做出来，后面看别人用约瑟夫环解法直接除余反推就完事了，第三题正常递增超过就区别计算，第四题N进制先转成十进制再转成M进制，第五题感觉都要做出来了突然发现没时间了，最后一直被字符串下标越界困扰，思路是从左往右横着记录字符串到一个列表中，然后有空格的地方补全，然后再按列表每个元素的下标打印出来，因为补全的是空格符可以过滤掉，最后就能得到新的字符串，可惜了，感觉差一点就能全AC了，不过后面的附加题看都没看，题目长的就离谱</p>
-<p><br><br></p>
-<h4 id="2020-9-13"><a href="#2020-9-13" class="headerlink" title="2020.9.13"></a>2020.9.13</h4><p><strong>爱奇艺笔试</strong></p>
-<ol>
-<li>求字符串中最长的非重复子串</li>
-<li>求一个数组中的最多元素，最多元素数量大于n/2</li>
-<li>给一个数组，求其中三个数字之和为0的三元数组，要求不重复且按规律排序</li>
-</ol>
-<p>&emsp;&emsp;现在感觉笔试有点熟练了，不过可能是题目简单给我的错觉，第一题经典动态规划，第二题排序后取中值，第三题用三指针做的，不过不知道为什么就只有83%AC，差点就能圆一波AK梦想了。不过这轮笔试难的地方不在编程而是选择问答，选择有考到大数据、分布式算法什么的，问答题不明白什么意思，题目给了一堆属性，像文件大小、数量，节点上传、存储限制，但是没给实际值，只是用符号S[i]之类的表示，说要用最小成本求最优方案，真看不懂随便写了几行直接上交了..</p>
-<br>
-
-<p><strong>滴滴笔试</strong></p>
-<ol>
-<li>解密字符串，每隔n个长度将这段字符串翻转</li>
-<li>n个岛屿，建m条桥，桥的成本要控制在k以下，能建成的桥使每个岛屿联通则输出Yes否则输出No</li>
-</ol>
-<p>&emsp;&emsp;选择题分值占了60，有一些题常见的还是不会，像哈夫曼树的带权路径长度为叶子结点乘路径长的总和、TCP协议使用流式套接字UDP协议使用数据报套接字。编程题第一题就是按序遍历翻转，第二题是并查集题目，没做过类似题，毫无思路。看了题解是要依据题意建类，该类中有一个记录数组record对应岛屿(节点)，一个数count用于记录连通性，然后还要写合并方法和查找方法，合并方法会对两个联通点进行合并即修改record的两个点为一个归一点，并且每次合并都令count减一，只有在两个连通点相等的情况下不会减一，而查找方法时判断当前点是否已经联通，连通了就修改其值会归一点，因此可以根据count是否为0来判断是否能全连通</p>
-<blockquote>
-<p>&emsp;&emsp;今天在牛客讨论区看到一条帖子说尽量看书复习而不是面经，面经可以解决30%的问题但不是全部，其实最早我也觉得，但是就很浮躁静不下心，面经正好又应和了我这种想要速成的心理。这几天算法简单题刷的差不多了，也差不多要开始准备面试内容了，今天先定个小目标，三天看完《JAVA并发编程艺术》</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-9-14"><a href="#2020-9-14" class="headerlink" title="2020.9.14"></a>2020.9.14</h4><p><strong>GrowingIO笔试(AK)</strong></p>
-<ol>
-<li>最长上升子序列</li>
-<li>二分法</li>
-</ol>
-<p>&emsp;&emsp;感觉编程题目过于简单了，虽然说是AK了，但是感觉就像大佬们说的那种不招人了出这难度。后面简答题也就是写REST风格接口和网站设计，三十分钟就交了</p>
-<br>
-
-<p><strong>58同城笔试</strong></p>
-<ol>
-<li>一个二维数组，有疫情区1和正常区0，连在一起的算一块疫情区，求疫情区数</li>
-<li>二叉树求每层节点</li>
-<li>求无序列表中不存在的最小正整数</li>
-</ol>
-<p>&emsp;&emsp;选择题有一题计网突然不记得子网掩码是干啥的了。编程题第一题就拉了，已经快半个月没碰过BFS/DFS的题了，知道怎么递归遍历所有疫情区了但是不知道怎么求结果，看了力扣题解真觉得自己蠢的一，这题只是求无向图的连通部分，没必要加个标记数组，解法是遍历二维数组中的疫情部分，采用深度递归但不回溯遍历后直接置当前元素为0，当一块区域疫情区所有元素都被遍历为0后就结束本次方法并让区数+1，然后继续下一次深度递归。第二题用队列层序遍历，第三题先排序再求最小正整数不过不知道为什么只有80%</p>
-<p><br><br></p>
-<h4 id="2020-9-15"><a href="#2020-9-15" class="headerlink" title="2020.9.15"></a>2020.9.15</h4><p><strong>小米笔试(AK)</strong></p>
-<ol>
-<li>求有效括号字符串</li>
-<li>除去已出现的重复字符</li>
-</ol>
-<p>&emsp;&emsp;第一题用了栈加队列加各种条件判断看了力扣上题解只需要一个辅助栈和哈希表就够了，哈希表存储键值(左括号-右括号)，遇到左括号就存储到辅助栈中，右括号就判断是否对应哈希表中括号的对应值，不对应就证明字符串无效，对应就弹出栈中与该右括号对应的左括号，第二题哈希表，又一次AK了但是题目都是力扣上easy难度的，但还是给我个面试吧，球球了~~</p>
-<p><br><br></p>
-<h4 id="2020-9-16"><a href="#2020-9-16" class="headerlink" title="2020.9.16"></a>2020.9.16</h4><p><strong>众安保险笔试(AK)</strong></p>
-<ol>
-<li>给一个数组，求满足要求的数字</li>
-<li>求最长的重复字符子串长度</li>
-<li>翻转字符串</li>
-<li>求一个有规律数组所有元素异或的结果</li>
-<li>破密，获取字符串中的数字字符</li>
-</ol>
-<p>&emsp;&emsp;编程题都挺简单的，就不让用本地IDE和第四题异或开始忘记怎么写了。但是前面的选择题完全看不懂，出来了什么贝叶斯还有波纹，感觉就像专门为研究生出的 </p>
-<p>​        </p>
-<blockquote>
-<p>&emsp;&emsp;今天还收到GrowingIO的面试消息，但是没有做好准备，HR小姐姐问了一堆问题都答得语无伦次的。这三天差不多算是把多线程的书翻了一遍，都没有好好动手敲代码，但基本是对多线程的原理和框架有一点点了解了。等秋招结束一定回来认真看一遍再做一波笔记总结，还有明天要开始看一波面经了，攒了一大堆面经问题没解决，也可能是飘了，现在感觉笔试问题不大，今天还又投了几家。</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-9-17"><a href="#2020-9-17" class="headerlink" title="2020.9.17"></a>2020.9.17</h4><p><strong>瑛太莱笔试</strong></p>
-<ol>
-<li>实现Strstr()，给两个字符串，找出前一个字符串中后一个字符串的第一个位置，若无则返回-1</li>
-<li>丽丽的电子词典，给N、M、K，N为字符a的上限，M为字符b的上限，找出比K小的字典序的所有结果</li>
-<li>求最大和子序列</li>
-<li>母羊生羊，母羊第二年和第四年会生一只，第五年会死去，求十五年后母羊剩余数量</li>
-</ol>
-<p>&emsp;&emsp;第一题滑动窗口。。。编程题第二题用了回溯法结果超时了0%，到最后也不知道字典序是啥意思，第三题动态规划，首先需要有一个值记录最大值，然后遍历数组，遍历语句中如果dp数组上一个值大于0则加上当前元素，如果小于0就从当前元素另起，最后从原最大值和当前dp数组元素取新的最大值。母羊问题创建对象，并用三个列表维护，一个存总羊，另外两个存活羊和死羊，最后清除掉死羊部分添加活羊部分。还有不得不吐槽这出题人，三四题直接输入测试样例就能AC，测试样例也能水的吗。。</p>
-<br>
-
-<p><strong>浩鲸云笔试</strong></p>
-<p>&emsp;&emsp;35道选择题加三句SQL语句，总体比较简单。选择题有个知识点用transient和static修饰对象成员变量时，当对象进行序列化存储时，被修饰的成员变量值不需维持，即不存入文件。int $a;这种变量名的写法是正确的的。在JAVA中声明常量方法有static final修饰、直接使用接口变量、使用枚举常量</p>
-<br>
-
-<p>&emsp;&emsp;很多天没接到消息的应该是淘汰了状态没改，整理一波</p>
-<ul>
-<li><strong>微盟笔试(淘汰)</strong></li>
-<li><strong>哔哩哔哩笔试(淘汰)</strong></li>
-<li><strong>广州光锥元笔试(淘汰)</strong></li>
-<li><strong>58同城笔试(淘汰)</strong></li>
-<li><strong>爱奇艺笔试(淘汰)</strong></li>
-<li><strong>青书笔试(淘汰)</strong> </li>
-<li><strong>携程笔试(淘汰)</strong></li>
-<li><strong>滴滴笔试(淘汰)</strong></li>
-<li><strong>BIGO笔试(淘汰)</strong></li>
-<li><strong>广联达笔试(淘汰)</strong></li>
-<li><strong>达达集团简历(淘汰)</strong></li>
-<li><strong>斗鱼简历(淘汰)</strong> </li>
-<li><strong>猫眼娱乐简历(淘汰)</strong></li>
-<li><strong>中金所简历(淘汰)</strong></li>
-</ul>
-<br>
-
-<p>&emsp;&emsp;于是又投了几家来保持平衡，投递公司：</p>
-<ul>
-<li><strong>快手(内推)</strong>(重投内推的也是一天就又挂了，老铁可太难了)</li>
-<li><strong>得物(内推)</strong>(电商)</li>
-<li><strong>涂鸦智能(内推)</strong>(物联网)</li>
-<li><strong>微保(内推码)</strong>(保险)</li>
-<li><strong>去哪儿(内推)</strong>(旅游)</li>
-<li><strong>陌陌(内推)</strong>(社交)</li>
-</ul>
-<br>
-
-<p><strong>京东笔试</strong></p>
-<ol>
-<li>找字符串中的年份:1000~3999</li>
-<li>迷宫里王子找公主，地图分障碍和道路</li>
-</ol>
-<p>&emsp;&emsp;第二题常规的深度优先搜索，第一题测了半天9%，后面发现条件问题只判断了开头在1~3之间，但是对大于3的数字没有判断，导致像41234这样的字符串会输出1234，中间系统弹了个测试用例的提示，让我一直以为题目还有问题而忽略了自己测试用例不够完善，本来稳稳全A的机会无了，看来是没机会和东哥做朋友了</p>
-<br>
-
-<p><strong>GrowingIOHR面(淘汰)</strong></p>
-<p>&emsp;&emsp;这波淘汰是我没想到的，不过自己确实答得很烂，之前对于HR常问的那些问题一点准备没有，甚至中间停了几十秒，然后回答也就一句话，直接尬住。但是没想到直接就取消技术面了，我还以为只是简单了解呢，公司的任何电话都要谨慎处理了。不过淘汰后反而有点轻松了，因为之前完全没准备面试，估计也是一轮游</p>
-<p><br><br></p>
-<h4 id="2020-9-18"><a href="#2020-9-18" class="headerlink" title="2020.9.18"></a>2020.9.18</h4><p><strong>恒生笔试</strong>、<strong>同花顺笔试</strong></p>
-<p>&emsp;&emsp;两场笔试连在一起的，都用自己的系统，题量都巨多，但都很简单，没啥值得记录的地方</p>
-<p><br><br></p>
-<h4 id="2020-9-20"><a href="#2020-9-20" class="headerlink" title="2020.9.20"></a>2020.9.20</h4><p><strong>浩鲸云笔试(淘汰)</strong></p>
-<p><strong>酷家乐笔试</strong></p>
-<ol>
-<li>找出中数组中只出现1次的数字</li>
-<li>两个矩形重叠后的总面积</li>
-</ol>
-<p>&emsp;&emsp;编程题是手写的，第一题哈希表，第二题求两个矩形总和，然后判断是否重复，重复则减去重复部分，不过我的求判重部分代码好像有问题，看了力扣上的是取坐标最大、最小值，我是直接看着题目取坐标点了。选择里Linux句柄的0、1、2对应的是标准输入，标准输出，标准错误。<code>GenericServlet</code>类实现了<code>Servlet</code>接口，<code>HttpServlet</code>类继承了<code>GenericServlet</code>类。可作为GC Roots的对象有虚拟机栈（栈帧中的本地变量表）中引用的对象、方法区中的类静态属性引用的对象、方法区中常量引用的对象、本地方法栈中JNI（即一般说的Native方法）中引用的对象</p>
-<blockquote>
-<p>&emsp;&emsp;今天早上一度反思秋招是不是该结束了，是不是应该先去找个实习。最后决定还是先准备秋招吧，如果到10月底还没有offer就去日常实习准备春招了</p>
-</blockquote>
-<br>
-
-<p>&emsp;&emsp;经典笔试撞车，字节下一场要10月，只能硬着头皮上了，先看题目难不难吧，没思路的话直接下一场了</p>
-<p><strong>字节跳动笔试</strong></p>
-<ol>
-<li>判断字符串是否是循环的</li>
-<li>计算器，+ - * ^，要对1e9+7取余</li>
-<li>有N个家庭，M个火车站，求目标火车站到每个家庭的距离最短(距离计算取直线)</li>
-<li>完美树</li>
-</ol>
-<p>&emsp;&emsp;四道编程，第一题先筛除长度不符的，再一段一段比较，然而超时了，只A了71%，第二题就求幂的部分用了快速幂，化大幂为小幂，其余的正常计算，第三题先求所有火车站距离，然后再求最小值，同样超时，只A40%，最后一题赶时间没看蒙了10%</p>
- <br>
-
-
-
-<p><strong>度小满笔试</strong></p>
-<ol>
-<li>涂色，用已有颜料和砖块涂色</li>
-<li>小虫子走迷宫，有三种格子，一种格子作为障碍，一种格子作为空地，一种格子作为可突破的格子，但突破后要计数，求小虫子出去的最少次数</li>
-</ol>
-<p>&emsp;&emsp;第一题用哈希表记录颜料然后匹配砖块，第二题应该是dfs+剪枝。选择题十分钟做完了，潜力果然害得靠逼出来。发邮件用SMTP协议，收邮件用POP3协议和IMAP协议。P类问题是NP问题的子集</p>
-<blockquote>
-<p>&emsp;&emsp;字节投票的AK佬也太多了，度小满可能多花点时间没准能过，不过不敢肯定，想要双开车结果双翻车，惨的不谈</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-9-21"><a href="#2020-9-21" class="headerlink" title="2020.9.21"></a>2020.9.21</h4><p><strong>恒生闪面</strong></p>
-<p>&emsp;&emsp;对着手机AI面试，重录了好几次，感觉跟机器讲话真的怪怪的</p>
-<p><strong>微保笔试</strong></p>
-<ol>
-<li>找出只含3、5、7质因子的第k大数</li>
-<li>找出数组中的最大连续数组</li>
-<li>找最大公共子串长度</li>
-<li>求数组中两个中只出现1次的两个数字</li>
-</ol>
-<p>&emsp;&emsp;编程题四选二，感觉还没从实习or秋招的状态中走出来，四选二都没做出来，大部分是力扣原题，第二题用动态规划，第四题用了哈希表会超时只有60%，本来记得力扣上有个用异或^来求得，但是忘记后面怎么搞了，有想着用与&amp;判断，但是没有后续没有思路，应该取异或结果中一位为1的部分(因为两个数字一个该位为0一个该位为1才会出现当前位为1的情况)，拿这个条件就可以区分这两个不同的数字，对于数组中的其他数字就继续用异或让其抵消，不管它们这个位是否为1，最后按条件区分异或得到的两个结果就是所求值。选择题路由器在网络层，交换机在数据链路层</p>
-<p><br><br></p>
-<h4 id="2020-9-22"><a href="#2020-9-22" class="headerlink" title="2020.9.22"></a>2020.9.22</h4><p><strong>恒生一面</strong></p>
-<ol>
-<li>Java的继承和多态</li>
-<li>HashMap的死循环(不会)</li>
-<li>重写方法的能抛出的异常范围(答错)</li>
-<li>sql优化(不会)</li>
-<li>MySQL的索引类别(不会)</li>
-<li>….(答出来的就没什么印象了)</li>
-</ol>
-<p>&emsp;&emsp;迎来了第一次视频面试，面试官挺友好的，但是就是我一堆不会的，感觉问的都很基础，有些看过的但都忘记了。面完才知道自己的知识有多匮乏，还是得恶补。</p>
-<p><strong>瑛太莱一面</strong></p>
-<ol>
-<li>项目</li>
-<li>笔试</li>
-<li>用递归反向输出栈</li>
-</ol>
-<p>&emsp;&emsp;太尬了，之前笔试有两道直接用测试用例输出做对，被问思路，讲了半天后面发现当时用测试用例做的。第一次手撕算法，还好是helloworld题。还有就是为什么面试官都喜欢迟到，早上一个四十分钟，下午二十分钟。</p>
-<blockquote>
-<p>&emsp;&emsp;两轮面试之后感觉现在就想找个日常实习准备春招了。还有面经是真的看得很难受，这种学习方式不能深入，感觉只能应对面试，然而这种面试造火箭，工作拧螺丝的现状怕是无法改变了</p>
-<p>&emsp;&emsp;傍晚发现投的实习简历被拒了，简直光速打脸，看来实习也得要经验啊(没有经验你就去找实习啊.jpg)，不过现在也没时间懊悔浑浑噩噩的大学前三年或是不去争取保研和考研上岸这些选择了，毕竟路是自己挑的。秋招的海投感觉又要开始了(之前才说了最后一波，噗~)，静下来好好学习吧，桥到船头自然直</p>
-</blockquote>
-<p>&emsp;&emsp;JOJO，这是我最后的波纹了：</p>
-<ul>
-<li><strong>微聚未来</strong>(金融)</li>
-<li><strong>网易互娱(内推码)</strong>(游戏)</li>
-<li><strong>微步在线(内推)</strong>(安全)</li>
-<li><strong>信也科技(内推)</strong>(金融)</li>
-<li><strong>顺丰(内推)</strong>(物流)</li>
-<li><strong>收钱吧</strong>(收费)</li>
-<li><strong>好未来</strong>(教育)</li>
-<li><strong>斗鱼(内推)</strong>(直播)</li>
-<li><strong>货拉拉</strong>(物流)</li>
-<li><strong>深演智能(内推)</strong>(人工智能)</li>
-<li><strong>37互娱(内推码)</strong>(游戏)</li>
-<li><strong>神策数据</strong>(数据分析)</li>
-<li><strong>便利蜂(内推)</strong>(零售)</li>
-<li><strong>步步高(内推)</strong>(硬件)</li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-9-23"><a href="#2020-9-23" class="headerlink" title="2020.9.23"></a>2020.9.23</h4><blockquote>
-<p>&emsp;&emsp;昨晚刷了一晚B站，好久没有享受生活娱乐了，只是玩了几个小时就很爽，等秋招结束，不管有没offer都要好好放松几天了。还有昨晚还刷到个简历误区的视频，原来连简历名都有讲究，只写一个名字可能直接就被淘汰了，职位学历电话全得写上。说起来自己当时简历就是随便照着同学模板写的，也很久没改了</p>
-</blockquote>
-<p><strong>酷家乐笔试(淘汰)</strong></p>
-<br>
-
-<p><strong>微步在线笔试</strong></p>
-<ol>
-<li>两个字符串，在第一个字符串找第二个字符串的出现位置</li>
-</ol>
-<p>&emsp;&emsp;编程题暴力法遍历比较即可AC，选择题题量很多：常见哈希冲突解决办法有开放地址法、线性探测法、链地址法、再散列(双重散列，多重散列)、建立公共溢出区，而单旋转法是建立散列函数的一种方法，将最后一位数，旋转放置到第一位。常见的软件开发模型有边做边改模型、瀑布模型演化模型、增量模型、螺旋模型、喷泉模型、敏捷模型-SCRUM。ARP协议将IP地址转换成MAC地址。冒泡排序是否稳定需要看比较条件是否有<code>=</code>。Linux查看网络状态和端口状态命令用<code>netstat</code>  。面向对象编程的SOLID原则为单一责任原则、开放封闭原则、里氏替换原则 、接口分离原则、依赖倒置原则。在浏览器上当前访问的网站向另一个网站发送请求获取数据的过程就是跨域请求。-Xms 和 -Xmx是java 命令的一个选项，用来设置应用程序堆启动时内存大小和运行时最大内存大小。简答题只能说不愧是信息安全公司，要写两个异常BUG出来</p>
-<br>
-
-<p><strong>去哪儿笔试</strong></p>
-<ol>
-<li>M个人中选出N个，求排序</li>
-<li>给两个队列，求其中按顺序排列的相同部分</li>
-<li>五张扑克牌，判断各种情况(有七八种好像：皇家同花顺、对子..，代码量要起飞)</li>
-</ol>
-<p>&emsp;&emsp;编程题原地裂开，一题没过，第一题用递归超时加解法有问题，第二题不会，第三题不会，力扣又要重开了啊，每日一题太悠闲</p>
-<p><strong>去哪儿笔试(淘汰)</strong></p>
-<p><br><br></p>
-<h4 id="2020-9-24"><a href="#2020-9-24" class="headerlink" title="2020.9.24"></a>2020.9.24</h4><p><strong>1加笔试</strong></p>
-<p>&emsp;&emsp;没有编程题，做完常规选择完就是做测评</p>
-<br>
-
-<p><strong>同花顺一面</strong></p>
-<ol>
-<li><code>hashmap</code>的遍历方法</li>
-</ol>
-<p>&emsp;&emsp;只说了<code>keySet()</code>和<code>entrySet()</code>，还特意强调自己只用<code>keySet()</code>，结果一查<code>keySet()</code>虽然代码简洁，但是效率是最慢的，尬住了..其余的遍历是entrySet()、keySet()、iterator()、values()，其他的感觉问的都挺简单的，应该能二面吧，不过开始问了要不要搞Android，不会没HC了吧</p>
-<br>
-
-<p><strong>途虎养车笔试</strong></p>
-<ol>
-<li>以1年1月1日是周一作为基准，求两个日期之间的工作日(周一到周五)</li>
-<li>一个数组为购物车，定义便宜物品为前后元素都比自己大(因此首末尾不能为便宜物品)，可任意排序，求满足便宜物品条件的最大数</li>
-</ol>
-<p>&emsp;&emsp;第一题先求当前日和1.1.1的间隔天数，然后判断是否是工作日，但是不知道是不是超时了就10%，哎最近笔试是真的烂，感觉又回到开始那种笔试都过不去的情况了。</p>
-<p><strong>途虎养车笔试(淘汰)</strong></p>
-<p><br><br></p>
-<h4 id="2020-9-25"><a href="#2020-9-25" class="headerlink" title="2020.9.25"></a>2020.9.25</h4><p><strong>招银网络笔试</strong></p>
-<ol>
-<li>多线程用到<code>ReentrantLock</code>、<code>Condition</code></li>
-<li>求数组存在的最大连续元素长度(不论位置)</li>
-<li>按字典序全排列</li>
-</ol>
-<p>&emsp;&emsp;前两题编程填空题，第三题全排列又忘记怎么写了，感觉最近笔试做的心态有点炸。</p>
-<br>
-
-<blockquote>
-<p>&emsp;&emsp;今天学校突然说保研名额增加了几个，但自己成绩还在保研线外几名，就像是突然给了个无法触及的机会一样，想了想自己大学前几年什么比赛都没参加什么奖都没拿，配吗？我配几把！之前看到别人的申请表一页的奖项，我呢，一行不到！</p>
-<p>&emsp;&emsp;最开始一直觉得现在找到好工作的话三年经验会优于考研(而且考研也不是说上就上)，但突然出现的一丝丝机会好像让我有了逃避的理由，但意识到自己绩点不够、六级没过、基本没奖项的现状后，感觉就算运气好分配到名额也保不到啥好学校了吧。而且看了牛客现状感觉好多读研的出来了卷不动算法还是搞开发，虽然说读研能提升学习能力把，但感觉开发的实战能力应该更重要，不过本科学历贬值倒是必然的了，以前老听大人说现在研究生遍地走叫我读研，那时候还是小屁孩，我信了，后来上了大学我又不信了读研哪有那么容易说上就上啊，不过现在又感觉以后可能真没准研究生遍地走了，毕竟中国才是内卷之王啊，前段时间在牛客上看的秋招学历投票硕士占比60%以上，彳亍吧，本科生倒成稀缺资源了</p>
-<p>&emsp;&emsp;最近看的《MySQL必知必会》本来一天就能看完的书硬是拖了三天没看完，注意力不能集中，要么去看招聘信息，要是去看简历状态。现在决定不看牛客了，之前看上面一个帖子提到不要让peer presure打击自己真的很有道理，OfferShow和脉脉这样的软件对于我这种菜鸡来说，真就只会带来负面上的刺激，牛客上的一些大厂offer比较贴也会让人产生自卑感和落寞，只做好自己就行了啊！</p>
-<p>&emsp;&emsp;继续定目标，今天看完《MYSQL必知必会》，9.28看完《高性能MYSQL》，每天保证重温5题力扣，恢复基本的笔试能力，国庆期间公司应该没有笔试面试这段时间是翻身的最后机会了，加油，冲了！</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-9-26"><a href="#2020-9-26" class="headerlink" title="2020.9.26"></a>2020.9.26</h4><blockquote>
-<p>&emsp;&emsp;今日没什么事，但需要处理好多学校的琐事，就看了几十页书，明天要加速了</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-9-27"><a href="#2020-9-27" class="headerlink" title="2020.9.27"></a>2020.9.27</h4><blockquote>
-<p>&emsp;&emsp;哎，面试笔试时间冲突，网上说改时间了就是挂，感觉也有点道理，还是抓住面试机会吧，网易笔试估计也很难，面试结束后看看题吧</p>
-</blockquote>
-<br>
-
-<p><strong>微步在线一面</strong></p>
-<ol>
-<li>return在catch语句中后面finally语句有赋值，最终返回的值，执行流程</li>
-<li>海量数据中找出出现频率最多的字符串</li>
-<li>UDP上层的协议有哪些53(DNS)、69(TFTP)、161(SNMP)</li>
-</ol>
-<p>&emsp;&emsp;开始自我介绍、问项目，问spring、问数据库…，最后没让我反问问题，估计是凉了，哎，感觉问的问题以前面经上都见过，但已经好久没看面经了有些答不出来。</p>
-<br>
-
-<p><strong>微众银行笔试(冲突)</strong></p>
-<p>&emsp;&emsp;经典二选一，网易是最后一次，微众不知道还会不会给机会</p>
-<br>
-
-<p><strong>网易互娱笔试</strong></p>
-<ol>
-<li>给多个日期段，日期段中不重叠的为true，重叠的为false</li>
-<li>求最大上下电梯数，转化成求数组中不相邻的数的最大和</li>
-<li>给多个字段，字段分为后续和前提，按顺序排出执行顺序，前提要在后续前，如果有问题则返回空</li>
-<li>建立一个论坛系统，xxx一堆方法</li>
-</ol>
-<p>&emsp;&emsp;面试完只剩一小时了，第一题按顺序排的但做完就80%，第二题用dp求出最大值，但是每个数需要进行修改成(当前层-1层)*2，做的时候一直想着怎么把最后最大和中用到的数组下标记录下来，笔试完洗个澡一看就知道咋解了，直接修改初始数组成需要上下的层数然后动态规划不就行了，哎， 当时真是蠢得不行。第三题、第四题就没时间了。上牛客看也没题解，好像同是服务端做的题目却不一样，别人的好像更难了…</p>
-<blockquote>
-<p>&emsp;&emsp;一周没碰力扣是这样的，赶紧到国庆吧，七天创造波奇迹。今天看《高性能MySQL》真是看不下去，前面的测试章节没看懂，涉及到好多参数，感觉只有实际使用测试工具后才能更深刻地理解。好不容易看到后面的优化章节了，发现才一百多页，而且优化也是建立在测试的基础上的，以后巩固的时候必须得来波实操了。</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-9-28"><a href="#2020-9-28" class="headerlink" title="2020.9.28"></a>2020.9.28</h4><p><strong>步步高笔试</strong></p>
-<p>&emsp;&emsp;40道选择题，有些多选题不敢多选，重载时权限修饰符可以不同也可相同、返回类型可以不同也可相同，但方法参数一定要不同</p>
-<br>
-
-<p><strong>微聚未来笔试</strong></p>
-<ol>
-<li>后序遍历(非递归)</li>
-<li>最长回文子序列</li>
-</ol>
-<p>&emsp;&emsp;总共60分钟，时间还是比较紧的。选择题Spring提供了五种自动装配的类型no、byName、byType、constructor、autodetect，消息队列MQ主要解决应用解耦，异步消息，流量削锋等问题。GC垃圾回收器的初始标记步骤需要STW(stop the world)。编程题虽然是全过了，但又不能算AK，第一题没按要求直接写了递归法，因为迭代忘记咋写了没调试完时间就没了，看了力扣是用辅助栈压入结点的左右子树(如果存在的话)，然后弹出末节点追加到结果集的头部(这个弹出顺序是根-&gt;右子树-&gt;左子树，正好与后序遍历的左右根相反)，所以照这样存到结果集的头部就可以保证是后续。第二题用的暴力法求，应该选择动态规划来做</p>
-<blockquote>
-<p>&emsp;&emsp;晚上又忍不住刷牛客了，看了一些鼓励贴还是很激励人的。一些0offer的贴也让我感受到战友的存在(然后再仔细一看，哦，原来是面试都面完了等通知的那种，打扰了，我连池子都不配进)，今天重拾力扣，做了十几道之前的题目，慢慢恢复了一点笔试能力。不过三天之期已到，还是没看完书，800页可太厚了吧，四分之一还没完成。</p>
-<p>&emsp;&emsp;最后是一句某个帖子里有点中二但挺感动的话：胜利和败北都要品尝，经历了四处逃窜的辛酸，痈苦伤心的回忆，男人才能真正独当一面，就算痛哭流涕也没关系，一定要闯过这一关。</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-9-29"><a href="#2020-9-29" class="headerlink" title="2020.9.29"></a>2020.9.29</h4><p><strong>37互娱笔试</strong></p>
-<ol>
-<li>给定一个总金额和一个表示硬币数组，求最少的硬币数组成总金额</li>
-<li>求二叉树的最大深度</li>
-</ol>
-<p>&emsp;&emsp;两道签到题，第一题还以为又是背包(背包好久没做感觉又忘了)，结果是贪心，第二题递归，但是是手写的不知道能不能AK。选择题采用TOKEN验证可以防止CSRF攻击，查看mysql的安装路径<code>@@basedir</code></p>
-<blockquote>
-<p>&emsp;&emsp;晚上接到了同花顺的二面消息，泪目了，一个月了，第一个二面，感觉生活好起来了。今晚冲一波十月的公司。在牛客上搜着搜着发现其实还在秋招和会补招的公司也不少，所以别放弃啊，没必要等到春招，时刻都要保持精神紧绷啊！！！</p>
-</blockquote>
-<p>&emsp;&emsp;投递公司：</p>
-<ul>
-<li><strong>快看漫画(内推)</strong>(漫画)</li>
-<li><strong>喜马拉雅</strong>(音频)</li>
-<li><strong>金山WPS(内推)</strong>(办公)</li>
-<li><strong>医渡云</strong>(医疗)</li>
-<li><strong>Soul</strong>(社交)</li>
-<li><strong>招联金融</strong>(金融)</li>
-</ul>
-<p><br><br></p>
-<h4 id="2020-9-30"><a href="#2020-9-30" class="headerlink" title="2020.9.30"></a>2020.9.30</h4><p><strong>步步高一面</strong></p>
-<ol>
-<li>解决慢查询方案</li>
-<li>Redis如何保持数据库和缓存一致性</li>
-</ol>
-<p>&emsp;&emsp;下午突然打来了一通电话面，先是自我介绍，然后各种基础，到后面问自己项目的时候底层不太了解(本来以为我这渣渣项目根本深挖不了，失算了。。)，就很尴尬，其他感觉答得还可以。不过面过几次后，确实比之前稳了，在电话面试的时候至少知道说些什么了</p>
-<br>
-
-<p><strong>神策数据笔试</strong></p>
-<ol>
-<li>替换字符串</li>
-<li>给限定数量的1、2、5、10、20、50、100元，求凑成一个总额的所有排列</li>
-<li>判断数字是否是2的幂次方</li>
-</ol>
-<p>&emsp;&emsp;第一题简单遍历，第二题没做出来，感觉应该用动态规划，但是每个价格的钱又都有数量限制，第三题用位运算判断。选择题索引的选择性为不重复的值/总数据数。用例图包含用例和参与者(角色)，用例一般包括用例编号、用例说明、前置条件、基本事件流、其他事件流、异常事件流和后置条件等。</p>
-<blockquote>
-<p>&emsp;&emsp;今天做了十五道力扣，以前的简单题可能要思考个五分钟，现在差不多一看题就会了，但是困难题还是难以触碰的境地</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-1"><a href="#2020-10-1" class="headerlink" title="2020.10.1"></a>2020.10.1</h4><p><strong>深演智能笔试(AK)</strong></p>
-<ol>
-<li>字符串去重</li>
-<li>计算器</li>
-<li>二进制相加</li>
-</ol>
-<p>&emsp;&emsp;编程题意外的简单。选择题阻塞队列执行<code>take()</code>时候如果超过队列容量大小时，会出现队列阻塞，执行<code>element()</code>，<code>peek()</code>时能够查看队首元素，在队首元素为空的情况下，<code>element()</code> 方法会抛出异常，而<code>peek()</code>方法只会返回 null。执行<code>add()</code>只能添加队列的容量大小的元素，如果超过队列容量大小，则会抛出异常，而执行<code>offer()</code>如果超过队列容量大小，不会抛出异常，而是返回bool值false，执行<code>put()</code>如果超过队列容量大小，则会处于等待状态，出现队列阻塞。Option是Scala语言的语法，它有两个子类别，一个是 Some，一个是 None。</p>
-<blockquote>
-<p>&emsp;&emsp;话说今年中秋国庆是同一天，但是没有offer(太痛苦了，太痛了啊，我洗海带哟.jpg</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-4"><a href="#2020-10-4" class="headerlink" title="2020.10.4"></a>2020.10.4</h4><blockquote>
-<p>&emsp;&emsp;这三天把剑指Offer又刷了一遍，明天开始看面经 + 看书 + 算法专项了，哎，真不想向面经屈服，但是想补充广度过面试还是得借一手面经，也只能说真香了吧</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-9"><a href="#2020-10-9" class="headerlink" title="2020.10.9"></a>2020.10.9</h4><p><strong>途虎养车笔试(淘汰)</strong></p>
-<br>
-
-<p><strong>好未来简历(淘汰无HC)</strong></p>
-<br>
-
-<p><strong>同花顺二面</strong></p>
-<ol>
-<li>HTTPS的整个运行流程</li>
-<li>HTTP缓存</li>
-<li>JAVA中哪些操作是原子操作</li>
-<li>合并两个有序数组</li>
-</ol>
-<p>&emsp;&emsp;三十分钟的面试，好久没有面试了有点慌，二面还是一堆基础问题，用的手机APP面试结果要手撕算法，不过还好是签到题。</p>
-<p><strong>恒生一面(淘汰)</strong></p>
-<br>
-
-<p><strong>恒生笔试(复活赛)</strong> </p>
-<p>&emsp;&emsp;一如既往地简单，没啥说的</p>
-<p><br><br></p>
-<h4 id="2020-10-10"><a href="#2020-10-10" class="headerlink" title="2020.10.10"></a>2020.10.10</h4><p><strong>便利蜂笔试</strong></p>
-<ol>
-<li>给字典序，若符合字典序则替换双重括号内关键字，禁用正则(咱也不会啊</li>
-<li>求数字N中小于等于k个数字的所有加法组合</li>
-<li>依赖循环，求需要修改的节点数</li>
-</ol>
-<p>&emsp;&emsp;全军覆没，感觉每题都是hard难度啊，第一题处理数据写了好久，看这笔试难度估计面试也悬，做了半小时感觉没戏了就溜溜球去做WPS了</p>
-<p><strong>金山WPS笔试</strong></p>
-<ol>
-<li>不重复全排序</li>
-</ol>
-<p>&emsp;&emsp;选择题很多C++的，感觉不太对劲，问答题是三次握手+进程状态，总体比较简单</p>
-<p><br><br></p>
-<h4 id="2020-10-11"><a href="#2020-10-11" class="headerlink" title="2020.10.11"></a>2020.10.11</h4><p><strong>字节跳动笔试(复活赛)</strong></p>
-<ol>
-<li>求前k高积分选手</li>
-<li>求数组中的Q(k)=k*min(…)(k为相邻数大小)最大值</li>
-<li>切蛋糕，按1*2来切，求方案数</li>
-<li>给一列数字，求和等于目标数的方案，可以对数字使用魔法(魔法有限制次数)使其变成阶乘，求方案数</li>
-</ol>
-<p>&emsp;&emsp;熟悉的味道，熟悉的配方。第一题用堆解92%，第二题暴力法83%，第三题懵了看牛客上说是用轮廓线dp(不知道是啥)，第四题想用递归获得所有子集加入结果集，然后再对小于魔法限制次数的排列使用魔法加入结果集，结果时间来不及了，不过估计做出来了也是超时看着就慢。不说了，又挂了，太菜了。</p>
-<br>
-
-<p><strong>哈啰出行笔试</strong></p>
-<ol>
-<li>求最长非重复子串</li>
-</ol>
-<p>&emsp;&emsp;选择题的不定项好多不确定的。Java的指令中jps用于输出JVM进程状态信息，jmap用于生成虚拟机的内存快照信息(堆快照)，jstack 显示虚拟机的线程栈信息，jhat分析java堆的命令，可以将堆中的对象以html的形式显示出来。GB2312支持中文编码，ASCII不支持。Java8Stream的中间操作有filter()、map()、limit()…。git中查看提交历史使用命令git log。maven坐标的三个定位元素groupID、artifactId、version</p>
-<p><br><br></p>
-<h4 id="2020-10-12"><a href="#2020-10-12" class="headerlink" title="2020.10.12"></a>2020.10.12</h4><p><strong>信也科技笔试</strong></p>
-<p>&emsp;&emsp;无编程题，选择题很多，最后的简答题又忘记线程池组成有哪些了。String调用toUpperCase()本体对象不会大写只会返回全大写的结果，substring()方法的两个参数分别为截取字符串的首下标和尾下标，首下标是闭区间，尾下标是开区间。float a = 1.0;有语法错误，因为1.0默认是double类型的，char s = ‘\u0639’;是正确的因为’\u0639’是Unicode 标量值。位运算符 &amp; 和 | 都可以实现 &amp;&amp; 和 || 的功能，只不过前者在于符号的两边都会运算，而后者满足判断条件后就会停止条件后面的运算。_var2&amp;是不合法的变量名，因为&amp;是位运算符。Java线程池的四大组成包括线程池管理器、工作线程、任务接口、 任务队列</p>
-<blockquote>
-<p>&emsp;&emsp;哎，本来收到同花顺HR面的消息还是很高兴的，然后晚上手贱又去脉脉上看，结果清一色的差评，吐槽加班、食堂、技术差之类的，而且确实在笔面试难度感觉好像也不是很重视技术这块。感觉自己真是贱啊，自己水平不够去不了大厂，又眼高手低、贪的不行。再被牛客上一些说秋招早就结束的帖子破防，又开始想放弃秋招了。最后定个期限吧，25号之前没找到满意的就开始投日常实习了，其实感觉自己内心真的可能更倾向于日常实习，只有体验过才会知道自己想进什么公司吧</p>
-<p>&emsp;&emsp;这段时间把CS2018的面经宝典也看的差不多了，然后在学Netty，感觉之前的项目真的太拉胯，尽量这周赶个Netty轮子项目出来面试也有的聊把</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-13"><a href="#2020-10-13" class="headerlink" title="2020.10.13"></a>2020.10.13</h4><p><strong>三七互娱笔试(淘汰)</strong></p>
-<br>
-
-<p><strong>携程笔试(复活赛)</strong></p>
-<ol>
-<li>买多瓶可乐投各类硬币，超额的话会找零，求投硬币总数</li>
-<li>多个司机服务，一个司机只能在一个区域，每个区域的人数要求相同，求两个区域最大价值</li>
-<li>判断数组语句是否正确(不越界)，可嵌套使用[]符</li>
-</ol>
-<p>&emsp;&emsp;第一题正常循环求解不知道为什么超时只有50%，后面看别人说测试用例存在钱不够的情况，(但是题目不是说了钱够的情况吗，佛了。第二题用全排序加排重求所有结果取最大值结果还是超时50%，第三题不会。但相较之前第一次携程笔试拿0分已经强很多了</p>
-<p><strong>同花顺HR面</strong></p>
-<p>&emsp;&emsp;第一次走到终面。讲了好多，家庭、学习、期望薪资、公司期望等等，试用期是六个月，三个月考核转正。如果给了offer我也不知道自己会不会去，昨晚在脉脉上其实还看到个有意思的说法，讲的是先经历过差公司的毒打后，后面去什么公司就都不虚了。</p>
-<blockquote>
-<p>&emsp;&emsp;复盘的时候发现当时期望薪资说公司看着给吧属实有点蠢，过于放低身份，太卑微了，还有在问为什么不读研的时候却回答以后会看情况读研，简直是迷惑回答啊。。</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-14"><a href="#2020-10-14" class="headerlink" title="2020.10.14"></a>2020.10.14</h4><blockquote>
-<p>&emsp;&emsp;今天又破防了，刷了扣扣空间，以前的同学保研的有中科大的、浙大的，这peer presure也太沉重了吧，很喜欢《新华字典》的一句话：张华考上了北京大学，李萍进了中等技术学校，我在百货公司当售货员：我们都有光明的前途</p>
-</blockquote>
-<p><strong>招联金融笔试</strong></p>
-<ol>
-<li>矩阵元素右移</li>
-<li>链表倒数第N个</li>
-<li>判断括号是否正确并返回结果</li>
-<li>判断是否是顺子</li>
-</ol>
-<p>&emsp;&emsp;前三题是编程填空比较简单，第四道也是力扣原题了，先排序再求差。选择题truncate和delete只删除数据,drop 则删除整个表(结构和数据)。Java中String和字符数组之间的转换可以用String.valueOf(char[] array)来实现</p>
-<blockquote>
-<p>&emsp;&emsp;本来还在看Netty，看着看着连着两个面试通知，又要面经走起了</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-15"><a href="#2020-10-15" class="headerlink" title="2020.10.15"></a>2020.10.15</h4><p><strong>恒生一面</strong></p>
-<p>&emsp;&emsp;太短了，面试最速传说，感觉十五分钟不到，问的问题过于基础，估计是KPI面或者可能是真的很简单~，好像恒生只要求数据库基础，CURD Boy准备就绪</p>
-<br>
-
-<blockquote>
-<p>&emsp;&emsp;笔试烂了，居然也有面试机会。。。不会是把笔试总分加起来算的吧</p>
-</blockquote>
-<p><strong>字节跳动一面</strong></p>
-<ol>
-<li><p>单向链表实现栈</p>
-<p>&emsp;&emsp;对不起，是我不配，噗~。基础数据结构算法题做了二十多分钟，佛了，怎么这么菜啊，后面让优化添加、删除方法只会优化添加，感觉面试官是想先来一道签到的，没想到我这菜鸡儿做了这么久…不过面试官很耐心，这么久没催我就是了。后面就是问一些基础的和项目，最开始是问各种数据结构和作用。第一次大厂面试感觉真的很不一样，不过我还是太菜了，害，字节有缘再见把</p>
-</li>
-</ol>
-<br>
-
-<p><strong>微众银行笔试</strong></p>
-<ol>
-<li>磁铁带重力，吸到右边</li>
-<li>Perfact、Great、Miss，判断得分</li>
-<li>数字全排序后判断是K的倍数的数量</li>
-</ol>
-<p>&emsp;&emsp;第一题题目一大串，解题排序一小行，第二题逻辑判断得分，第三题数字给的量较大，做了全排序剪枝加排除存在0的情况后还是超时，测试时写了个大一点的数据差点把我电脑卡死机了，最后只过了45%。选择题感觉就很恶心，但又说不出哪里恶心，跟以前题目差不多但又要想很久，有题前序中序求后序的想了很久感觉题目有问题，以前这种题都随便画画就出来了，不过也可能是刚好脑子短路。。。1的ASCII码是49。重载是编译时多态，重写是运行时多态。8/2.5的默认结果是3.2，会自动转换成浮点数</p>
-<blockquote>
-<p>&emsp;&emsp;今天连着收到三个面试机会，不过都是保险、银行这类的，之前投的互联网都沉了吗</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-16"><a href="#2020-10-16" class="headerlink" title="2020.10.16"></a>2020.10.16</h4><p><strong>神策数据笔试(淘汰)</strong></p>
-<br>
-
-<p><strong>众安保险一面</strong></p>
-<p>&emsp;&emsp;好尬的面试，面试官不知道问什么，就这里问一点，那里问一点，然后硬凑到30分钟。。。</p>
-<p><br><br></p>
-<h4 id="2020-10-17"><a href="#2020-10-17" class="headerlink" title="2020.10.17"></a>2020.10.17</h4><p><strong>招联金融一面</strong></p>
-<p>&emsp;&emsp;最速面试传说。。十分钟左右</p>
-<blockquote>
-<p>&emsp;&emsp;今天Netty看完了，但是发现纯靠Netty写个项目好难啊，github上看有一些仿RPC框架，但是实现起来有点复杂，感觉等写完日常实习都木得投了</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-18"><a href="#2020-10-18" class="headerlink" title="2020.10.18"></a>2020.10.18</h4><p>&emsp;&emsp;离最后通牒期限还有一周，搏一搏单车变摩托</p>
-<p>投递公司：</p>
-<ul>
-<li><strong>猫眼娱乐(内推失败)</strong></li>
-<li><strong>美团(内推)(生活)</strong></li>
-<li><strong>牛客(招聘)</strong></li>
-<li><strong>SHEIN(内推码)(电商)</strong></li>
-<li><strong>电信云(通信)</strong></li>
-<li><strong>贝壳找房(内推码)(住房)</strong></li>
-<li><strong>松果出行(内推)(出行)</strong></li>
-<li><strong>酷家乐(内推)(室内设计)</strong></li>
-</ul>
-<blockquote>
-<p>&emsp;&emsp;本来想多投几家，发现自己眼光刁了，也不想海投了，大不了春招再战了。猫眼由于之前投过了然后内推失败，不过内推小哥帮我看了简历提了修改意见丰富了一下项目描述，还是挺好的</p>
-</blockquote>
-<br>
-
-<p> <strong>货拉拉笔试</strong></p>
-<ol>
-<li>判断到一个点路径</li>
-<li>求N叉树的前序遍历</li>
-</ol>
-<p>&emsp;&emsp;9道简答题，2道编程一小时。简答题大多是面试题，但感觉手写起来比讲的更难，讲的有时候还可以阿巴阿巴糊弄过去，写的就要具体很多。编程题前面没看到有第二页，我说怎么11题只做了10题，最后剩5分钟看到，只写了一种递归方法，非递归的写一半然后就交卷了，解法和二叉树的应该差不多吧</p>
-<blockquote>
-<p>&emsp;&emsp;这两天感觉啥都没学，面经也看不下去。。。在实习和秋招中纠结，怕去实习了错过了剩下几家秋招上岸的机会(有几家真想去，之前的银行保险倒是真没兴趣)，又怕直接简历就给挂了根本不给机会。算法也就保持每日两三题的数量，感觉也没多少笔试了。然后决定看视频，视频这种被动学习的方式还是挺舒服的，虽然学了那么来天也就是在简历上多个单词的结果罢了。然后就是静静地等25号deadline吧</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-20"><a href="#2020-10-20" class="headerlink" title="2020.10.20"></a>2020.10.20</h4><p><strong>招联网络一面</strong></p>
-<ol>
-<li>20个人随机选10个人竞争，用递归</li>
-</ol>
-<p>&emsp;&emsp;面试官没露脸，但应该是个大叔。笔试题目做出来了，但也没让优化什么的。然后总时长也就二十分钟，有点敷衍，关键下一次面试通知说在两周以内，这不等到黄花菜都凉了，deadline还剩下4天。。。还是下午好好准备冲字节吧，给了第二条命要好好珍惜</p>
-<p><strong>字节跳动二面</strong></p>
-<p>1.topK</p>
-<p>&emsp;&emsp;算法题明明测试用例出来了，但是结果提交通不过，佛了=。= ，这个面试官一直在笑，都没有停过！！一开始就挖项目，哎，人给挖没了，我真没啥东西啊就嗯挖，说好的重视基础呢，为啥都不问啊。</p>
-<blockquote>
-<p>&emsp;&emsp;应该是凉了，哎，倒在项目关了，感觉真要投个实习搞项目了，等不到deadline了。然后今天还看到两家公司的秋招补招信息，直接就没JAVA后端岗位了，这也太卷了。。。</p>
-</blockquote>
-<p><strong>字节跳动二面(淘汰)</strong></p>
-<p>&emsp;&emsp;心里已经早有B数了。。。</p>
-<p><br><br></p>
-<h4 id="2020-10-21"><a href="#2020-10-21" class="headerlink" title="2020.10.21"></a>2020.10.21</h4><p><strong>众安保险HR面</strong></p>
-<p>&emsp;&emsp;一下午睡过头了，本来以为我迟到了，结果是面试官鸽了。总共就两面。。。啊这，再结合第一面，感觉也太水了。。。</p>
-<br>
-
-<p><strong>阅文集团笔试</strong></p>
-<ol>
-<li>返回没有重复字符的字符串，禁用集合，内置函数</li>
-<li>判断一个数是否是素数</li>
-<li>分不同条件排序一个对象，类似SQL的order</li>
-<li>判断一个数有多少个N</li>
-</ol>
-<p>&emsp;&emsp;编程第二题属实很迷，题目说了数小于2^64，然后在本地输入这个数可以秒出来，但是运行提交就超时，然后值A了80%，其他全是签到题。最后简答题是答BIO、NIO、AIO，刚好CSNote的IO这块刚开始，刚好还就不会AIO，BIO、NIO靠着学Netty时的记忆写了一些。选择题有很多不确定的，考到很多分布式存储，不会Hadoop吃了大亏：RAM 是随机存取存储器，它的特点是易挥发性，即掉电失忆。 ROM 通常指固化存储器(一次写入，反复读取)，它的特点与RAM 相反。集群的瓶颈是磁盘IO而不是网络，网络只能算是稀缺资源。多播IP地址就是D类IP地址。冯·诺依曼结构为运算器、控制器、存储器、输入设备、输出设备。nginx的作用包含静态HTTP服务器、反向代理服务器、负载均衡、虚拟主机</p>
-<p><br><br></p>
-<h4 id="2020-10-22"><a href="#2020-10-22" class="headerlink" title="2020.10.22"></a>2020.10.22</h4><p><strong>恒生二面</strong></p>
-<p>&emsp;&emsp;感觉是妥妥的KPI面，这面试官像是边工作边面试的，然后就开始问了下项目，然后二面就开始闲聊了，问起爱好、薪资。后面收到offer才知道还真就只有两面。。。</p>
-<blockquote>
-<p>&emsp;&emsp;今天找了个牛客大佬写的仿RPC框架，比github上的一些项目缩减了不少还有博客指导，争取3天冲完deadline投简历时加个小菜</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-24"><a href="#2020-10-24" class="headerlink" title="2020.10.24"></a>2020.10.24</h4><blockquote>
-<p>&emsp;&emsp;轮子算是写完了，但是好多功能没实现，就是一个别人简易版本的简易版，不过写这种项目感觉收获很多，写完以后对整个RPC的基本流程了解得更深刻了。于是简历又能多加4行字了，好耶.jpg！这两天一直没刷题，明天两场笔试估计手要生疏了。</p>
-<p>&emsp;&emsp;不过现在项目勉强行了，却早没互联网可投了，现在凌晨，也算25号了。。。不知道该不该投实习，好纠结啊。昨天美团开奖，牛客上大佬狂欢，白菜价都21k，真就让我产生一种错觉：原来应届生真的都能拿这么多工资啊，然后想起来人和人的薪资不能一概而论。</p>
-<p>&emsp;&emsp;在之后的某一天，我又在牛客上看到一个帖子说自己本科24k白菜价侮辱人，我才明白是我太菜了，对不起，我收拾收拾就走.jpg。。。</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-25"><a href="#2020-10-25" class="headerlink" title="2020.10.25"></a>2020.10.25</h4><p><strong>美团笔试</strong></p>
-<ol>
-<li>求集合A、B的各自数和交集数</li>
-<li>求转换N个字母使大小写数相等</li>
-<li>求自定义公式的结果，异或</li>
-<li>公司职员至少要有两个下属或没有下属，判断是否满足关系</li>
-<li>无穷变大的矩阵，求指定坐标的数</li>
-</ol>
-<p>&emsp;&emsp;没有想象的那么难，但是也没全做出来。。前两题AC，第三题超时55%，第四题可能没完全理解题意只有73%，最后一题开始想了个最蠢的就是一直造新矩阵，在自己的编辑器都出现堆溢出(第一次见)，然后在网页上18%。这种题明显是找规律，不过刚有点思路就发现没时间了</p>
-<br>
-
-<p><strong>字节跳动笔试(复活复活赛)</strong></p>
-<ol>
-<li>RGB加起来求和</li>
-<li>多个处理器，多个任务，处理器忙碌时不能处理任务，求分配策略</li>
-<li>多个人围一圈，每个人只能为0或1，如果两边和自己一样则要变化，直到稳定</li>
-<li>给出多个数两两相加的结果，求所有加数</li>
-</ol>
-<p>&emsp;&emsp;捞，就嗯捞。害，我S10都没看，来做笔试找虐真是作的。第一题简单的但是只有10分，第二题做了快一小时然后一运行，哦豁，超时0%，后面两题毫无思路，三次笔试，一次比一次捞，菜鸡落泪</p>
-<p><br><br></p>
-<h4 id="2020-10-26"><a href="#2020-10-26" class="headerlink" title="2020.10.26"></a>2020.10.26</h4><p><strong>贝壳买房笔试</strong></p>
-<ol>
-<li>给三个数，满足Max(a,b) Max(a,c) Max(b,c),求a、b、c</li>
-<li>判断一个数组中是否有数字满足乘积为m</li>
-<li>判断一个范围内有几个近亲数，近亲数：最大位数&lt;=最小位数 * 2</li>
-<li>a数组和b数组，a数组中只能用一次，b数组元素可用多次(加b数前需要加对应的a数)，求加n个数的最大和</li>
-</ol>
-<p>​    没话说了，太变态了。每题测试用例都跑成功了，然后提交不是0%就是10%</p>
-<p><br><br></p>
-<h4 id="2020-10-27"><a href="#2020-10-27" class="headerlink" title="2020.10.27"></a>2020.10.27</h4><blockquote>
-<p>&emsp;&emsp;呜呜呜，受不了煎熬了，刷了牛客整整两天，纠结怪要入魔了，现在真的受不了了，完全学不下去，所以——放弃秋招了。投日常实习了。明年春招再见了。秋招日记可能就到这里了</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-10-28"><a href="#2020-10-28" class="headerlink" title="2020.10.28"></a>2020.10.28</h4><p><strong>招银网络二面</strong></p>
-<ol>
-<li>螺旋模型、瀑布模型</li>
-<li>spring事务传播级别</li>
-<li>本地修改数据库，缓存怎么保持一致性</li>
-</ol>
-<p>&emsp;&emsp;感觉这个面试官说的话比我还多。。。但是这样也HR面了吗。。</p>
-<p><strong>招银网络HR面</strong></p>
-<p>&emsp;&emsp;HR咳嗽咳个不停，然后就挂了。。。</p>
-<p><br><br></p>
-<h4 id="2020-10-29"><a href="#2020-10-29" class="headerlink" title="2020.10.29"></a>2020.10.29</h4><p><strong>恒生offer</strong></p>
-<p>&emsp;&emsp;终于，在10月份的尾巴，拿到了第一份offer，薪资比想象的要多，但是之前的面试体验实在不好，感觉招人就很敷衍，而且感觉公司是做金融外包性质的，对自己的未来发展意义不大，再加上一天逼签感觉不太对劲，所以拒了。但是还是很感谢它给了我信心，至少完成了从0到1的突破，自己也不是那么没用了，心态上真的好了很多。</p>
-<br>
-
-<p><strong>知乎一面</strong></p>
-<ol>
-<li>full GC什么时候出现</li>
-<li>堆的内存划分</li>
-<li>spring循环依赖</li>
-</ol>
-<p>&emsp;&emsp;JVM这块有点辣眼睛，要恶补一波了。知乎要求要先实习，然后毕业转正，讲道理要是毕业没法转正不是GG了吗。。</p>
-<p><br><br></p>
-<h4 id="2020-10-30"><a href="#2020-10-30" class="headerlink" title="2020.10.30"></a>2020.10.30</h4><p><strong>Soul一面</strong></p>
-<p>&emsp;&emsp;电话面，基本都是给个方向自由发挥，但是总感觉讲的不让他满意</p>
-<br>
-
-<p><strong>知乎二面</strong></p>
-<ol>
-<li>限流算法</li>
-<li>垃圾回收器有哪些</li>
-<li>上传文件进度条</li>
-</ol>
-<p>&emsp;&emsp;总共问了五十几分钟，问项目时，项目有些东西没有做到被问的很尴尬，比如解决远程调用请求超时问题等等，还有kafka也不会等等</p>
-<p><br><br></p>
-<h4 id="2020-11-2"><a href="#2020-11-2" class="headerlink" title="2020.11.2"></a>2020.11.2</h4><p><strong>知乎三面</strong></p>
-<ol>
-<li>HTTPS整个具体流程</li>
-</ol>
-<p>&emsp;&emsp;太草了，感觉面试活生生变成用户调研了。晚上状态就变成暂不匹配了。其实面试的时候就感觉不对劲了，技术面的时候就突然变成HR面的一些问题了，估计是不想问了。而且知乎好像去年就没招人，招人估计还是会从优选择，我这种没实习没奖项没学历的应该直接就滚了。</p>
-<p><strong>N家公司(淘汰)</strong></p>
-<blockquote>
-<p>&emsp;&emsp;没有消息的公司应该是都淘汰了，也懒得一个一个写失败记录了。随着今天三面的溃败，我的秋招应该彻底结束了，犹豫就会败北，或许早该结束了吧</p>
-</blockquote>
-<p><br><br></p>
-<h4 id="2020-11-5"><a href="#2020-11-5" class="headerlink" title="2020.11.5"></a>2020.11.5</h4><p><strong>招银网络offer</strong></p>
-<p>&emsp;&emsp;秋招的第二份offer，给了一周时间考虑。感觉人是真的贱啊，当初自己投的简历，现在又看不上人家，可能主要还是自己的一个互联网心结吧，要是签了违约感觉好麻烦也不太好，最后可能还是会拒了把，但是一直没有实习电话真的好难受啊</p>
-<p><br><br></p>
-<h4 id="秋招复盘"><a href="#秋招复盘" class="headerlink" title="秋招复盘"></a>秋招复盘</h4><ul>
-<li>投递公司数：<strong>77</strong></li>
-<li>笔试场次：<strong>49</strong>  实际参与：<strong>47</strong>    通过：<strong>9</strong>    </li>
-<li>面试公司：<strong>11</strong>    面试场次：<strong>21</strong>    </li>
-<li>offer：<strong>2</strong></li>
-</ul>
-<ul>
-<li><strong>GROWINGIO一面</strong></li>
-<li><strong>恒生一面 + 二面</strong></li>
-<li><strong>同花顺三面</strong></li>
-<li><strong>微步在线一面</strong></li>
-<li><strong>步步高一面</strong></li>
-<li><strong>众安保险二面</strong></li>
-<li><strong>招联金融一面</strong></li>
-<li><strong>招银网络三面</strong></li>
-<li><strong>字节跳动二面</strong></li>
-<li><strong>Soul一面</strong></li>
-<li><strong>知乎三面</strong></li>
-</ul>
-<blockquote>
-<p>&emsp;&emsp;回顾整个秋招，最显而易见的问题必然是简历，但简历真的是得靠积累的，学习了几星期也不过是在上面加几个词汇的描述。而学历、实习这些东西实在没法速成。最开始的简历投递近乎全挂，第一版的简历里框架只会SSM(虽然秋招的面试基本没几个问框架的)，项目也写的没有特色过于简单，还没有奖项和实习，属于一看就能筛掉的类型，并且没有选择内推，后面用了内推倒是一般都有机会笔试</p>
-<p>&emsp;&emsp;然后就是笔试了，这轮秋招最大的问题应该就是笔试。没有冲突的每场笔试都认真地做了，但接近1/6的笔试通过率属实有问题，最开始的十几场没有开始刷题直接裸考然后失去机会真的很可惜，现在看那些题目难度真的不大，然后刷题量增多以后状态变好，虽然有四、五家笔试应该是全A了但没给机会(可能是学历、没实习又或者选择题做太差)，但其余的大部分笔试还是由于自己算法水平不够导致的，那种三题、四题的长题变式经常只能做出一两题(测试用例属实变态)。</p>
-<p>&emsp;&emsp;面试的话前期因为没有面向面经复习经常一面挂，后面准备了一整套面经后一面基本很容易，但项目和实习这块是硬伤，后期补了个RPC框架但也已经没啥面试机会了</p>
-<p>&emsp;&emsp;秋招大概率是结束了吧，希望能找到个好实习，然后每天算法训练，春招再战(秋招BAT一个都没投，现在水平不够，挺怕留下很差的面评，春招要是还有补录就试一试了)。秋招的心态确实很重要，感觉9、10两个月因为焦虑刷牛客的时间加起来可能都快有近百小时了，本来只是招聘信息网站，但是当时真的很想知道像我这样的情况，别人是怎么做的，但是发现完全没有参照性，”渣硕”的比例过多，很多”失败翻盘帖”也不过是已经很优秀的人的自述或吐糟，实在难以感同身受，而且其中大多也都是有实习有好项目(好歹也是秒杀商城，虽然烂大街但也比我强，要比烂我管理系统第一个不服)。</p>
-<p>&emsp;&emsp;补招上岸的情况基本很少见，因为秋招没有成功上岸的话短时间内的补招可能也没有多大机会：一个是补招的时间问题，零零散散的没有秋招那么集中；很多公司会用三个月保护期来防止人重复投递简历或者是面评记录直接锁死；补招招收的通常是从未投递过公司的人，所以想秋招重来基本很难了。。。所以我把希望都押在明年的春招了</p>
-<p>&emsp;&emsp;细数一下我现在有的优势：失败而坎坷的秋招笔面试经历、<del>不算很</del>拉胯的面试技巧、顶多能解决easy题的笔试能力、未来一定能<del>可能</del>找到的实习经历、寻找春招招聘信息的意识、<del>破罐破摔</del>良好的心态。</p>
-<p>&emsp;&emsp;之后要做的是实习总结收获，每天练习算法，看技术书籍，在春招前要看完书单的所有书，还有写博客，记录自己的想法。之后应该转战《日常实习笔记》，不会再动这篇记录了，希望来年春天拿到offer后我能满意地回来看这篇文章吧</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>日常随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>秋招面经总结合集</title>
-    <url>/2020/12/04/%E7%A7%8B%E6%8B%9B%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93%E5%90%88%E9%9B%86/</url>
-    <content><![CDATA[<div style = "padding-left:100px; padding-right:100px">主要记录一些之前遇到过但不会的问题，部分比较基础的问题就没有收录进来</div>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YoruG's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yorug.github.io/2020/12/04/%E7%A7%8B%E6%8B%9B%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93%E5%90%88%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="YoruG">
+      <meta itemprop="description" content="记录一些自己的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YoruG's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          秋招面经总结合集
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-04 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-04T00:00:00+08:00">2020-12-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/12/04/%E7%A7%8B%E6%8B%9B%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93%E5%90%88%E9%9B%86/" class="post-meta-item leancloud_visitors" data-flag-title="秋招面经总结合集" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/2020/12/04/%E7%A7%8B%E6%8B%9B%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93%E5%90%88%E9%9B%86/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/12/04/%E7%A7%8B%E6%8B%9B%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93%E5%90%88%E9%9B%86/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div style = "padding-left:100px; padding-right:100px">主要记录一些之前遇到过但不会的问题，部分比较基础的问题就没有收录进来</div>
 
 <a id="more"></a>
 
@@ -2032,10 +1059,10 @@
 <p><br><br></p>
 <h2 id="21-JVM调优实操"><a href="#21-JVM调优实操" class="headerlink" title="21.JVM调优实操"></a>21.JVM调优实操</h2><p>&emsp;&emsp;前面说了一些JVM调优时需要考虑的因素，在实际操作的时候需要将这些配置写在配置文件中，Windows下是修改Tomcat安装目录下conf文件夹中的catalina.bat文件， Linux下是catalina. sh文件。</p>
 <p>&emsp;&emsp;catalina. sh中实际启动时执行的命令如下</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">eval exec &quot;\&quot;$_RUNJAVA\&quot;&quot; &quot;\&quot;$LOGGING_CONFIG\&quot;&quot; $LOGGING_MANAGER &quot;$JAVA_OPTS&quot; &quot;$CATALINA_OPTS&quot; \</span><br><span class="line"><span class="meta">  -D$</span><span class="bash">ENDORSED_PROP=<span class="string">&quot;\&quot;<span class="variable">$JAVA_ENDORSED_DIRS</span>\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  -classpath <span class="string">&quot;\&quot;<span class="variable">$CLASSPATH</span>\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  -Djava.security.manager \</span></span><br><span class="line"><span class="bash">  -Djava.security.policy==<span class="string">&quot;\&quot;<span class="variable">$CATALINA_BASE</span>/conf/catalina.policy\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  -Dcatalina.base=<span class="string">&quot;\&quot;<span class="variable">$CATALINA_BASE</span>\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  -Dcatalina.home=<span class="string">&quot;\&quot;<span class="variable">$CATALINA_HOME</span>\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  -Djava.io.tmpdir=<span class="string">&quot;\&quot;<span class="variable">$CATALINA_TMPDIR</span>\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  org.apache.catalina.startup.Bootstrap <span class="string">&quot;<span class="variable">$@</span>&quot;</span> start</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">eval exec &quot;\&quot;$_RUNJAVA\&quot;&quot; &quot;\&quot;$LOGGING_CONFIG\&quot;&quot; $LOGGING_MANAGER &quot;$JAVA_OPTS&quot; &quot;$CATALINA_OPTS&quot; \</span><br><span class="line"><span class="meta">  -D$</span><span class="bash">ENDORSED_PROP=<span class="string">&quot;\&quot;<span class="variable">$JAVA_ENDORSED_DIRS</span>\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  -classpath <span class="string">&quot;\&quot;<span class="variable">$CLASSPATH</span>\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  -Djava.security.manager \</span></span><br><span class="line"><span class="bash">  -Djava.security.policy==<span class="string">&quot;\&quot;<span class="variable">$CATALINA_BASE</span>/conf/catalina.policy\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  -Dcatalina.base=<span class="string">&quot;\&quot;<span class="variable">$CATALINA_BASE</span>\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  -Dcatalina.home=<span class="string">&quot;\&quot;<span class="variable">$CATALINA_HOME</span>\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  -Djava.io.tmpdir=<span class="string">&quot;\&quot;<span class="variable">$CATALINA_TMPDIR</span>\&quot;&quot;</span> \</span></span><br><span class="line"><span class="bash">  org.apache.catalina.startup.Bootstrap <span class="string">&quot;<span class="variable">$@</span>&quot;</span> start</span></span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;在实际配置时要注意不要改变之前已有的配置，比如在配置JAVA_OPTS的时候，要把前面已经配置的加上如下指令表示使用CMS垃圾收集器并且设置堆起始大小为500MB</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">JAVA_OPTS=&quot;$JAVA_OPTS $JSSE_OPTS&quot;</span><br><span class="line">JAVA_OPTS=&quot;$JAVA_OPTS -Xms500m -XX:+UseConcMarkSweepGC&quot; </span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JAVA_OPTS=&quot;$JAVA_OPTS $JSSE_OPTS&quot;</span><br><span class="line">JAVA_OPTS=&quot;$JAVA_OPTS -Xms500m -XX:+UseConcMarkSweepGC&quot; </span><br></pre></td></tr></table></figure>
 
 
 
@@ -2096,7 +1123,7 @@
 <p><br><br></p>
 <h2 id="2-一条SQL语句在MySQL中如何执行"><a href="#2-一条SQL语句在MySQL中如何执行" class="headerlink" title="2.一条SQL语句在MySQL中如何执行"></a>2.一条SQL语句在MySQL中如何执行</h2><p>&emsp;&emsp;SQL语句基本可以分为两种，一种是<strong>查询</strong>，一种是<strong>更新</strong>（增加、更新、删除）</p>
 <p><strong>查询语句</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> tb_student  A <span class="keyword">where</span> A.age=<span class="string">&#x27;18&#x27;</span> <span class="keyword">and</span> A.name=<span class="string">&#x27;张三&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> tb_student  A <span class="keyword">where</span> A.age=<span class="string">&#x27;18&#x27;</span> <span class="keyword">and</span> A.name=<span class="string">&#x27;张三&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>先用<strong>连接器</strong>检查该语句是否<strong>有权限</strong>，如果没有权限，直接返回错误信息，如果有权限，在mysql8.0版本以前，会先<strong>查询缓存</strong>，以这条sql语句为key在内存中查询是否有结果，如果有直接缓存，如果没有，执行下一步。</li>
@@ -2112,7 +1139,7 @@
 <li><strong>执行器</strong>先进行权限校验，如果没有权限就会返回错误信息，如果有权限就会调用数据库引擎接口，返回引擎的执行结果。</li>
 </ul>
 <p><strong>更新语句</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">update</span> tb_student A <span class="keyword">set</span> A.age=<span class="string">&#x27;19&#x27;</span> <span class="keyword">where</span> A.name=<span class="string">&#x27;张三&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> tb_student A <span class="keyword">set</span> A.age=<span class="string">&#x27;19&#x27;</span> <span class="keyword">where</span> A.name=<span class="string">&#x27;张三&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;其实这条语句也基本上会沿着像查询那样的流程走，只不过执行更新时还需要记录日志，这时就会引入日志模块，<strong>MySQL自带的</strong>日志模块<strong>binlog</strong>，所有的存储引擎都可以使用，<strong>InnoDB引擎</strong>也自带了一个日志模块<strong>redo log</strong>，下面就以InnoDB模式下来探讨这个语句的执行流程。流程如下：</p>
 <ul>
@@ -2574,13 +1601,13 @@
 </blockquote>
 <p><br><br><br><br></p>
 <h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="1-手写Java动态代理"><a href="#1-手写Java动态代理" class="headerlink" title="1.手写Java动态代理"></a>1.手写Java动态代理</h2><p>​        首先声明一个接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">     <span class="function">String <span class="title">getUser</span><span class="params">(String userName)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">     <span class="function">String <span class="title">getUser</span><span class="params">(String userName)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>​        在定义一个接口实现类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUser</span><span class="params">(String userName)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;用户名为:&quot;</span>+userName);</span><br><span class="line">        <span class="keyword">return</span> userName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUser</span><span class="params">(String userName)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;用户名为:&quot;</span>+userName);</span><br><span class="line">        <span class="keyword">return</span> userName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;最后写一个动态代理类，动态代理的代理体现在对代理对象方法的增强，如这里在代理对象<code>userService</code>的所有方法前后加上两个打印语句。该代理类还该定义了<code>getProxy()</code>方法来返回代理对象，在调用</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        UserService usi=<span class="keyword">new</span> UserServiceImpl();</span><br><span class="line">        UserServiceProxy up=<span class="keyword">new</span> UserServiceProxy(usi);</span><br><span class="line">        UserService proxy = up.getProxy();</span><br><span class="line">        proxy.getUser(<span class="string">&quot;lili&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserServiceProxy</span><span class="params">(UserService userService)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.userService = userService;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserService <span class="title">getProxy</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (UserService) Proxy.newProxyInstance(userService.getClass().getClassLoader(),userService.getClass().getInterfaces(), <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Before invoke()&quot;</span>);</span><br><span class="line">        Object o1 = method.invoke(userService, args);</span><br><span class="line">        System.out.println(<span class="string">&quot;After invoke()&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        UserService usi=<span class="keyword">new</span> UserServiceImpl();</span><br><span class="line">        UserServiceProxy up=<span class="keyword">new</span> UserServiceProxy(usi);</span><br><span class="line">        UserService proxy = up.getProxy();</span><br><span class="line">        proxy.getUser(<span class="string">&quot;lili&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserServiceProxy</span><span class="params">(UserService userService)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.userService = userService;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserService <span class="title">getProxy</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (UserService) Proxy.newProxyInstance(userService.getClass().getClassLoader(),userService.getClass().getInterfaces(), <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Before invoke()&quot;</span>);</span><br><span class="line">        Object o1 = method.invoke(userService, args);</span><br><span class="line">        System.out.println(<span class="string">&quot;After invoke()&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -2590,7 +1617,7 @@
 <h2 id="2-Integer的缓存池问题"><a href="#2-Integer的缓存池问题" class="headerlink" title="2.Integer的缓存池问题"></a>2.Integer的缓存池问题</h2><p><code>valueOf()</code>：先判断值是否在缓存池中，如果在的话就直接返回缓存池的内容，否则返回新的<code>Integer</code>对象</p>
 <p><code>new Integer() </code>：直接创建新的<code>Integer</code>对象</p>
 <p>按照上面两个方法的不同实现，可以得知</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Integer a = <span class="keyword">new</span> Integer(<span class="number">127</span>);</span><br><span class="line">Integer b = <span class="keyword">new</span> Integer(<span class="number">127</span>);</span><br><span class="line">System.out.println(a == b);<span class="comment">//false</span></span><br><span class="line">Integer c = <span class="number">127</span>;</span><br><span class="line">Integer d = <span class="number">127</span>;</span><br><span class="line">System.out.println(c == d);<span class="comment">//true</span></span><br><span class="line">Integer e = <span class="number">128</span>;</span><br><span class="line">Integer f = <span class="number">128</span>;</span><br><span class="line">System.out.println(e == f);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Integer a = <span class="keyword">new</span> Integer(<span class="number">127</span>);</span><br><span class="line">Integer b = <span class="keyword">new</span> Integer(<span class="number">127</span>);</span><br><span class="line">System.out.println(a == b);<span class="comment">//false</span></span><br><span class="line">Integer c = <span class="number">127</span>;</span><br><span class="line">Integer d = <span class="number">127</span>;</span><br><span class="line">System.out.println(c == d);<span class="comment">//true</span></span><br><span class="line">Integer e = <span class="number">128</span>;</span><br><span class="line">Integer f = <span class="number">128</span>;</span><br><span class="line">System.out.println(e == f);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;编译器会在<code>Integer</code>的自动装箱过程调用<code>valueOf()</code>方法，因此多个值相同且值在缓存池范围内的<code>Integer</code>实例(上面的c和d)使用自动装箱创建时会引用相同的对象</p>
 <p>各基本类型对应的缓冲池如下：</p>
@@ -2725,7 +1752,7 @@
 <li>…</li>
 </ul>
 <p><br><br></p>
-<h2 id="14-finally与return的返回结果问题"><a href="#14-finally与return的返回结果问题" class="headerlink" title="14.finally与return的返回结果问题"></a>14.finally与return的返回结果问题</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">testFinally</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">try</span>&#123;</span><br><span class="line">          <span class="keyword">int</span> count;</span><br><span class="line">          count = <span class="number">2</span>;</span><br><span class="line">          <span class="keyword">return</span> count;</span><br><span class="line">      &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">          count = <span class="number">5</span>;</span><br><span class="line">          <span class="keyword">return</span> count;</span><br><span class="line">      &#125;</span><br><span class="line"><span class="comment">//return count;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="14-finally与return的返回结果问题"><a href="#14-finally与return的返回结果问题" class="headerlink" title="14.finally与return的返回结果问题"></a>14.finally与return的返回结果问题</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">testFinally</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">try</span>&#123;</span><br><span class="line">          <span class="keyword">int</span> count;</span><br><span class="line">          count = <span class="number">2</span>;</span><br><span class="line">          <span class="keyword">return</span> count;</span><br><span class="line">      &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">          count = <span class="number">5</span>;</span><br><span class="line">          <span class="keyword">return</span> count;</span><br><span class="line">      &#125;</span><br><span class="line"><span class="comment">//return count;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;该方法中在try-catch中修改局部变量count，结果将会返回5，如果将移除finally中的return语句，取消最后一行注释返回结果则是2，这个结果与finally语句的特性有关</p>
 <ul>
@@ -2756,7 +1783,7 @@
 <li><code>notify()</code>、<code>notifyAll()</code>：<code>notify()</code>随机唤醒之前在当前对象上调用<code>wait()</code>的一个线程，<code>notifyAll()</code>唤醒所有之前在当前对象上调用<code>wait()</code>的线程 </li>
 </ul>
 <p><br><br></p>
-<h2 id="17-JAVA执行HelloWorld程序的全过程"><a href="#17-JAVA执行HelloWorld程序的全过程" class="headerlink" title="17.JAVA执行HelloWorld程序的全过程"></a>17.JAVA执行HelloWorld程序的全过程</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;    </span><br><span class="line">          String s;</span><br><span class="line">          s = <span class="string">&quot;Hello World&quot;</span>;  <span class="comment">//定义字符串s</span></span><br><span class="line">          System.out.println(s); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="17-JAVA执行HelloWorld程序的全过程"><a href="#17-JAVA执行HelloWorld程序的全过程" class="headerlink" title="17.JAVA执行HelloWorld程序的全过程"></a>17.JAVA执行HelloWorld程序的全过程</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;    </span><br><span class="line">          String s;</span><br><span class="line">          s = <span class="string">&quot;Hello World&quot;</span>;  <span class="comment">//定义字符串s</span></span><br><span class="line">          System.out.println(s); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;执行上述这样一个HelloWorld程序时在内部的执行流程如下</p>
 <ol>
@@ -2849,10 +1876,10 @@
 <p>&emsp;&emsp;为了实现保护共享资源而提出的一种锁机制。其实，自旋锁与互斥锁比较类似，它们都是为了解决对某项资源的互斥使用。无论是互斥锁，还是自旋锁，在任何时刻最多只能有一个执行单元获得锁。但是两者在调度机制上略有不同。对于互斥锁，如果资源已经被占用，资源申请者只能进入睡眠状态。但是自旋锁不会引起调用者睡眠，如果自旋锁已经被别的执行单元保持，调用者就一直循环在那里看是否该自旋锁的保持者已经释放了锁，”自旋”一词就是因此而得名。</p>
 <p><strong>优点</strong>：自旋锁不会使线程状态发生切换，一直处于用户态，即线程一直都是active的；不会使线程进入阻塞状态，减少了不必要的上下文切换，执行速度快 </p>
 <p><strong>不可重入的自旋锁</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpinLock</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicReference&lt;Thread&gt; cas = <span class="keyword">new</span> AtomicReference&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Thread currentThread = Thread.currentThread();</span><br><span class="line">        <span class="keyword">while</span>(!cas.compareAndSet(<span class="keyword">null</span>, currentThread)) &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span></span>&#123; </span><br><span class="line">        Thread currentThread = Thread.currentThread();</span><br><span class="line">        cas.compareAndSet(currentThread,<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpinLock</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicReference&lt;Thread&gt; cas = <span class="keyword">new</span> AtomicReference&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Thread currentThread = Thread.currentThread();</span><br><span class="line">        <span class="keyword">while</span>(!cas.compareAndSet(<span class="keyword">null</span>, currentThread)) &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span></span>&#123; </span><br><span class="line">        Thread currentThread = Thread.currentThread();</span><br><span class="line">        cas.compareAndSet(currentThread,<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>可重入的自旋锁</strong>(借助计数器实现)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReentrantSpinLock</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicReference&lt;Thread&gt; cas = <span class="keyword">new</span> AtomicReference&lt;Thread&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread current = Thread.currentThread();</span><br><span class="line">        <span class="keyword">if</span> (current == cas.get()) &#123; <span class="comment">// 如果当前线程已经获取到了锁，线程数增加一，然后返回</span></span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果没获取到锁，则通过CAS自旋</span></span><br><span class="line">        <span class="keyword">while</span> (!cas.compareAndSet(<span class="keyword">null</span>, current)) &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread cur = Thread.currentThread();</span><br><span class="line">        <span class="keyword">if</span> (cur == cas.get()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">             <span class="comment">// 如果大于0，表示当前线程多次获取了该锁，释放锁通过count减一来模拟</span></span><br><span class="line">                count--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             <span class="comment">// 如果count==0，可以将锁释放，这样就能保证获取锁的次数与释放锁的次数是一致的了。</span></span><br><span class="line">                cas.compareAndSet(cur, <span class="keyword">null</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReentrantSpinLock</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicReference&lt;Thread&gt; cas = <span class="keyword">new</span> AtomicReference&lt;Thread&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread current = Thread.currentThread();</span><br><span class="line">        <span class="keyword">if</span> (current == cas.get()) &#123; <span class="comment">// 如果当前线程已经获取到了锁，线程数增加一，然后返回</span></span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果没获取到锁，则通过CAS自旋</span></span><br><span class="line">        <span class="keyword">while</span> (!cas.compareAndSet(<span class="keyword">null</span>, current)) &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread cur = Thread.currentThread();</span><br><span class="line">        <span class="keyword">if</span> (cur == cas.get()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">             <span class="comment">// 如果大于0，表示当前线程多次获取了该锁，释放锁通过count减一来模拟</span></span><br><span class="line">                count--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             <span class="comment">// 如果count==0，可以将锁释放，这样就能保证获取锁的次数与释放锁的次数是一致的了。</span></span><br><span class="line">                cas.compareAndSet(cur, <span class="keyword">null</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -2942,7 +1969,7 @@
 <li><code>newSingleThreadExecutor()</code>：创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(如FIFO, LIFO, 优先级)执行。</li>
 </ul>
 <p><br><br></p>
-<h2 id="12-ThreadPoolExecutor参数含义"><a href="#12-ThreadPoolExecutor参数含义" class="headerlink" title="12.ThreadPoolExecutor参数含义"></a>12.<code>ThreadPoolExecutor</code>参数含义</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                          TimeUnit unit,BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,RejectedExecutionHandler handler)</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="12-ThreadPoolExecutor参数含义"><a href="#12-ThreadPoolExecutor参数含义" class="headerlink" title="12.ThreadPoolExecutor参数含义"></a>12.<code>ThreadPoolExecutor</code>参数含义</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                          TimeUnit unit,BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,RejectedExecutionHandler handler)</span></span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><code>corePoolSize</code>：线程池核心线程数。当提交一个任务时，线程池创建一个新线程执行任务，直到当前线程数等于corePoolSize，如果当前线程数为corePoolSize，继续提交的任务被保存到阻塞队列中，等待被执行，如果执行了线程池的<code>prestartAllCoreThreads()</code>方法，线程池会提前创建并启动所有核心线程</li>
@@ -3453,10 +2480,10 @@
 </ul>
 <p><br><br></p>
 <h2 id="6-Cookie的创建过程"><a href="#6-Cookie的创建过程" class="headerlink" title="6.Cookie的创建过程"></a>6.Cookie的创建过程</h2><p>&emsp;&emsp;服务器发送给客户端的响应报文包含<code>Set-Cookie</code>首部字段，客户端得到响应报文后会根据字段信息把 Cookie 内容保存到浏览器中，如知乎的Cookie响应报文段格式如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set-cookie: KLBRSID&#x3D;abcdefghijk; Path&#x3D;&#x2F;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set-cookie: KLBRSID&#x3D;abcdefghijk; Path&#x3D;&#x2F;</span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;而客户端在之后对这个服务器再发送请求时，会从浏览器中取出 Cookie 信息并通过请求报头中的cookie字段发送给服务器</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cookie: KLBRSID&#x3D;abcdefghijk</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookie: KLBRSID&#x3D;abcdefghijk</span><br></pre></td></tr></table></figure>
 
 
 
@@ -4129,14 +3156,14 @@
 <li>其优点是只在类加载的时候创建一次单实例，不会存在多个线程创建多个实例的情况，从而避免了多线程同步的问题。</li>
 <li>相对的，缺点就是即使这个单实例没有用到也会被创建，这样内存就被浪费了。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">newInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">newInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;<strong>懒汉模式</strong>：在需要时才创建单实例，如果单例已经创建，再次调用获取接口将不会重新创建新的对象，而是直接返回之前创建的对象。</p>
 <ul>
 <li>其优势在于如果单实例使用次数少且创建消耗资源多时，让单实例按需创建能够节省资源</li>
 <li>缺点在于懒汉模式没有考虑线程安全问题，在多个线程并发调用其<code>getInstance()</code>方法时，可能会导致创建出多个实例，因此需要加锁解决线程同步问题，但加锁也会带来一定的开销</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">newInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == instance)&#123;  <span class="comment">// Single Checked</span></span><br><span class="line">            instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">newInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == instance)&#123;  <span class="comment">// Single Checked</span></span><br><span class="line">            instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -4163,15 +3190,15 @@
 </ul>
 <p><br><br></p>
 <h2 id="4-工厂模式"><a href="#4-工厂模式" class="headerlink" title="4.工厂模式"></a>4.工厂模式</h2><p>&emsp;&emsp;首先定义一个产品接口Shape</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Shape</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Shape</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;产品的实现分多种，有Circle、Rectagle等</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> <span class="keyword">implements</span> <span class="title">Shape</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;draw Circle&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> <span class="keyword">implements</span> <span class="title">Shape</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;draw Circle&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> <span class="keyword">implements</span> <span class="title">Shape</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;draw Rectangle&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> <span class="keyword">implements</span> <span class="title">Shape</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;draw Rectangle&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;定义一个工厂类，能够根据传入参数的不同得到不同的产品Shape</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShapeFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Shape <span class="title">getShape</span><span class="params">(String type)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(type.equals(<span class="string">&quot;CIRCLE&quot;</span>))</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Circle();</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(<span class="string">&quot;RECTANGLE&quot;</span>))</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Rectangle();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShapeFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Shape <span class="title">getShape</span><span class="params">(String type)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(type.equals(<span class="string">&quot;CIRCLE&quot;</span>))</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Circle();</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(<span class="string">&quot;RECTANGLE&quot;</span>))</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Rectangle();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -4179,7 +3206,7 @@
 
 <p><br><br></p>
 <h2 id="5-LRU缓存"><a href="#5-LRU缓存" class="headerlink" title="5.LRU缓存"></a>5.LRU缓存</h2><p>&emsp;&emsp;LRU，Least Recently Used，最近最少使用。简单实现就是采用JDK中的<code>LinkedHashap</code>，在查询缓存时移除原key值缓存数据再把其追加到尾部；在添加缓存时如果key值已存在，同样移除后再追加其到尾部表示最新使用，否则在添加后判断是否需要进行内存淘汰，即添加新缓存数据后将最近最少使用的头部缓存移除</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> LinkedHashMap&lt;Integer,Integer&gt; map; </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> capacity;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">        map = <span class="keyword">new</span> LinkedHashMap&lt;&gt;(); </span><br><span class="line">        <span class="keyword">this</span>.capacity = capacity;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!map.containsKey(key))</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> val = map.remove(key);</span><br><span class="line">        map.put(key,val);</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (map.containsKey(key))&#123;</span><br><span class="line">            map.remove(key);</span><br><span class="line">            map.put(key,value);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        map.put(key,value);</span><br><span class="line">        <span class="keyword">if</span> (map.size() &gt; capacity)&#123; </span><br><span class="line">            map.remove(map.entrySet().iterator().next().getKey()); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> LinkedHashMap&lt;Integer,Integer&gt; map; </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> capacity;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">        map = <span class="keyword">new</span> LinkedHashMap&lt;&gt;(); </span><br><span class="line">        <span class="keyword">this</span>.capacity = capacity;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!map.containsKey(key))</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> val = map.remove(key);</span><br><span class="line">        map.put(key,val);</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (map.containsKey(key))&#123;</span><br><span class="line">            map.remove(key);</span><br><span class="line">            map.put(key,value);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        map.put(key,value);</span><br><span class="line">        <span class="keyword">if</span> (map.size() &gt; capacity)&#123; </span><br><span class="line">            map.remove(map.entrySet().iterator().next().getKey()); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -4380,7 +3407,7 @@
 <ul>
 <li>使用<code>epoll ()</code>时需要调用下列三个系统调用：</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> size)</span></span>;  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_ctl</span><span class="params">(<span class="keyword">int</span> epfd, <span class="keyword">int</span> op, <span class="keyword">int</span> fd, struct epoll_event *event)</span></span>;  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event *events,<span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> size)</span></span>;  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_ctl</span><span class="params">(<span class="keyword">int</span> epfd, <span class="keyword">int</span> op, <span class="keyword">int</span> fd, struct epoll_event *event)</span></span>;  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event *events,<span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <p>可以对应创建<code>epoll()</code>的句柄fd、对指定fd进行op操作、等待fd上的IO事件</p>
 <p>简单来看就是当调用 <code>epoll_create()</code> 时，内核就创建了一棵红黑树和一个就绪链表，其中，红黑树用于存储后面<code>epoll_ctl()</code>传过来的 fd，以支持高效的查找、插入和删除。就绪链表用于存储准备就绪的事件，当 <code>epoll_wait()</code> 调用时，仅仅观察这个就绪链表里有没有数据即可。有数据就返回，没有数据就 sleep，等到 timeout 时间到后即使链表没数据也返回。</p>
@@ -4406,15 +3433,252 @@
 <li><code>epoll()</code>应用场景：只需要运行在 Linux 平台上，有大量的描述符需要同时轮询，并且这些连接最好是长连接。 需要同时监控小于 1000 个描述符，就没有必要使用<code>epoll()</code>。 需要监控的描述符状态变化多，而且都是非常短暂的，也没有必要使用<code>epoll()</code>。因为 <code>epoll()</code>中的所有描述符都存储在内核中，造成每次需要对描述符的状态改变都需要通过 <code>epoll_ctl()</code> 进行系统调用，频繁系统调用降低效率。并且<code>epoll()</code>的描述符存储在内核，不容易调试。</li>
 </ul>
 <p><br><br></p>
-<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a href="https://cyc2018.github.io/CS-Notes/#/">Cyc2018</a></p>
-<p><a href="https://github.com/Snailclimb/JavaGuide">JavaGuide</a></p>
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://cyc2018.github.io/CS-Notes/#/">Cyc2018</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Snailclimb/JavaGuide">JavaGuide</a></p>
 <p><a href="#">很多博客</a>(实在太多了，就不一一列举了…)</p>
-]]></content>
-      <categories>
-        <category>学习总结</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-</search>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/23/%E5%8D%81%E5%A4%A7%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="prev" title="十大经典排序算法">
+      <i class="fa fa-chevron-left"></i> 十大经典排序算法
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-B-%E6%A0%91%E3%80%81B-%E6%A0%91%E3%80%81B-%E6%A0%91"><span class="nav-text">1.B-树、B+树、B*树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88B-%E6%A0%91%E6%AF%94B-%E6%A0%91%E6%9B%B4%E9%80%82%E5%90%88%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95"><span class="nav-text">2.为什么B+树比B-树更适合作数据库索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-LSM%E6%A0%91"><span class="nav-text">3.LSM树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-text">4.红黑树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%B7%B3%E8%B7%83%E8%A1%A8"><span class="nav-text">5.跳跃表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-B-%E6%A0%91%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91IO%E6%AC%A1%E6%95%B0"><span class="nav-text">6.B+树如何减少IO次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%AD%97%E5%85%B8%E6%A0%91"><span class="nav-text">7.字典树</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98"><span class="nav-text">缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Redis%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">1.Redis常见数据类型及应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Redis%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%BF%99%E4%B9%88%E5%BF%AB"><span class="nav-text">2.Redis是单线程为什么还这么快</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Redis-%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E6%9C%BA%E5%88%B6"><span class="nav-text">3.Redis 内存淘汰机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E3%80%81%E9%9B%AA%E5%B4%A9%E3%80%81%E7%83%AD%E7%82%B9%E6%95%B0%E6%8D%AE%E5%A4%B1%E6%95%88"><span class="nav-text">4.缓存穿透、击穿、雪崩、热点数据失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Redis%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8"><span class="nav-text">5.Redis二进制安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%BA%95%E5%B1%82"><span class="nav-text">6.Redis数据结构底层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Redis%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-text">7.Redis持久化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Redis%E5%8F%98%E6%85%A2%E5%8E%9F%E5%9B%A0%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">8.Redis变慢原因及解决方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E9%9B%86%E5%90%88"><span class="nav-text">Java集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%9B%86%E5%90%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3"><span class="nav-text">1.集合线程安全问题怎么解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-java%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4"><span class="nav-text">2.java类型擦除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-ArrayList%E5%92%8CLinkedList%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">3. ArrayList和LinkedList使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-text">4.哈希冲突的解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-ArrayList%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="nav-text">5.ArrayList扩容机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-HashMap%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF0-75"><span class="nav-text">6.HashMap负载因子为什么是0.75</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-ConcurrentHashMap%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="nav-text">7.ConcurrentHashMap底层实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-HashMap%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="nav-text">8.HashMap线程安全问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-HashMap%E6%89%A9%E5%AE%B9%E6%B5%81%E7%A8%8B"><span class="nav-text">9.HashMap扩容流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-HashMap%E7%9A%84writeObject-%E5%92%8CreadObject"><span class="nav-text">10.HashMap的writeObject()和readObject()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM"><span class="nav-text">JVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-JVM%E6%96%B9%E6%B3%95%E5%8C%BA%E4%BD%9C%E7%94%A8"><span class="nav-text">1.JVM方法区作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B0%86%E6%B0%B8%E4%B9%85%E4%BB%A3%E6%9B%BF%E6%8D%A2%E4%B8%BA%E5%85%83%E7%A9%BA%E9%97%B4"><span class="nav-text">2.为什么将永久代替换为元空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A7%BB%E5%88%B0%E5%A0%86"><span class="nav-text">3.字符串常量池为什么要移到堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-JVM%E5%88%86%E4%BB%A3%EF%BC%8C%E6%96%B0%E7%94%9F%E4%BB%A3%E8%80%81%E5%B9%B4%E4%BB%A3%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">4.JVM分代，新生代老年代是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%80%8E%E4%B9%88%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E8%A6%81%E5%9B%9E%E6%94%B6"><span class="nav-text">5.垃圾回收怎么判断是否要回收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-GCRoot%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-text">6.GCRoot对象有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84stw%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">7.垃圾回收的stw是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-GC%E5%88%86%E7%B1%BB"><span class="nav-text">8.GC分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%A0%86%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5"><span class="nav-text">9.堆的内存分配策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Full-GC%E7%9A%84%E8%A7%A6%E5%8F%91%E6%9D%A1%E4%BB%B6"><span class="nav-text">10.Full GC的触发条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-JVM%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E5%88%92%E5%88%86"><span class="nav-text">11.JVM内存空间划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">12.类加载器的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E5%B8%B8%E7%94%A8JDK%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="nav-text">13.常用JDK调试工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-new%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-text">14.new一个对象的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-java%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E6%89%A7%E8%A1%8C"><span class="nav-text">15.java的编译和执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B"><span class="nav-text">16.双亲委派模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-%E9%9C%80%E8%A6%81%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">17.需要自定义类加载器的应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-finalize-%E6%96%B9%E6%B3%95"><span class="nav-text">18.finalize()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-JVM%E8%B0%83%E4%BC%98%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">19.JVM调优原因分析以及相应解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-JVM%E8%B0%83%E4%BC%98%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-text">20.JVM调优相关配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-JVM%E8%B0%83%E4%BC%98%E5%AE%9E%E6%93%8D"><span class="nav-text">21.JVM调优实操</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-JVM%E4%B8%AD%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%87%BA%E7%8E%B0%E7%9A%84%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98"><span class="nav-text">22.JVM中可能会出现的内存溢出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-text">23.字符串常量池</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-MySQL%E7%BB%93%E6%9E%84%E6%80%8E%E4%B9%88%E5%88%92%E5%88%86"><span class="nav-text">1.MySQL结构怎么划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E5%9C%A8MySQL%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C"><span class="nav-text">2.一条SQL语句在MySQL中如何执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E5%BE%97%E5%BE%88%E6%85%A2%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-text">3.一条SQL语句执行得很慢的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-MySQL%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="nav-text">4.MySQL索引优化建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%B8%89%E7%BA%A7%E5%B0%81%E9%94%81%E5%8D%8F%E8%AE%AE%E5%92%8C%E4%B8%A4%E6%AE%B5%E9%94%81%E5%8D%8F%E8%AE%AE"><span class="nav-text">5.三级封锁协议和两段锁协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%BD%93%E5%89%8D%E8%AF%BB%E4%B8%8E%E5%BF%AB%E7%85%A7%E8%AF%BB"><span class="nav-text">6.当前读与快照读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F"><span class="nav-text">7.数据库范式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-MySQL%E7%9A%84%E7%B4%A2%E5%BC%95%E7%B1%BB%E5%9E%8B"><span class="nav-text">8.MySQL的索引类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E8%81%9A%E7%B0%87%E3%80%81%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95"><span class="nav-text">9.聚簇、非聚簇索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E7%B4%A2%E5%BC%95%E6%98%AF%E5%90%A6%E8%B6%8A%E5%A4%9A%E8%B6%8A%E5%A5%BD"><span class="nav-text">10.索引是否越多越好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E7%B4%A2%E5%BC%95%E7%9A%84%E9%80%89%E6%8B%A9%E6%80%A7"><span class="nav-text">11.索引的选择性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">12.覆盖索引是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-text">13.数据库的优化方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="nav-text">14.数据库的分库分表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-MVCC%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB"><span class="nav-text">15.MVCC实现可重复读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-%E5%B7%A6%E8%BF%9E%E6%8E%A5-%E3%80%81%E5%8F%B3%E8%BF%9E%E6%8E%A5%E3%80%81%E5%86%85%E8%BF%9E%E6%8E%A5%E3%80%81%E5%85%A8%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-text">16.左连接 、右连接、内连接、全外连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-MySQL%E6%9C%89%E5%93%AA%E4%BA%9B%E9%94%81"><span class="nav-text">17.MySQL有哪些锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%82%B2%E8%A7%82%E9%94%81"><span class="nav-text">18.乐观锁和悲观锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-JDBC%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B"><span class="nav-text">19.JDBC连接过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-text">20.数据库与缓存数据一致性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%9B%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="nav-text">21.如何避免回表查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-DDL%E5%92%8CDML%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">22.DDL和DML的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E7%B4%A2%E5%BC%95%E7%9A%84%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99"><span class="nav-text">23.索引的优化原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-%E8%A7%A3%E5%86%B3%E6%85%A2%E6%9F%A5%E8%AF%A2%E6%AD%A5%E9%AA%A4"><span class="nav-text">24.解决慢查询步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-%E7%89%A9%E7%90%86%E5%88%86%E9%A1%B5%E5%92%8C%E9%80%BB%E8%BE%91%E5%88%86%E9%A1%B5%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">25.物理分页和逻辑分页的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26-MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="nav-text">26.MySQL主从复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27-MySQL%E6%97%A5%E5%BF%97%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-text">27.MySQL日志有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28-%E5%8F%8D%E8%8C%83%E5%BC%8F%E8%AE%BE%E8%AE%A1"><span class="nav-text">28.反范式设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#29-char%E3%80%81varchar%E5%BC%82%E5%90%8C"><span class="nav-text">29.char、varchar异同</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E5%9F%BA%E7%A1%80"><span class="nav-text">Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%89%8B%E5%86%99Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-text">1.手写Java动态代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Integer%E7%9A%84%E7%BC%93%E5%AD%98%E6%B1%A0%E9%97%AE%E9%A2%98"><span class="nav-text">2.Integer的缓存池问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-final%E5%85%B3%E9%94%AE%E5%AD%97%E4%BD%9C%E7%94%A8"><span class="nav-text">3.final关键字作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Java%E5%8F%8D%E5%B0%84"><span class="nav-text">4.Java反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Java%E9%87%8D%E5%86%99%E3%80%81%E9%87%8D%E8%BD%BD%E8%A6%81%E6%B1%82"><span class="nav-text">5.Java重写、重载要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-transient%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-text">6.transient关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%8F%8D%E5%B0%84%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-text">7.反射创建对象的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81"><span class="nav-text">8.常用的字符编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-String%E7%9A%84hashcode"><span class="nav-text">9.String的hashcode()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Java%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-text">10.Java原子操作有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E4%B8%BA%E4%BB%80%E4%B9%88long%E5%92%8Cdouble%E7%9A%84%E6%93%8D%E4%BD%9C%E6%B2%A1%E6%9C%89%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="nav-text">11.为什么long和double的操作没有原子性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB%E5%92%8C%E6%99%AE%E9%80%9A%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">12.静态内部类和普通内部类的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-JDK8%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-text">13.JDK8的特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-finally%E4%B8%8Ereturn%E7%9A%84%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E9%97%AE%E9%A2%98"><span class="nav-text">14.finally与return的返回结果问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-BIO%E3%80%81NIO%E3%80%81AIO%E6%A6%82%E8%BF%B0"><span class="nav-text">15.BIO、NIO、AIO概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-Object%E7%9A%84%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-text">16.Object的方法有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-JAVA%E6%89%A7%E8%A1%8CHelloWorld%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B"><span class="nav-text">17.JAVA执行HelloWorld程序的全过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-Java%E4%B8%AD%E7%9A%84%E5%AE%88%E6%8A%A4%E7%BA%BF%E7%A8%8B"><span class="nav-text">18.Java中的守护线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-JAVA%E5%A6%82%E4%BD%95%E8%AF%BB%E5%8F%96%E5%A4%A7%E6%96%87%E4%BB%B6"><span class="nav-text">19.JAVA如何读取大文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-Java%E5%BA%8F%E5%88%97%E5%8C%96ID%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-text">20.Java序列化ID的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-static%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-text">21.static关键字</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-text">Java多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-ThreadLocal%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">1.ThreadLocal的用法和优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E9%AB%98%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"><span class="nav-text">2.怎么解决高并发问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-CAS%E6%93%8D%E4%BD%9C"><span class="nav-text">3.CAS操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%87%AA%E6%97%8B%E9%94%81"><span class="nav-text">4. 自旋锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-CopyOnWriteArrayList"><span class="nav-text">5.CopyOnWriteArrayList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-ReentrantLock%E4%B8%8Esynchronized%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">6.ReentrantLock与synchronized的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95"><span class="nav-text">7.Java多线程方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Java%E7%9A%84%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="nav-text">8.Java的线程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-CyclicBarrier%E3%80%81CountdownLatch%E5%8C%BA%E5%88%AB"><span class="nav-text">9.CyclicBarrier、CountdownLatch区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-shutdown-%E3%80%81shutdownNow-%E5%8C%BA%E5%88%AB"><span class="nav-text">10.shutdown()、shutdownNow()区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-Executors%E5%88%9B%E5%BB%BA%E7%9A%84%E5%9B%9B%E7%A7%8D%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%B1%BB%E5%9E%8B"><span class="nav-text">11.Executors创建的四种线程池类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-ThreadPoolExecutor%E5%8F%82%E6%95%B0%E5%90%AB%E4%B9%89"><span class="nav-text">12.ThreadPoolExecutor参数含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-text">13.Java内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81%E3%80%81%E5%81%8F%E5%90%91%E9%94%81"><span class="nav-text">14.轻量级锁、偏向锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-notify-%E5%92%8Cnotifyall-%E5%8C%BA%E5%88%AB"><span class="nav-text">15.notify()和notifyall()区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-AQS%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">16.AQS是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88"><span class="nav-text">17.Java线程池异常处理方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-ThreadLocal%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98"><span class="nav-text">18.ThreadLocal实现与存在问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-Collections-synchronizedMap-%E5%8E%9F%E7%90%86"><span class="nav-text">19.Collections.synchronizedMap()原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web%E6%A1%86%E6%9E%B6"><span class="nav-text">Web框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-MVC%E6%A8%A1%E5%BC%8F%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">1.MVC模式是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Mybatis%E6%8F%92%E4%BB%B6%E5%8E%9F%E7%90%86"><span class="nav-text">2.Mybatis插件原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-SSH%E3%80%81SSM%E6%A1%86%E6%9E%B6%E5%BC%82%E5%90%8C"><span class="nav-text">3.SSH、SSM框架异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-SpringMVC%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-text">4.SpringMVC为什么用适配器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-RestTemplate%E4%BB%8B%E7%BB%8D"><span class="nav-text">5.RestTemplate介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98"><span class="nav-text">6.Spring如何解决循环依赖问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-SpringBoot%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="nav-text">7.SpringBoot启动过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-BeanFactory%E5%92%8CApplicationContext%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">8.BeanFactory和ApplicationContext的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Spring%E4%B8%ADbean%E7%9A%84%E6%95%B4%E4%B8%AA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">9.Spring中bean的整个生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-IOC%E3%80%81DI%E6%A6%82%E5%BF%B5"><span class="nav-text">10.IOC、DI概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-AOP%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">11.AOP基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-AOP%E5%8E%9F%E7%90%86"><span class="nav-text">12.AOP原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">13.过滤器和拦截器的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-Spring%E4%B8%8ESpring-Boot%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">14.Spring与Spring Boot的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-Spring-Boot%E4%B8%8ESpring-MVC%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">15.Spring Boot与Spring MVC的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-Mybatis%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"><span class="nav-text">16.Mybatis缓存机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-Spring%E4%BD%BF%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-text">17.Spring使用的设计模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E5%85%A8"><span class="nav-text">安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9F%BA%E4%BA%8EToken%E7%9A%84%E8%AE%A4%E8%AF%81"><span class="nav-text">1.基于Token的认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BBXSS"><span class="nav-text">2.跨站脚本攻击XSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0CSRF"><span class="nav-text">3.跨站请求伪造CSRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%A2%84%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5"><span class="nav-text">4.预编译为什么可以防止SQL注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-ARP%E6%94%BB%E5%87%BB"><span class="nav-text">5.ARP攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-SYN%E6%B4%AA%E6%B3%9B%E6%94%BB%E5%87%BB%E5%8F%8A%E6%8A%B5%E5%BE%A1%E6%96%B9%E6%B3%95"><span class="nav-text">6.SYN洪泛攻击及抵御方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-DOS%E5%92%8CDDOS%E6%94%BB%E5%87%BB"><span class="nav-text">7.DOS和DDOS攻击</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux"><span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Linux%E7%9A%84%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7"><span class="nav-text">1.Linux的文件属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-text">2.Linux常用命令有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Linux%E7%9A%84%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="nav-text">3.Linux的进程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%AD%A4%E5%84%BF%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B"><span class="nav-text">4.孤儿进程和僵尸进程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="nav-text">计算机网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%89%A9%E7%90%86%E5%B1%82%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="nav-text">1.物理层的通信方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-text">2.三次握手与四次挥手的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-TCP%E5%8F%AF%E9%9D%A0%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-text">3.TCP可靠的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Http%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E7%B1%BB%E5%9E%8B"><span class="nav-text">4.Http请求方法类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%B8%B8%E8%A7%81HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-text">5.常见HTTP状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Cookie%E7%9A%84%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="nav-text">6.Cookie的创建过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Https%E7%9A%84%E5%AE%9E%E7%8E%B0%E3%80%81%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F%E3%80%81%E8%AE%A4%E8%AF%81"><span class="nav-text">7.Https的实现、加密方式、认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-TCP%E4%B8%8EUDP%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">8.TCP与UDP的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-GET%E4%B8%8EPOST%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">9.GET与POST的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E5%92%8C%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">10.流量控制和拥塞控制的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-301%E3%80%81302%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">11.301、302的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-HTTPS%E5%85%A8%E8%BF%87%E7%A8%8B"><span class="nav-text">12.HTTPS全过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-HTTP%E8%AF%B7%E6%B1%82%E6%80%A7%E8%83%BD%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0"><span class="nav-text">13.HTTP请求性能影响因素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-HTTP1-0%E5%92%8CHTTP1-1%E5%8C%BA%E5%88%AB"><span class="nav-text">14.HTTP1.0和HTTP1.1区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-HTTP2-0%E5%92%8CHTTP1-X%E5%8C%BA%E5%88%AB"><span class="nav-text">15.HTTP2.0和HTTP1.X区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-WebSocket%E5%8D%8F%E8%AE%AE"><span class="nav-text">16.WebSocket协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3"><span class="nav-text">17.浏览器缓存机制详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E5%BA%94%E7%94%A8%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5"><span class="nav-text">18.实际场景应用缓存策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-content-type%E8%AF%A6%E8%A7%A3"><span class="nav-text">19.content-type详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-Nagle%E7%AE%97%E6%B3%95"><span class="nav-text">20.Nagle算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB"><span class="nav-text">21.跨域资源共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E7%9F%AD%E7%BD%91%E5%9D%80%E5%8E%9F%E7%90%86"><span class="nav-text">22.短网址原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E6%89%AB%E6%8F%8F%E4%BA%8C%E7%BB%B4%E7%A0%81%E5%AE%9E%E7%8E%B0%E7%99%BB%E5%BD%95%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B"><span class="nav-text">23.扫描二维码实现登录的全过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-text">分布式、中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Docker%E4%BC%98%E5%8A%BF%E4%B8%8E%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">1.Docker优势与适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-CAP%E7%90%86%E8%AE%BA"><span class="nav-text">2.CAP理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-BASE%E7%90%86%E8%AE%BA"><span class="nav-text">3.BASE理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-text">4.常用的分布式锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="nav-text">5.分布式事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-CAP%E7%90%86%E8%AE%BA%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">6.CAP理论的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Git%E4%B8%8ESVN%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">7.Git与SVN的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">8.消息队列的模型以及使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="nav-text">9.如何保证消息队列的可靠性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Dubbo%E5%8D%8F%E8%AE%AE%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-text">10.Dubbo协议有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-Dubbo%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-text">11.Dubbo的序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-Eureka%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6"><span class="nav-text">12.Eureka自我保护机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">13.分布式的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-text">14.负载均衡算法有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-text">15.为什么要序列化和反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E9%99%90%E6%B5%81"><span class="nav-text">16.为什么需要限流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95"><span class="nav-text">17.限流算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-RPC%E8%AF%B7%E6%B1%82%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="nav-text">18.RPC请求连接方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-%E6%8E%A5%E5%8F%A3%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88"><span class="nav-text">19.接口性能问题优化方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-Tomcat%E7%BB%93%E6%9E%84"><span class="nav-text">20.Tomcat结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-Tomcat%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82"><span class="nav-text">21.Tomcat怎么处理请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E5%88%86%E5%B8%83%E5%BC%8FID%E7%94%9F%E6%88%90%E8%A6%81%E6%B1%82"><span class="nav-text">22.分布式ID生成要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95"><span class="nav-text">23.雪花算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-RPC%E6%9C%8D%E5%8A%A1%E4%B8%8EHTTP%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">24.RPC服务与HTTP服务的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">25.微服务的定义和优缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1"><span class="nav-text">软件设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-SOLID%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-text">1.SOLID设计原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-text">2.单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%80%A6%E5%90%88%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-text">3.耦合类型有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-text">4.工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-LRU%E7%BC%93%E5%AD%98"><span class="nav-text">5.LRU缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E9%80%92%E5%BD%92%E5%92%8C%E8%BF%AD%E4%BB%A3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">6.递归和迭代的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E7%AB%99%E5%86%85%E4%BF%A1%E8%AE%BE%E8%AE%A1"><span class="nav-text">7.站内信设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88"><span class="nav-text">8.秒杀系统设计方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="nav-text">海量数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B5%B7%E9%87%8F%E6%97%A5%E5%BF%97%E6%95%B0%E6%8D%AE%E6%89%BE%E5%87%BA%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0%E6%9C%80%E5%A4%9A%E7%9A%84%E9%82%A3%E4%B8%AAIP"><span class="nav-text">1.海量日志数据找出出现次数最多的那个IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-text">2.布隆过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%BB%99%E5%AE%9A%E4%B8%A4%E4%B8%AA%E6%96%87%E4%BB%B6%E5%AD%98%E6%94%BE%E6%B5%B7%E9%87%8FURL%EF%BC%8C%E6%B1%82%E4%B8%A4%E6%96%87%E4%BB%B6%E7%9B%B8%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E9%83%A8%E5%88%86"><span class="nav-text">3.给定两个文件存放海量URL，求两文件相同的数据部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E6%8E%92%E5%BA%8F%E9%97%AE%E9%A2%98"><span class="nav-text">4.海量数据的排序问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-text">操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-PCB%E5%8C%85%E5%90%AB%E6%9C%89%E4%BB%80%E4%B9%88%E4%BF%A1%E6%81%AF"><span class="nav-text">1.PCB包含有什么信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">2.协程与线程的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%AD%BB%E9%94%81%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6%E5%92%8C%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="nav-text">3.死锁的必要条件和处理方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E3%80%81%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA"><span class="nav-text">4.内存泄露、内存溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%BA%90%E6%96%87%E4%BB%B6%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-text">5.源文件到可执行文件的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E4%B8%AD%E6%96%AD%E5%88%86%E7%B1%BB"><span class="nav-text">6.中断分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%8D%95%E7%BA%BF%E7%A8%8BIO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="nav-text">7.单线程IO多路复用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2"><span class="nav-text">参考博客</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YoruG"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">YoruG</p>
+  <div class="site-description" itemprop="description">记录一些自己的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YoruG" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YoruG" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/yorug" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;yorug" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yorugg@qq.com" title="E-Mail → mailto:yorugg@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-anchor"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YoruG</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '3Pmdxm7w9FkLDcAr2KNqiBUK-9Nh9j0Va',
+      appKey     : 'rFJdrNXrmgvNKnGy82aNo4zP',
+      placeholder: "",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
